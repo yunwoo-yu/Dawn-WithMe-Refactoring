@@ -1,9 +1,9 @@
 # 팀 프로젝트 개인 리팩토링 & 마이그레이션
 
-```
-팀 프로젝트 원본 레포 : https://github.com/TEAM-INFINITE/Dawn-WithMe
-팀 프로젝트 원본 배포 : dawn-with-me.vercel.app
-```
+
+**팀 프로젝트 원본 레포** : https://github.com/TEAM-INFINITE/Dawn-WithMe  
+**팀 프로젝트 원본 배포** : https://dawn-with-me.vercel.app
+
 
 ## 리팩토링 & 마이그레이션 예정 사항
 
