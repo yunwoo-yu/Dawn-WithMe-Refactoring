@@ -6,7 +6,7 @@ export interface LoginData {
 }
 
 export interface LoginProps {
-  loginValue: { email: string; password: string };
+  formData: LoginData;
   onChangeInputHandler(event: ChangeEvent<HTMLInputElement>): void;
   onSubmitButtonHandler(event: React.FormEvent<HTMLFormElement>): void;
   error: string;
