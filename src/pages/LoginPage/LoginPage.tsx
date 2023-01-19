@@ -1,16 +1,19 @@
 import { useMutation } from '@tanstack/react-query';
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import userLogin from '../../api/auth';
+import LoginTemplate from '../../components/template/LoginTemplate/LoginTemplate';
+import { LoginData } from '../../types/auth';
 
 const LoginPage = () => {
-  const [loginValue, setLoginValue] = useState({
+  const [loginValue, setLoginValue] = useState<LoginData>({
     email: '',
     password: '',
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const loginMutation = useMutation(postUserLogin, {
+  const loginMutation = useMutation(userLogin, {
     onSuccess(data: any) {
       if (data.status === 422) {
         setError(`${data.message}`);
@@ -31,11 +34,18 @@ const LoginPage = () => {
     setLoginValue({ ...loginValue, [name]: value });
   };
 
-  const onSubmitButtonHandler = (event: KeyboardEvent) => {
+  const onSubmitButtonHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    loginMutation.mutate({ user: loginValue });
+    loginMutation.mutate(loginValue);
   };
-  return <div>zzz</div>;
+  return (
+    <LoginTemplate
+      onChangeInputHandler={onChangeInputHandler}
+      onSubmitButtonHandler={onSubmitButtonHandler}
+      loginValue={loginValue}
+      error={error}
+    />
+  );
 };
 
 export default LoginPage;
