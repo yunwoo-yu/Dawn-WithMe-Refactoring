@@ -34,6 +34,7 @@ module.exports = {
     ],
     'arrow-body-style': ['off', 'always'],
     'jsx-quotes': ['error', 'prefer-single'],
+    '@typescript-eslint/no-unnecessary-type-constraint': 'off',
   },
 
   settings: {
