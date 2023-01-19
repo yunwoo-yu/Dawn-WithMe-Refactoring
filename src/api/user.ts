@@ -6,3 +6,5 @@ const userLogin = async (loginData: LoginData) => {
 
   return response.data;
 };
+
+export default userLogin;
