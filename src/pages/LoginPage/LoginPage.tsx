@@ -3,49 +3,52 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import userLogin from '../../api/user';
 import LoginTemplate from '../../components/template/LoginTemplate/LoginTemplate';
+import useForm from '../../hooks/useForm';
 import { LoginData } from '../../types/auth';
 
 const LoginPage = () => {
-  const [loginValue, setLoginValue] = useState<LoginData>({
+  const { formData, onChangeInputHandler } = useForm({
     email: '',
     password: '',
   });
+
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const loginMutation = useMutation(userLogin, {
-    onSuccess(data: any) {
-      if (data.status === 422) {
-        setError(`${data.message}`);
-
+    onSuccess(resData) {
+      console.log(resData);
+      if (resData.status === 422) {
+        setError(`${resData.message}`);
         return;
       }
-      localStorage.setItem('accountname', data.user.accountname);
-      localStorage.setItem('token', data.user.token);
+      if (resData.message === '잘못된 접근입니다.') {
+        setError(`${resData.message}`);
+        return;
+      }
+      localStorage.setItem('accountname', resData.user.accountname);
+      localStorage.setItem('token', resData.user.token);
       navigate('/home');
     },
-    onError(err) {
+    onError(err: any) {
+      setError(`${err.message}`);
       console.log(err);
     },
   });
 
-  const onChangeInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setLoginValue({ ...loginValue, [name]: value });
-  };
-
   const onSubmitButtonHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    loginMutation.mutate(loginValue);
+    loginMutation.mutate(formData);
   };
-  return (
-    <LoginTemplate
-      onChangeInputHandler={onChangeInputHandler}
-      onSubmitButtonHandler={onSubmitButtonHandler}
-      loginValue={loginValue}
-      error={error}
-    />
-  );
+
+  const propsData = {
+    formData,
+    onSubmitButtonHandler,
+    onChangeInputHandler,
+    error,
+  };
+
+  return <LoginTemplate propsData={propsData} />;
 };
 
 export default LoginPage;

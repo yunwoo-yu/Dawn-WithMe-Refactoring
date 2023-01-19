@@ -3,13 +3,10 @@ import Button from '../../atoms/Button/Button';
 import TextFiledCard from '../../molecules/TextFiledCard/TextFiledCard';
 import LoginFormWrapper from './styled';
 
-const LoginForm = ({
-  loginValue,
-  onChangeInputHandler,
-  onSubmitButtonHandler,
-  error,
-}: LoginProps) => {
-  const { email, password } = loginValue;
+const LoginForm = ({ propsData }: { propsData: LoginProps }) => {
+  const { formData, onChangeInputHandler, onSubmitButtonHandler, error } =
+    propsData;
+  const { email, password } = formData;
 
   return (
     <LoginFormWrapper onSubmit={onSubmitButtonHandler}>
