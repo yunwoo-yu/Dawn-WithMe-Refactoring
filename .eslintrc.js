@@ -2,17 +2,19 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['prettier', 'react', '@typescript-eslint', 'react-hooks'],
   extends: [
-    'prettier',
     'airbnb',
     'airbnb/hooks',
     'plugin:@typescript-eslint/recommended',
+    'prettier',
   ],
   rules: {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-explicit-any': 'warn',
     'react/react-in-jsx-scope': 0,
     'react/jsx-uses-react': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
+    'react/require-default-props': [0, {}],
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -30,7 +32,7 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
-    'arrow-body-style': ['error', 'always'],
+    'arrow-body-style': ['off', 'always'],
     'jsx-quotes': ['error', 'prefer-single'],
   },
 
