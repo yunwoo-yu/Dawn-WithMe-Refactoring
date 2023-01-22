@@ -1,38 +1,28 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-    node: true,
-  },
+  parser: '@typescript-eslint/parser',
+  plugins: ['prettier', 'react', '@typescript-eslint', 'react-hooks'],
   extends: [
-    'plugin:react/recommended',
     'airbnb',
-    'plugin:prettier/recommended',
+    'airbnb/hooks',
+    'plugin:@typescript-eslint/recommended',
     'prettier',
   ],
-  overrides: [],
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 12,
-    sourceType: 'module',
-  },
-  plugins: ['react', 'prettier'],
   rules: {
-    'import/no-unresolved': 'off',
-    'react/jsx-boolean-value': 0,
-    'no-param-reassign': 0,
-    'react/prop-types': 'off',
-    'react/jsx-uses-react': 'off',
-    'react/react-in-jsx-scope': 'off',
-    'no-unused-vars': 'warn',
-    // 'consistent-return': ['error', { treatUndefinedAsUnspecified: false }],
-    'react/jsx-props-no-spreading': ['warn'],
-    'react/jsx-filename-extension': [
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-explicit-any': 'warn',
+    'react/react-in-jsx-scope': 0,
+    'react/jsx-uses-react': 0,
+    'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
+    'react/require-default-props': [0, {}],
+    'import/extensions': [
       'error',
+      'ignorePackages',
       {
-        extensions: ['.js', '.jsx'],
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
       },
     ],
     'react/function-component-definition': [
@@ -42,15 +32,23 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
-    'prettier/prettier': [
-      'error',
+    'arrow-body-style': ['off', 'always'],
+    'jsx-quotes': ['error', 'prefer-single'],
+    '@typescript-eslint/no-unnecessary-type-constraint': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      2,
       {
-        singleQuote: true,
-        endOfLine: 'auto',
-        trailingComma: 'all',
-        jsxSingleQuote: true,
+        labelComponents: ['CustomInputLabel'],
+        labelAttributes: ['label'],
+        controlComponents: ['CustomInput'],
+        depth: 3,
       },
     ],
-    'no-console': 'off',
+  },
+
+  settings: {
+    'import/resolver': {
+      typescript: {}, // this loads <rootdir>/tsconfig.json to eslint
+    },
   },
 };
