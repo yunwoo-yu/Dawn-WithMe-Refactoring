@@ -11,3 +11,15 @@ export interface LoginProps {
   onSubmitButtonHandler(event: React.FormEvent<HTMLFormElement>): void;
   error: string;
 }
+
+export interface SignupData {
+  email: string;
+  password: string;
+}
+
+export interface SignupProps {
+  formData: SignupData;
+  onChangeInputHandler(event: ChangeEvent<HTMLInputElement>): void;
+  onSubmitButtonHandler(event: React.FormEvent<HTMLFormElement>): void;
+  error: SignupData;
+}
