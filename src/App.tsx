@@ -1,16 +1,14 @@
-import {
-  QueryCache,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LoginPage from './pages/LoginPage/LoginPage';
+import Login from './pages/Login/Login';
 
 const App = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
         retry: 1,
+        refetchOnMount: false,
+        refetchOnReconnect: false,
         refetchOnWindowFocus: false,
         keepPreviousData: true,
         staleTime: Infinity,
@@ -22,7 +20,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
-          <Route path='/login' element={<LoginPage />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

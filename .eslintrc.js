@@ -35,6 +35,15 @@ module.exports = {
     'arrow-body-style': ['off', 'always'],
     'jsx-quotes': ['error', 'prefer-single'],
     '@typescript-eslint/no-unnecessary-type-constraint': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        labelComponents: ['CustomInputLabel'],
+        labelAttributes: ['label'],
+        controlComponents: ['CustomInput'],
+        depth: 3,
+      },
+    ],
   },
 
   settings: {
