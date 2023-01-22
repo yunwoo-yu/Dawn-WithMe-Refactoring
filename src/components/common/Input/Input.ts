@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-const TextFiled = styled.input`
+const Input = styled.input`
   width: 100%;
 
   ${({ theme }) => {
@@ -21,4 +21,4 @@ const TextFiled = styled.input`
   }}
 `;
 
-export default TextFiled;
+export default Input;

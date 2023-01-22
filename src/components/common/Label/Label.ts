@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-const TextLabel = styled.label`
+const Label = styled.label`
   width: 100%;
 
   ${({ theme }) => {
@@ -14,4 +14,4 @@ const TextLabel = styled.label`
   }}
 `;
 
-export default TextLabel;
+export default Label;
