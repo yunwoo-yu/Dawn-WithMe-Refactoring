@@ -30,7 +30,11 @@ const Signup = () => {
 
   const onSubmitButtonHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate('/profilesetting');
+    navigate('/profilesetting', {
+      state: {
+        data: formData,
+      },
+    });
   };
 
   const propsData = {
