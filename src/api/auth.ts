@@ -1,7 +1,7 @@
-import { LoginData } from '../types/auth';
+import { LoginSignupData } from '../types/auth';
 import { instance } from './axiosBase';
 
-export const userLogin = async (loginData: LoginData) => {
+export const userLogin = async (loginData: LoginSignupData) => {
   const response = await instance.post('/user/login', { user: loginData });
 
   return response.data;
