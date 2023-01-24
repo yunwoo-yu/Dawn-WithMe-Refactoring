@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-
 import AuthWrapper from '../../components/common/Wrapper/AuthWrapper';
 
-const LoginWrapper = styled(AuthWrapper)``;
-
-export default LoginWrapper;
+const SignupWrapper = styled(AuthWrapper)`
+  h2 {
+    margin-bottom: 30px;
+  }
+`;
+export default SignupWrapper;
