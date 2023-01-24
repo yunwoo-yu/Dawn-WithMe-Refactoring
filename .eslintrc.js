@@ -35,6 +35,7 @@ module.exports = {
     'arrow-body-style': ['off', 'always'],
     'jsx-quotes': ['error', 'prefer-single'],
     '@typescript-eslint/no-unnecessary-type-constraint': 'off',
+    'react-hooks/exhaustive-deps': 'warn',
     'jsx-a11y/label-has-associated-control': [
       2,
       {

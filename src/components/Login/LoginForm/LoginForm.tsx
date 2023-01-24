@@ -12,25 +12,27 @@ const LoginForm = ({ propsData }: { propsData: LoginProps }) => {
   return (
     <LoginFormWrapper onSubmit={onSubmitButtonHandler}>
       <div>
-        <Label htmlFor='email'>이메일</Label>
+        <Label htmlFor='loginEmail'>이메일</Label>
         <Input
           type='text'
-          id='email'
+          id='loginEmail'
           name='email'
           value={email}
           onChange={onChangeInputHandler}
           placeholder='이메일을 입력해주세요.'
+          required
           autoFocus
         />
       </div>
       <div>
-        <Label htmlFor='password'>비밀번호</Label>
+        <Label htmlFor='loginPassword'>비밀번호</Label>
         <Input
           value={password}
           type='password'
-          id='password'
+          id='loginPassword'
           name='password'
           placeholder='패스워드를 입력해주세요. (6자이상)'
+          required
           onChange={onChangeInputHandler}
         />
       </div>

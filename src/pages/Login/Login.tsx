@@ -29,12 +29,14 @@ const Login = () => {
   };
 
   return (
-    <LoginWrapper>
-      <h2>로그인</h2>
-      <LoginForm propsData={propsData} />
-      <Link to='/signup'>이메일로 회원가입</Link>
-      <img src={titleLogo} width='80px' alt='타이틀 로고' />
-    </LoginWrapper>
+    <main>
+      <LoginWrapper>
+        <h2>로그인</h2>
+        <LoginForm propsData={propsData} />
+        <Link to='/signup'>이메일로 회원가입</Link>
+        <img src={titleLogo} width='80px' alt='타이틀 로고' />
+      </LoginWrapper>
+    </main>
   );
 };
 
