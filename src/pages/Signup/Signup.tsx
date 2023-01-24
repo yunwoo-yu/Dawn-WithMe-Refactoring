@@ -1,20 +1,36 @@
-import { Link } from 'react-router-dom';
+import _, { debounce } from 'lodash';
+import React, { useCallback, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import SignupForm from '../../components/Signup/SignupForm';
 import { useEmailValidMutation } from '../../hooks/auth.hooks';
 import useForm from '../../hooks/useForm';
 import SignupWrapper from './styled';
 
 const Signup = () => {
+  const navigate = useNavigate();
   const { formData, error, onChangeInputHandler } = useForm({
     email: '',
     password: '',
   });
 
-  const emailValidMutation = useEmailValidMutation(formData);
+  const emailValidMutation = useEmailValidMutation();
+
+  const debounceEmailValidMutation = useCallback(
+    debounce((data) => {
+      emailValidMutation.mutate(data);
+    }, 500),
+    [],
+  );
+
+  useEffect(() => {
+    if (formData.email) {
+      debounceEmailValidMutation(formData.email);
+    }
+  }, [formData.email]);
 
   const onSubmitButtonHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    emailValidMutation.mutate(formData.email);
+    navigate('/profilesetting');
   };
 
   const propsData = {
@@ -32,4 +48,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default React.memo(Signup);
