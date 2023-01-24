@@ -36,7 +36,6 @@ export const useEmailValidMutation = () => {
   const setError = useSetRecoilState(errorMessageAtom);
   return useMutation(userEmailValid, {
     onSuccess(resData) {
-      console.log(resData);
       if (resData.message === '잘못된 접근입니다.') {
         setError((prev) => {
           return { ...prev, email: `${resData.message}`, isActvie: false };
@@ -63,8 +62,12 @@ export const useEmailValidMutation = () => {
         });
       }
     },
-    onError(err) {
-      console.log(err);
+    onError(err: any) {
+      if (err.response.data.status === 422) {
+        setError((prev) => {
+          return { ...prev, email: err.response.data.message };
+        });
+      }
     },
   });
 };
