@@ -5,15 +5,15 @@ const isValidate = <T>(
   targetValue: string,
   setError: React.Dispatch<React.SetStateAction<T>>,
 ) => {
-  const regEmail = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+  const regEmail = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/.test(targetValue);
   const regPassword = targetValue.length > 5 && targetValue !== '';
   const regUserName =
-    targetValue.length > 1 && targetValue.length > 9 && targetValue !== '';
-  const regAccountname = /^[a-z0-9A-Z_.]{2,16}$/;
+    targetValue.length > 1 && targetValue.length < 9 && targetValue !== '';
+  const regAccountname = /[a-z0-9A-Z_.]{2,20}$/.test(targetValue);
 
   switch (targetName) {
     case 'email':
-      if (!regEmail.test(targetValue)) {
+      if (!regEmail) {
         setError((prev: any) => ({
           ...prev,
           [targetName]: '잘못된 이메일 형식입니다.',
@@ -61,7 +61,7 @@ const isValidate = <T>(
       if (!regAccountname) {
         setError((prev: any) => ({
           ...prev,
-          [targetName]: '영문,숫자,밑줄 및 마침표만 사용할 수 있습니다.',
+          [targetName]: '영문, 숫자, 밑줄, 마침표만 사용할 수 있습니다. (1~16)',
         }));
       } else {
         setError((prev: any) => ({
