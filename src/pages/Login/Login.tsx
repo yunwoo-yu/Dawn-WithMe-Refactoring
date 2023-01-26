@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import titleLogo from '../../assets/images/title-logo.png';
 import LoginForm from '../../components/Login/LoginForm/LoginForm';
 import { useLoginMutation } from '../../hooks/auth.hooks';
-import useForm from '../../hooks/useForm';
+import useForm from '../../hooks/common/useForm';
 import LoginWrapper from './styled';
 
 const Login = () => {

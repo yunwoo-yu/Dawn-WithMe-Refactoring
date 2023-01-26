@@ -1,9 +1,9 @@
-import _, { debounce } from 'lodash';
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import SignupForm from '../../components/Signup/SignupForm';
-import { useEmailValidMutation } from '../../hooks/auth.hooks';
-import useForm from '../../hooks/useForm';
+import { useEmailValidMutation } from '../../hooks/valid.hooks';
+import useForm from '../../hooks/common/useForm';
+import useValidDebouncing from '../../hooks/common/useValidDebouncing';
 import SignupWrapper from './styled';
 
 const Signup = () => {
@@ -11,22 +11,10 @@ const Signup = () => {
   const { formData, error, onChangeInputHandler } = useForm({
     email: '',
     password: '',
+    isActive: true,
   });
 
   const emailValidMutation = useEmailValidMutation();
-
-  const debounceEmailValidMutation = useCallback(
-    debounce((data) => {
-      emailValidMutation.mutate(data);
-    }, 500),
-    [],
-  );
-
-  useEffect(() => {
-    if (formData.email) {
-      debounceEmailValidMutation(formData.email);
-    }
-  }, [formData.email]);
 
   const onSubmitButtonHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -37,12 +25,15 @@ const Signup = () => {
     });
   };
 
+  useValidDebouncing(emailValidMutation, formData.email);
+
   const propsData = {
     formData,
     error,
     onChangeInputHandler,
     onSubmitButtonHandler,
   };
+
   return (
     <SignupWrapper>
       <h2>이메일로 회원가입</h2>
