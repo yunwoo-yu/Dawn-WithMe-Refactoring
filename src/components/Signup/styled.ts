@@ -8,8 +8,7 @@ const SignupFormWrapper = styled(AuthFormWrapper)`
       margin-bottom: 6px;
     }
   }
-  input {
-  }
+
   p {
     margin: 6px 0;
   }

@@ -8,7 +8,7 @@ const SignupForm = ({ propsData }: { propsData: SignupProps }) => {
   const { formData, error, onChangeInputHandler, onSubmitButtonHandler } =
     propsData;
   const { email, password } = formData;
-  const { email: errorEmail, password: errorPassword } = error;
+  const { email: errorEmail, password: errorPassword, isActive } = error;
 
   return (
     <SignupFormWrapper onSubmit={onSubmitButtonHandler}>
@@ -44,7 +44,9 @@ const SignupForm = ({ propsData }: { propsData: SignupProps }) => {
         width='100%'
         size='large'
         type='submit'
-        disabled={!email || !password || !!errorEmail || !!errorPassword}
+        disabled={
+          !email || !password || !!errorEmail || !!errorPassword || isActive
+        }
       >
         다음
       </Button>
