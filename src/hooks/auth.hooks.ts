@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
 
-import { userEmailValid, userLogin } from '../api/auth';
-import errorMessageAtom from '../recoil/atom';
-import { errorToast } from '../util/toast';
+import { uesrSignup, uploadUserImage, userLogin } from '../api/auth';
+import { url } from '../api/axiosBase';
+
+import { errorToast, successToast } from '../util/toast';
 
 export const useLoginMutation = (
   setError: React.Dispatch<React.SetStateAction<string>>,
@@ -32,42 +32,34 @@ export const useLoginMutation = (
   });
 };
 
-export const useEmailValidMutation = () => {
-  const setError = useSetRecoilState(errorMessageAtom);
-  return useMutation(userEmailValid, {
+export const useSignupMutation = () => {
+  const navigate = useNavigate();
+
+  return useMutation(uesrSignup, {
     onSuccess(resData) {
-      if (resData.message === '잘못된 접근입니다.') {
-        setError((prev) => {
-          return { ...prev, email: `${resData.message}`, isActvie: false };
-        });
-      } else if (resData.status === 404) {
-        setError((prev) => {
-          return {
-            ...prev,
-            email: `서버에 문제가 있습니다. 잠시 후 시도해주세요 :(`,
-            isActvie: false,
-          };
-        });
-      } else if (resData.status === 422) {
-        setError((prev) => {
-          return { ...prev, email: `${resData.message}`, isActvie: false };
-        });
-      } else if (resData.message === '이미 가입된 이메일 주소 입니다.') {
-        setError((prev) => {
-          return { ...prev, email: `${resData.message}`, isActvie: false };
-        });
-      } else if (resData.message === '사용 가능한 이메일 입니다.') {
-        setError((prev) => {
-          return { ...prev, email: '' };
-        });
+      if (resData.message === '회원가입 성공') {
+        navigate('/login');
+        successToast('회원가입에 성공 했습니다!');
       }
+      console.log(resData);
     },
     onError(err: any) {
-      if (err.response.data.status === 422) {
-        setError((prev) => {
-          return { ...prev, email: err.response.data.message };
-        });
-      }
+      console.log(err);
+    },
+  });
+};
+
+export const useImageUploadMutation = (
+  setState: React.Dispatch<React.SetStateAction<string>>,
+) => {
+  return useMutation(uploadUserImage, {
+    onSuccess(resData) {
+      console.log(resData);
+      setState(`${url}/${resData.filename}`);
+    },
+    onError(err: any) {
+      errorToast(`${err.response.data.message}`);
+      console.log(err);
     },
   });
 };
