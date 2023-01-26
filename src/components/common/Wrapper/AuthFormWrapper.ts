@@ -3,8 +3,9 @@ import styled, { css } from 'styled-components';
 const AuthFormWrapper = styled.form`
   div {
     text-align: left;
-    &:first-child {
-      margin-bottom: 16px;
+    margin-bottom: 16px;
+    &:last-child {
+      margin-bottom: 0px;
     }
   }
 
