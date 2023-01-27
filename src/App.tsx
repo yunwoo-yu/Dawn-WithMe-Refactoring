@@ -3,8 +3,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
-import 'react-toastify/dist/ReactToastify.css';
 import ProfileSetting from './pages/ProfileSetting/ProfileSetting';
+import Home from './pages/Home/Home';
+import 'react-toastify/dist/ReactToastify.css';
+import useScreenResize from './hooks/common/useScreenRezise';
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -20,6 +22,8 @@ const App = () => {
     },
   });
 
+  useScreenResize();
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -27,6 +31,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/profilesetting' element={<ProfileSetting />} />
+          <Route path='/home' element={<Home />} />
         </Routes>
         <ToastContainer limit={1} />
       </BrowserRouter>
