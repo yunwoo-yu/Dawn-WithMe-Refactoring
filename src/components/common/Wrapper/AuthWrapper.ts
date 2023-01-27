@@ -27,7 +27,7 @@ const AuthWrapper = styled.section`
         margin-top: 20px;
       }
 
-      img {
+      > img {
         display: block;
         margin: 30px auto 0;
       }
