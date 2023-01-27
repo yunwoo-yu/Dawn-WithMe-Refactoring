@@ -35,11 +35,13 @@ const Signup = () => {
   };
 
   return (
-    <SignupWrapper>
-      <h2>이메일로 회원가입</h2>
-      <SignupForm propsData={propsData} />
-      <Link to='/login'>로그인 하러가기</Link>
-    </SignupWrapper>
+    <main>
+      <SignupWrapper>
+        <h2>이메일로 회원가입</h2>
+        <SignupForm propsData={propsData} />
+        <Link to='/login'>로그인 하러가기</Link>
+      </SignupWrapper>
+    </main>
   );
 };
 

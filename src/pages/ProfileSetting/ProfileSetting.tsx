@@ -57,23 +57,25 @@ const ProfileSetting = () => {
   };
 
   return (
-    <ProfileSettingWrapper>
-      <h2>프로필 설정</h2>
-      <p className='profile-subtit'>나중에 언제든지 변경할수있습니다.</p>
-      <ImgBackground backBg={imgSrc || profileImg}>
-        <input
-          type='file'
-          accept='image/*'
-          id='imageUpload'
-          ref={fileRef}
-          onChange={onChangeImageUpload}
-        />
-        <button type='button' onClick={() => imageClickHandler(fileRef)}>
-          <img src={profileUploadIcon} alt='프로필 이미지 업로드버튼' />
-        </button>
-      </ImgBackground>
-      <ProfileSettingForm propsData={propsData} />
-    </ProfileSettingWrapper>
+    <main>
+      <ProfileSettingWrapper>
+        <h2>프로필 설정</h2>
+        <p className='profile-subtit'>나중에 언제든지 변경할수있습니다.</p>
+        <ImgBackground backBg={imgSrc || profileImg}>
+          <input
+            type='file'
+            accept='image/*'
+            id='imageUpload'
+            ref={fileRef}
+            onChange={onChangeImageUpload}
+          />
+          <button type='button' onClick={() => imageClickHandler(fileRef)}>
+            <img src={profileUploadIcon} alt='프로필 이미지 업로드버튼' />
+          </button>
+        </ImgBackground>
+        <ProfileSettingForm propsData={propsData} />
+      </ProfileSettingWrapper>
+    </main>
   );
 };
 
