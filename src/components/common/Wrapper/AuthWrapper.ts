@@ -10,7 +10,7 @@ const AuthWrapper = styled.section`
       padding: 30px 34px 0;
       text-align: center;
 
-      h2 {
+      > h2 {
         color: ${theme.colors.colorBorder};
         font-weight: 500;
         font-size: ${theme.fontSizes.title};
@@ -18,7 +18,7 @@ const AuthWrapper = styled.section`
         margin-bottom: 40px;
       }
 
-      a {
+      > a {
         display: inline-block;
         font-weight: 400;
         font-size: ${theme.fontSizes.smallMid};
