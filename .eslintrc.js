@@ -45,6 +45,7 @@ module.exports = {
         depth: 3,
       },
     ],
+    'consistent-return': 'off',
   },
 
   settings: {
