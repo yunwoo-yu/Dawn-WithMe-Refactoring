@@ -10,7 +10,7 @@ const TopNavBar = ({
   styleProps,
   children,
 }: {
-  styleProps: HeaderStyle;
+  styleProps: Partial<HeaderStyle>;
   children: React.ReactNode;
 }) => {
   const {

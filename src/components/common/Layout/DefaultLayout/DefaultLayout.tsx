@@ -4,14 +4,14 @@ import TopNavBar from '../../Header/TopNavBar';
 import DefaultMainWrapper from '../../Wrapper/DefaultWrapper';
 
 export interface HeaderStyle {
-  title?: string;
-  onClick?: () => void;
-  buttonText?: string;
-  disabled?: boolean;
-  isButton?: boolean;
-  isMoreButton?: boolean;
-  isTitle?: boolean;
-  isBackButton?: boolean;
+  title: string;
+  onClick: () => void;
+  buttonText: string;
+  disabled: boolean;
+  isButton: boolean;
+  isMoreButton: boolean;
+  isTitle: boolean;
+  isBackButton: boolean;
 }
 
 const DefaultLayout = ({
@@ -19,7 +19,7 @@ const DefaultLayout = ({
   styleProps,
 }: {
   children: React.ReactNode;
-  styleProps: HeaderStyle;
+  styleProps: Partial<HeaderStyle>;
 }) => {
   const { title } = styleProps;
   return (
