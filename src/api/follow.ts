@@ -1,6 +1,6 @@
 import { accessInstance } from './axiosBase';
 
-const getFollowingList = async (accountName: string) => {
+export const getFollowingList = async (accountName: string) => {
   const response = await accessInstance.get(
     `/profile/${accountName}/following?limit=1000`,
   );
@@ -8,4 +8,10 @@ const getFollowingList = async (accountName: string) => {
   return response.data;
 };
 
-export default getFollowingList;
+export const getFollowerList = async (accountName: string) => {
+  const response = await accessInstance.get(
+    `/profile/${accountName}/following?limit=1000`,
+  );
+
+  return response.data;
+};
