@@ -1,7 +1,7 @@
 import DefaultLayout, {
   HeaderStyle,
 } from '../../components/common/Layout/DefaultLayout/DefaultLayout';
-import CategoryItem from '../../components/Home/CategoryItem/CategoryItem';
+import CategoryItem from '../../components/common/FeedItem/FeedItem';
 
 import useGetCategoryFeedQuery from '../../hooks/category.hooks';
 import { FeedData } from '../../types/category';
