@@ -28,6 +28,7 @@ export const useLoginMutation = (
     },
     onError(err) {
       console.log(err);
+      errorToast(`서버에 문제가 있습니다. 잠시 후 시도해주세요 :(`);
     },
   });
 };
