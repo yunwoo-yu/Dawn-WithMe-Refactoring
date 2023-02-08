@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 const CategoryItemWrapper = styled.li`
   margin: 20px 16px;
+
   ${({ theme }) => {
     return css`
       .profile {
@@ -18,6 +19,7 @@ const CategoryItemWrapper = styled.li`
           flex-direction: column;
           align-items: flex-start;
           gap: 2px;
+          margin-left: 12px;
 
           .user-name {
             color: ${theme.colors.colorBorder};
@@ -29,6 +31,34 @@ const CategoryItemWrapper = styled.li`
             color: ${theme.colors.color76};
             font-size: ${theme.fontSizes.smallMid};
           }
+        }
+      }
+
+      .feed-content-box {
+        display: block;
+        padding-left: 54px;
+        text-align: left;
+
+        .feed-text {
+          color: ${theme.colors.colorWhite};
+          font-size: ${theme.fontSizes.xl};
+          line-height: 18px;
+          margin-top: 16px;
+        }
+
+        .feed-img {
+          width: 100%;
+          max-height: 300px;
+          margin-top: 16px;
+          border-radius: 16px;
+          object-fit: cover;
+          border: 0.5px solid ${theme.colors.colorNavBg};
+        }
+
+        .feed-date {
+          color: ${theme.colors.colorBorder};
+          font-size: ${theme.fontSizes.small};
+          margin-top: 16px;
         }
       }
     `;
