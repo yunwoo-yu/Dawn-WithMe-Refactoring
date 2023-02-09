@@ -22,4 +22,8 @@ export const getFollowingProduct = async (accountNameList: string[]) => {
   return result;
 };
 
-export default getFollowingProduct;
+export const getCategoryDetailProduct = async (id: string) => {
+  const response = await accessInstance.get(`/product/detail/${id}`);
+
+  return response.data;
+};
