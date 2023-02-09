@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TopNavBar from '../../Header/TopNavBar';
+import TabMenu from '../../TabMenuBar/TabMenuBar';
 import DefaultMainWrapper from '../../Wrapper/DefaultWrapper';
 
 export interface HeaderStyle {
@@ -26,6 +27,7 @@ const DefaultLayout = ({
     <>
       <TopNavBar styleProps={styleProps}>{title}</TopNavBar>
       <DefaultMainWrapper>{children}</DefaultMainWrapper>
+      <TabMenu />
     </>
   );
 };
