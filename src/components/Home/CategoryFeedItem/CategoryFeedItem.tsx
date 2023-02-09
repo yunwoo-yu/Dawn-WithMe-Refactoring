@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { FeedData } from '../../../types/category';
+
 import CategoryItemWrapper from './styled';
 import profileImg from '../../../assets/images/profile-logo.png';
+import { FeedData } from '../../../types/category';
 
-const FeedItem = ({ data }: { data: FeedData }) => {
-  const { itemImage, itemName, createdAt, updatedAt, price, link, id, author } =
-    data;
+const CategoryFeedItem = ({ data }: { data: FeedData }) => {
+  const { itemImage, createdAt, price, link, id, author } = data;
   const { accountname, username, image: profileImage } = author;
 
   const basicProfileImg =
@@ -39,4 +39,4 @@ const FeedItem = ({ data }: { data: FeedData }) => {
   );
 };
 
-export default FeedItem;
+export default CategoryFeedItem;

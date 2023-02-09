@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 
 const CategoryItemWrapper = styled.li`
-  margin: 20px 16px;
+  width: 100%;
+  margin: 20px 0;
 
   ${({ theme }) => {
     return css`
@@ -36,7 +37,7 @@ const CategoryItemWrapper = styled.li`
 
       .feed-content-box {
         display: block;
-        padding-left: 54px;
+        margin-left: 54px;
         text-align: left;
 
         .feed-text {
