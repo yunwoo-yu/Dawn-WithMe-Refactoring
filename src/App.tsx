@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import ProfileSetting from './pages/ProfileSetting/ProfileSetting';
@@ -19,6 +20,7 @@ const App = () => {
         refetchOnWindowFocus: false,
         keepPreviousData: true,
         staleTime: Infinity,
+        suspense: true,
       },
     },
   });
@@ -36,6 +38,7 @@ const App = () => {
           <Route path='/home/detail/:id' element={<HomeDetail />} />
         </Routes>
         <ToastContainer limit={1} />
+        <ReactQueryDevtools />
       </BrowserRouter>
     </QueryClientProvider>
   );
