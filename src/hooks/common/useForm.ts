@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import errorMessageAtom from '../../recoil/atom';
+import { errorMessageAtom } from '../../recoil/atom';
 import isValidate from '../../util/isValidate';
 
 const useForm = <T extends object>(initialState: T) => {
