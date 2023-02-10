@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useSetRecoilState } from 'recoil';
 import { signupAccountNameValid, signupEmailValid } from '../api/auth';
-import errorMessageAtom from '../recoil/atom';
+import { errorMessageAtom } from '../recoil/atom';
 
 export const useEmailValidMutation = () => {
   const setError = useSetRecoilState(errorMessageAtom);
