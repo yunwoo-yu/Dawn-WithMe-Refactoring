@@ -8,6 +8,7 @@ const HomeWrapper = styled(AuthWrapper)`
       overflow: scroll;
 
       ul {
+        margin: 0 16px;
       }
     `;
   }}
