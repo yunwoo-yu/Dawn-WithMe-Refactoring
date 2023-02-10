@@ -2,8 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyled = createGlobalStyle`
 
-
-
   :root {
     --vh: 100%;
   }
@@ -47,7 +45,7 @@ const GlobalStyled = createGlobalStyle`
   }
 
 *,html {
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   font-weight: 400;
   box-sizing: border-box;
 }
