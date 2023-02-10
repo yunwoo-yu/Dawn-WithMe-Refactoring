@@ -19,7 +19,7 @@ const CategoryItemWrapper = styled.li`
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          gap: 2px;
+          gap: 4px;
           margin-left: 12px;
 
           .user-name {

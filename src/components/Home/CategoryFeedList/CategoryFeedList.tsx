@@ -1,14 +1,21 @@
+import { useRecoilValue } from 'recoil';
 import { useGetCategoryFeedQuery } from '../../../hooks/category.hooks';
+import { selectBoxValueAtom } from '../../../recoil/atom';
 
 import { FeedData } from '../../../types/category';
 import FeedItem from '../CategoryFeedItem/CategoryFeedItem';
 
 const CategoryFeedList = () => {
+  const selectValue = useRecoilValue(selectBoxValueAtom);
   const { data: feedData } = useGetCategoryFeedQuery();
+
+  const filteredFeedList = feedData?.filter(
+    (el) => el.itemName === selectValue,
+  );
 
   return (
     <ul>
-      {feedData?.map((item: FeedData) => (
+      {filteredFeedList?.map((item: FeedData) => (
         <FeedItem key={item.id} data={item} />
       ))}
     </ul>
