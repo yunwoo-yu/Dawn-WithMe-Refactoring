@@ -1,8 +1,11 @@
 import { atom } from 'recoil';
 
-const errorMessageAtom = atom({
+export const errorMessageAtom = atom({
   key: 'errorMessage',
   default: {},
 });
 
-export default errorMessageAtom;
+export const selectBoxValueAtom = atom({
+  key: 'selectValue',
+  default: 'study',
+});

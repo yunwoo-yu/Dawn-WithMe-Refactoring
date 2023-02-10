@@ -13,6 +13,7 @@ export interface HeaderStyle {
   isMoreButton: boolean;
   isTitle: boolean;
   isBackButton: boolean;
+  isSelectBox: boolean;
 }
 
 const DefaultLayout = ({

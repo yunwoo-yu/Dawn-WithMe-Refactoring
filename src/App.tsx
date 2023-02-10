@@ -9,6 +9,7 @@ import Home from './pages/Home/Home';
 import 'react-toastify/dist/ReactToastify.css';
 import useScreenResize from './hooks/common/useScreenRezise';
 import HomeDetail from './pages/HomeDetail/HomeDetail';
+import MyProfile from './pages/Profile/MyProfile';
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -21,6 +22,7 @@ const App = () => {
         keepPreviousData: true,
         staleTime: Infinity,
         suspense: true,
+        useErrorBoundary: true,
       },
     },
   });
@@ -36,6 +38,7 @@ const App = () => {
           <Route path='/profilesetting' element={<ProfileSetting />} />
           <Route path='/home' element={<Home />} />
           <Route path='/home/detail/:id' element={<HomeDetail />} />
+          <Route path='/myprofile' element={<MyProfile />} />
         </Routes>
         <ToastContainer limit={1} />
         <ReactQueryDevtools />
