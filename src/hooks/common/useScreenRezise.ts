@@ -1,3 +1,4 @@
+import { debounce } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 
 const useScreenResize = () => {
@@ -7,13 +8,17 @@ const useScreenResize = () => {
     document.documentElement.style.setProperty('--vh', `${heightSize}px`);
   };
 
-  const setScreenResize = useCallback(() => {
-    setHeightSize(window.innerHeight * 0.01);
-  }, [heightSize]);
+  const setScreenResize = useCallback(
+    debounce(() => {
+      setHeightSize(window.innerHeight * 0.01);
+    }, 500),
+    [heightSize],
+  );
 
   useEffect(() => {
     setScreenSize();
     window.addEventListener('resize', setScreenResize);
+
     return () => {
       window.removeEventListener('resize', setScreenResize);
     };
