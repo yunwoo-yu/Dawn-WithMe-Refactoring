@@ -1,12 +1,15 @@
 import { lazy, Suspense } from 'react';
-import DefaultLayout from '../../components/common/Layout/DefaultLayout/DefaultLayout';
-import { homeStyleProps } from '../Home/Home';
+import DefaultLayout, {
+  HeaderStyle,
+} from '../../components/common/Layout/DefaultLayout/DefaultLayout';
 import HomeDetailWrapper from './styled';
 import CategoryDetailFeedSkeleton from '../../components/Home/CategoryDetailFeed/CategoryDetailFeedSkeleton';
+import RetryErrorBoundary from '../../components/common/RetryErrorBoundary/RetryErrorBoundary';
 
-const homeDetailFeedStyleProps = {
-  ...homeStyleProps,
+const homeDetailFeedStyleProps: Partial<HeaderStyle> = {
   title: '카테고리 게시물',
+  isBackButton: true,
+  isTitle: true,
 };
 
 const CategoryDetailFeed = lazy(
@@ -17,9 +20,11 @@ const HomeDetail = () => {
   return (
     <DefaultLayout styleProps={homeDetailFeedStyleProps}>
       <HomeDetailWrapper>
-        <Suspense fallback={<CategoryDetailFeedSkeleton />}>
-          <CategoryDetailFeed />
-        </Suspense>
+        <RetryErrorBoundary>
+          <Suspense fallback={<CategoryDetailFeedSkeleton />}>
+            <CategoryDetailFeed />
+          </Suspense>
+        </RetryErrorBoundary>
       </HomeDetailWrapper>
     </DefaultLayout>
   );

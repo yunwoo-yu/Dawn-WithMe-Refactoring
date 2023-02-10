@@ -1,17 +1,17 @@
-import React, { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import CategoryFeedItemSkeleton from '../../components/Home/CategoryFeedItem/CategoryFeedItemSkeleton';
+import RetryErrorBoundary from '../../components/common/RetryErrorBoundary/RetryErrorBoundary';
+import HomeWrapper from './styled';
 import DefaultLayout, {
   HeaderStyle,
 } from '../../components/common/Layout/DefaultLayout/DefaultLayout';
 
-import HomeWrapper from './styled';
-
 export const homeStyleProps: Partial<HeaderStyle> = {
-  title: '카테고리 피드',
-  isTitle: true,
+  isSelectBox: true,
   isMoreButton: true,
 };
-const CategoryFeedList = React.lazy(
+
+const CategoryFeedList = lazy(
   () => import('../../components/Home/CategoryFeedList/CategoryFeedList'),
 );
 
@@ -19,9 +19,11 @@ const Home = () => {
   return (
     <DefaultLayout styleProps={homeStyleProps}>
       <HomeWrapper>
-        <Suspense fallback={<CategoryFeedItemSkeleton />}>
-          <CategoryFeedList />
-        </Suspense>
+        <RetryErrorBoundary>
+          <Suspense fallback={<CategoryFeedItemSkeleton />}>
+            <CategoryFeedList />
+          </Suspense>
+        </RetryErrorBoundary>
       </HomeWrapper>
     </DefaultLayout>
   );
