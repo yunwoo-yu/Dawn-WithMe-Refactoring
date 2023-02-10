@@ -2,7 +2,7 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import CategoryItemWrapper from './styled';
 
-const FeedItemSkeleton = () => {
+const CategoryFeedItemSkeleton = () => {
   return (
     <ul>
       <CategoryItemWrapper>
@@ -48,4 +48,4 @@ const FeedItemSkeleton = () => {
   );
 };
 
-export default FeedItemSkeleton;
+export default CategoryFeedItemSkeleton;
