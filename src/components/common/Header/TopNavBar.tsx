@@ -1,10 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import TopNavBarWarpper from './styled';
 import backIcon from '../../../assets/images/icon-arrow-left.png';
 import moreIcon from '../../../assets/images/icon-more-vertical.png';
 import Button from '../Button/Button';
 import { HeaderStyle } from '../Layout/DefaultLayout/DefaultLayout';
+import { selectBoxValueAtom } from '../../../recoil/atom';
 
 const TopNavBar = ({
   styleProps,
@@ -21,15 +23,31 @@ const TopNavBar = ({
     isButton,
     isMoreButton,
     isTitle,
+    isSelectBox,
   } = styleProps;
   const navigate = useNavigate();
+  const selectValueSetter = useSetRecoilState(selectBoxValueAtom);
 
   return (
     <TopNavBarWarpper>
       {isBackButton && (
-        <button type='button' onClick={() => navigate(-1)}>
+        <button
+          className='back-button'
+          type='button'
+          onClick={() => navigate(-1)}
+        >
           <img src={backIcon} alt='뒤로가기 버튼' />
         </button>
+      )}
+      {isSelectBox && (
+        <select
+          defaultValue='study'
+          onChange={(event) => selectValueSetter(event.target.value)}
+        >
+          <option value='study'>스터디</option>
+          <option value='music'>음악</option>
+          <option value='tips'>공부 팁</option>
+        </select>
       )}
       {isTitle && <h2>{children}</h2>}
       {isMoreButton && (
