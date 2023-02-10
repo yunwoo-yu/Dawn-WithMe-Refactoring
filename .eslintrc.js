@@ -46,6 +46,12 @@ module.exports = {
       },
     ],
     'consistent-return': 'off',
+    'react/no-unstable-nested-components': [
+      'warn',
+      {
+        allowAsProps: true,
+      },
+    ],
   },
 
   settings: {
