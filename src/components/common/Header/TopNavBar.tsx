@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import TopNavBarWarpper from './styled';
 import backIcon from '../../../assets/images/icon-arrow-left.png';
 import moreIcon from '../../../assets/images/icon-more-vertical.png';
@@ -26,7 +26,7 @@ const TopNavBar = ({
     isSelectBox,
   } = styleProps;
   const navigate = useNavigate();
-  const selectValueSetter = useSetRecoilState(selectBoxValueAtom);
+  const [selectValue, setSelectValue] = useRecoilState(selectBoxValueAtom);
 
   return (
     <TopNavBarWarpper>
@@ -41,8 +41,8 @@ const TopNavBar = ({
       )}
       {isSelectBox && (
         <select
-          defaultValue='study'
-          onChange={(event) => selectValueSetter(event.target.value)}
+          value={selectValue}
+          onChange={(event) => setSelectValue(event.target.value)}
         >
           <option value='study'>스터디</option>
           <option value='music'>음악</option>

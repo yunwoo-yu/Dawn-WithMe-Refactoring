@@ -17,7 +17,6 @@ const TabMenuBarWrapper = styled.article`
 export const TabNavLink = styled(NavLink)`
   ${({ theme }) => {
     return css`
-      color: ${theme.colors.color76};
       display: block;
       width: 84px;
       text-align: center;
@@ -35,6 +34,7 @@ export const TabNavLink = styled(NavLink)`
         margin-top: 6px;
         font-size: ${theme.fontSizes.smallMid};
         line-height: 14px;
+        color: ${theme.colors.color76};
       }
     `;
   }}
