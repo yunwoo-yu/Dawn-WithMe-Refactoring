@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
-import ProfileSetting from './pages/SignupProfileSetting/ProfileSetting';
+import SignupProfileSetting from './pages/SignupProfileSetting/SignupProfileSetting';
 import Home from './pages/Home/Home';
 import 'react-toastify/dist/ReactToastify.css';
 import useScreenResize from './hooks/common/useScreenRezise';
@@ -35,7 +35,7 @@ const App = () => {
         <Routes>
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/profilesetting' element={<ProfileSetting />} />
+          <Route path='/profilesetting' element={<SignupProfileSetting />} />
           <Route path='/home' element={<Home />} />
           <Route path='/home/detail/:id' element={<HomeDetail />} />
           <Route path='/myprofile' element={<MyProfile />} />
