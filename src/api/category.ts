@@ -27,3 +27,9 @@ export const getCategoryDetailProduct = async (id: string) => {
 
   return response.data;
 };
+
+export const getCategoryFeedList = async (id: string) => {
+  const response = await accessInstance.get(`/product/${id}`);
+
+  return response.data;
+};
