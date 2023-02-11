@@ -5,7 +5,11 @@ import Input from '../../common/Input/Input';
 import Label from '../../common/Label/Label';
 import ProfileSettingFormWrapper from './styled';
 
-const ProfileSettingForm = ({ propsData }: { propsData: SignupProps }) => {
+const SignupProfileSettingForm = ({
+  propsData,
+}: {
+  propsData: SignupProps;
+}) => {
   const { formData, error, onChangeInputHandler, onSubmitButtonHandler } =
     propsData;
   const { username, accountname, intro } = formData;
@@ -76,4 +80,4 @@ const ProfileSettingForm = ({ propsData }: { propsData: SignupProps }) => {
   );
 };
 
-export default ProfileSettingForm;
+export default SignupProfileSettingForm;
