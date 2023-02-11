@@ -4,12 +4,12 @@ import { ToastContainer } from 'react-toastify';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
-import ProfileSetting from './pages/ProfileSetting/ProfileSetting';
+import ProfileSetting from './pages/SignupProfileSetting/ProfileSetting';
 import Home from './pages/Home/Home';
 import 'react-toastify/dist/ReactToastify.css';
 import useScreenResize from './hooks/common/useScreenRezise';
 import HomeDetail from './pages/HomeDetail/HomeDetail';
-import MyProfile from './pages/Profile/MyProfile';
+import MyProfile from './pages/Profile/MyProfile/MyProfile';
 
 const App = () => {
   const queryClient = new QueryClient({
