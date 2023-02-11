@@ -48,6 +48,7 @@ const GlobalStyled = createGlobalStyle`
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   font-weight: 400;
   box-sizing: border-box;
+  color: #fff;
 }
 
 input {
