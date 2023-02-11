@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import React, { useRef, useState } from 'react';
-import ProfileSettingForm from '../../components/Profile/ProfileSettingForm/ProfileSettingForm';
+
 import ProfileSettingWrapper, { ImgBackground } from './styled';
 import profileImg from '../../assets/images/profile-logo.png';
 import profileUploadIcon from '../../assets/images/s-upload-file.png';
@@ -12,8 +12,9 @@ import {
   useImageUploadMutation,
   useSignupMutation,
 } from '../../hooks/auth.hooks';
+import SignupProfileSettingForm from '../../components/SignupProfileSetting/ProfileSettingForm/SignupProfileSettingForm';
 
-const ProfileSetting = () => {
+const SignupProfileSetting = () => {
   const fileRef = useRef(null);
   const location = useLocation();
   const { email, password } = location.state.data;
@@ -73,10 +74,10 @@ const ProfileSetting = () => {
             <img src={profileUploadIcon} alt='프로필 이미지 업로드버튼' />
           </button>
         </ImgBackground>
-        <ProfileSettingForm propsData={propsData} />
+        <SignupProfileSettingForm propsData={propsData} />
       </ProfileSettingWrapper>
     </main>
   );
 };
 
-export default ProfileSetting;
+export default SignupProfileSetting;
