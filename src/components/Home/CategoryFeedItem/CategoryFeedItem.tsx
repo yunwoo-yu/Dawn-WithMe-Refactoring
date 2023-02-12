@@ -45,7 +45,11 @@ const CategoryFeedItem = ({ data }: { data: FeedData }) => {
       </div>
       <Link className='feed-content-box' to={`/home/detail/${id}`}>
         <p className='feed-text'>{link}</p>
-        <img className='feed-img' src={itemImage} alt='게시물 이미지' />
+        <div className='img-box'>
+          <img className='feed-img' src={itemImage} alt='게시물 이미지' />
+        </div>
+      </Link>
+      <div className='feed-date-box'>
         {selectValue === 'study' && (
           <p className='personnel'>
             참여 인원 {Math.ceil(price / 2)}/<span>{price}</span>
@@ -54,7 +58,7 @@ const CategoryFeedItem = ({ data }: { data: FeedData }) => {
         <p className='feed-date'>
           {postDate[0]}년 {postDate[1]}월 {parseInt(postDate[2], 10)}일
         </p>
-      </Link>
+      </div>
     </CategoryItemWrapper>
   );
 };

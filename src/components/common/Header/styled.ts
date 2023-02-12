@@ -19,6 +19,7 @@ const TopNavBarWarpper = styled.header`
       }
 
       .back-button {
+        width: 24px;
         margin-right: 8px;
       }
 

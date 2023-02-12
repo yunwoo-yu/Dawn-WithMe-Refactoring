@@ -2,9 +2,11 @@ import { NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 const TabMenuBarWrapper = styled.article`
+  max-width: 600px;
   width: 100%;
   height: 60px;
-  position: absolute;
+
+  position: fixed;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -17,9 +19,13 @@ const TabMenuBarWrapper = styled.article`
 export const TabNavLink = styled(NavLink)`
   ${({ theme }) => {
     return css`
-      display: block;
+      display: flex;
+      flex-direction: column;
       width: 84px;
+      height: 100%;
       text-align: center;
+      justify-content: center;
+      align-items: center;
 
       p.active {
         color: ${theme.colors.colorMain};
@@ -27,6 +33,7 @@ export const TabNavLink = styled(NavLink)`
 
       img {
         width: 18px;
+        height: 18px;
         margin-top: 6px;
       }
 

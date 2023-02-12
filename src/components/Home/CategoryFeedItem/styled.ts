@@ -13,7 +13,7 @@ const CategoryItemWrapper = styled.li`
         align-items: center;
 
         .participation {
-          display: inline-block;
+          width: 80px;
           height: 36px;
           font-size: ${theme.fontSizes.base};
           padding: 10px 12px;
@@ -69,6 +69,7 @@ const CategoryItemWrapper = styled.li`
         display: block;
         margin-left: 54px;
         text-align: left;
+        aspect-ratio: 16/9;
 
         .feed-text {
           color: ${theme.colors.colorWhite};
@@ -77,16 +78,29 @@ const CategoryItemWrapper = styled.li`
           margin-top: 12px;
         }
 
-        .feed-img {
+        .img-box {
+          position: relative;
           width: 100%;
-          max-height: 300px;
+          padding-top: calc(100% * (9 / 16));
           margin-top: 14px;
-          border-radius: 16px;
-          object-fit: cover;
-          border: 0.5px solid ${theme.colors.colorNavBg};
-        }
+          .feed-img {
+            position: absolute;
+            object-fit: cover;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            max-height: 300px;
+            border-radius: 16px;
 
+            border: 0.5px solid ${theme.colors.colorNavBg};
+          }
+        }
+      }
+      .feed-date-box {
+        margin-left: 54px;
         .feed-date {
+          display: inline-block;
           color: ${theme.colors.colorBorder};
           font-size: ${theme.fontSizes.small};
           margin-top: 16px;
