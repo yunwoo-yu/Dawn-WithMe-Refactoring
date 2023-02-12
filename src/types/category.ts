@@ -1,4 +1,4 @@
-interface Author {
+export interface Author {
   accountname: string;
   followerCount: number;
   followingCount: number;
