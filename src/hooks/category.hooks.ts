@@ -23,6 +23,7 @@ export const useGetCategoryFeedQuery = () => {
 
   return useQuery<FeedData[], AxiosError>(
     ['categoryPost', followingAccountNames],
+
     () => getFollowingProduct(followingAccountNames),
     { enabled: !!followingAccountNames },
   );
@@ -41,17 +42,10 @@ export const useGetCategoryFeedListQuery = () => {
   const { id } = useParams();
   const accountname = localStorage.getItem('accountname');
 
-  return useQuery(
-    ['categoryList', id || accountname],
-    () => {
-      if (id) {
-        return getCategoryFeedList(id);
-      }
-      return accountname && getCategoryFeedList(accountname);
-    },
-    {
-      suspense: false,
-      useErrorBoundary: false,
-    },
-  );
+  return useQuery(['categoryList', id || accountname], () => {
+    if (id) {
+      return getCategoryFeedList(id);
+    }
+    return accountname && getCategoryFeedList(accountname);
+  });
 };

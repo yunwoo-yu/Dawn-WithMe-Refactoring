@@ -55,7 +55,15 @@ const ProfileCategoryFeedListWrapper = styled.div`
             font-size: ${theme.fontSizes.smallMid};
             line-height: 15px;
           }
+
+          .feed-text {
+            margin: 6px 0;
+          }
         }
+      }
+
+      .select-wrapper {
+        margin: 12px 0;
       }
     `;
   }}
