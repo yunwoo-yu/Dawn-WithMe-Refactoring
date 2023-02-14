@@ -20,7 +20,14 @@ const CategoryFeedItem = ({ data }: { data: FeedData }) => {
   return (
     <CategoryItemWrapper>
       <div className='profile-box'>
-        <Link className='profile' to={`/profile/${accountname}`}>
+        <Link
+          className='profile'
+          to={
+            accountname === localStorage.getItem('accountname')
+              ? '/myprofile'
+              : `/profile/${accountname}`
+          }
+        >
           <img
             className='profile-image'
             src={basicProfileImg}
