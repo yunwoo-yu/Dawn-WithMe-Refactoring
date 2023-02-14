@@ -5,7 +5,6 @@ const TabMenuBarWrapper = styled.article`
   max-width: 600px;
   width: 100%;
   height: 60px;
-
   position: fixed;
   bottom: 0;
   left: 50%;
@@ -14,6 +13,7 @@ const TabMenuBarWrapper = styled.article`
   justify-content: space-evenly;
   align-items: center;
   background-color: #2f3136;
+  z-index: 100;
 `;
 
 export const TabNavLink = styled(NavLink)`
