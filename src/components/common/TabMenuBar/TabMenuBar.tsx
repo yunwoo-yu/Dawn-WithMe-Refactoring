@@ -23,7 +23,7 @@ const TabMenu = () => {
         />
         <p className={pathname === '/home' ? 'active' : ''}>홈</p>
       </TabNavLink>
-      <TabNavLink to='/feed'>
+      <TabNavLink to='/freeboard'>
         <img
           src={pathname === '/feed' ? noticeImgOn : noticeImg}
           alt='자유게시판 이동 버튼'
