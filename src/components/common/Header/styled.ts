@@ -44,6 +44,10 @@ const TopNavBarWarpper = styled.header`
         border: none;
         outline: none;
       }
+
+      a {
+        height: 100%;
+      }
     `;
   }}
 `;
