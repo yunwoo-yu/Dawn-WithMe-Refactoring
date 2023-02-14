@@ -3,6 +3,7 @@ import DefaultLayout, {
   HeaderStyle,
 } from '../../../components/common/Layout/DefaultLayout/DefaultLayout';
 import RetryErrorBoundary from '../../../components/common/RetryErrorBoundary/RetryErrorBoundary';
+import FreeBoardItemSkeleton from '../../../components/FreeBoard/FreeBoardItem/FreeBoardItemSkeleton';
 import ProfileCategoryFeedList from '../../../components/Profile/ProfileCategoryFeedList/ProfileCategoryFeedList';
 import ProfileCategoryFeedListSkeleton from '../../../components/Profile/ProfileCategoryFeedList/ProfileCategoryFeedListSkeleton';
 import ProfileFreeBoardPostList from '../../../components/Profile/ProfileFreeBoardPostList/ProfileFreeBoardPostList';
@@ -28,7 +29,9 @@ const MyProfile = () => {
           <Suspense fallback={<ProfileCategoryFeedListSkeleton />}>
             <ProfileCategoryFeedList />
           </Suspense>
-          <ProfileFreeBoardPostList />
+          <Suspense fallback={<FreeBoardItemSkeleton />}>
+            <ProfileFreeBoardPostList />
+          </Suspense>
         </RetryErrorBoundary>
       </MyProfileWrapper>
     </DefaultLayout>
