@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import useScreenResize from './hooks/common/useScreenRezise';
 import HomeDetail from './pages/HomeDetail/HomeDetail';
 import MyProfile from './pages/Profile/MyProfile/MyProfile';
+import UesrProfile from './pages/Profile/UserProfile/UserProfile';
+import FreeBoard from './pages/FreeBoard/FreeBoard';
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -39,6 +41,8 @@ const App = () => {
           <Route path='/home' element={<Home />} />
           <Route path='/home/detail/:id' element={<HomeDetail />} />
           <Route path='/myprofile' element={<MyProfile />} />
+          <Route path='/profile/:id' element={<UesrProfile />} />
+          <Route path='/freeboard' element={<FreeBoard />} />
         </Routes>
         <ToastContainer limit={1} />
         <ReactQueryDevtools />
