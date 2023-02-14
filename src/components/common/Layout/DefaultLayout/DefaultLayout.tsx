@@ -14,6 +14,7 @@ export interface HeaderStyle {
   isTitle: boolean;
   isBackButton: boolean;
   isSelectBox: boolean;
+  isSearch: boolean;
 }
 
 const DefaultLayout = ({

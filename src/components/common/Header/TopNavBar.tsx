@@ -1,9 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import TopNavBarWarpper from './styled';
 import backIcon from '../../../assets/images/icon-arrow-left.png';
 import moreIcon from '../../../assets/images/icon-more-vertical.png';
+import searchIcon from '../../../assets/images/icon-search.png';
 import Button from '../Button/Button';
 import { HeaderStyle } from '../Layout/DefaultLayout/DefaultLayout';
 import { selectBoxValueAtom } from '../../../recoil/atom';
@@ -24,6 +25,7 @@ const TopNavBar = ({
     isMoreButton,
     isTitle,
     isSelectBox,
+    isSearch,
   } = styleProps;
   const navigate = useNavigate();
   const [selectValue, setSelectValue] = useRecoilState(selectBoxValueAtom);
@@ -65,6 +67,11 @@ const TopNavBar = ({
         >
           {buttonText}
         </Button>
+      )}
+      {isSearch && (
+        <Link to='/search'>
+          <img src={searchIcon} alt='더보기 버튼' />
+        </Link>
       )}
     </TopNavBarWarpper>
   );
