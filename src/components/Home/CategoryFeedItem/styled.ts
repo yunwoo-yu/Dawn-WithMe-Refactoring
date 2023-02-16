@@ -69,20 +69,19 @@ const CategoryItemWrapper = styled.li`
         display: block;
         margin-left: 54px;
         text-align: left;
-        aspect-ratio: 16/9;
 
         .feed-text {
           color: ${theme.colors.colorWhite};
           font-size: ${theme.fontSizes.xl};
           line-height: 18px;
-          margin-top: 12px;
+          margin: 12px 0 14px;
         }
 
         .img-box {
           position: relative;
           width: 100%;
           padding-top: calc(100% * (9 / 16));
-          margin-top: 14px;
+
           .feed-img {
             position: absolute;
             object-fit: cover;
@@ -92,7 +91,6 @@ const CategoryItemWrapper = styled.li`
             height: 100%;
             max-height: 300px;
             border-radius: 16px;
-
             border: 0.5px solid ${theme.colors.colorNavBg};
           }
         }
