@@ -6,9 +6,7 @@ const HomeWrapper = styled(AuthWrapper)`
     return css`
       padding: 0 0 120px 0;
       overflow-y: scroll;
-      &::-webkit-scrollbar {
-        display: none;
-      }
+
       ul {
         margin: 0 16px;
       }
