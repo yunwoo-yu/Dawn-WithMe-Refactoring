@@ -14,5 +14,6 @@ export interface FreeBoardDataTypes {
 }
 
 export interface FreeBoardListDataTypes {
-  post: FreeBoardDataTypes[];
+  post?: FreeBoardDataTypes[];
+  posts?: FreeBoardDataTypes[];
 }
