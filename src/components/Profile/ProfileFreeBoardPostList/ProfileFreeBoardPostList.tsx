@@ -8,10 +8,8 @@ const ProfileFreeBoardPostList = () => {
 
   return (
     <ProfileFreeBoardPostListWrapper>
-      <ul>
-        {data &&
-          data.post.map((item) => <FreeBoardItem key={item.id} data={item} />)}
-      </ul>
+      {data &&
+        data.post?.map((item) => <FreeBoardItem key={item.id} data={item} />)}
     </ProfileFreeBoardPostListWrapper>
   );
 };
