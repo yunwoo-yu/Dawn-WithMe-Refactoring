@@ -12,6 +12,8 @@ import HomeDetail from './pages/HomeDetail/HomeDetail';
 import MyProfile from './pages/Profile/MyProfile/MyProfile';
 import UesrProfile from './pages/Profile/UserProfile/UserProfile';
 import FreeBoard from './pages/FreeBoard/FreeBoard';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const App = () => {
   const queryClient = new QueryClient({
