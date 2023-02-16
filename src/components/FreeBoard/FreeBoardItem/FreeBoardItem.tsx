@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
 import { FreeBoardDataTypes } from '../../../types/freeBoard';
 import FreeBoardItemWrapper from './styled';
 import profileImg from '../../../assets/images/profile-logo.png';
@@ -47,7 +48,14 @@ const FreeBoardItem = ({ data }: { data: FreeBoardDataTypes }) => {
   return (
     <FreeBoardItemWrapper>
       <div className='profile-box'>
-        <Link className='profile' to={`/profile/${accountname}`}>
+        <Link
+          className='profile'
+          to={
+            accountname === localStorage.getItem('accountname')
+              ? '/myprofile'
+              : `/profile/${accountname}`
+          }
+        >
           <img
             className='profile-image'
             src={basicProfileImg}
@@ -67,16 +75,14 @@ const FreeBoardItem = ({ data }: { data: FreeBoardDataTypes }) => {
       </div>
       <Link className='feed-content-box' to={`/freeboard/detail/${id}`}>
         <p className='feed-text'>{content}</p>
-        <div className='img-box'>
-          {image.split(',').map((imgSrc) => (
-            <img
-              key={imgSrc}
-              className='feed-img'
-              src={imgSrc}
-              alt='게시물 이미지'
-            />
-          ))}
-        </div>
+        <Slider dots draggable arrows={false}>
+          {image &&
+            image.split(',').map((imgSrc) => (
+              <div className='img-box' key={imgSrc}>
+                <img className='feed-img' src={imgSrc} alt='게시물 이미지' />
+              </div>
+            ))}
+        </Slider>
       </Link>
       <div className='feed-date-box'>
         <div className='comment-heart-box'>

@@ -29,6 +29,9 @@ const FreeBoardItemWrapper = styled(CategoryItemWrapper)`
           }
         }
       }
+      .feed-date {
+        margin-top: 10px;
+      }
     `;
   }}
 `;

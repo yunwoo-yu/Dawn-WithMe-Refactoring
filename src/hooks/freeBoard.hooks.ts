@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import {
+  getFreeBoardFeedList,
   getMyFreeBoardPostList,
   setFreeBoardPostHeart,
 } from '../api/freeBoard';
@@ -12,14 +13,21 @@ export const useGetMyFreeBoardPostList = () => {
   const accountname = localStorage.getItem('accountname');
 
   return useQuery<unknown, Error, FreeBoardListDataTypes>(
-    ['freeBoardPostList', id || accountname],
+    ['myFreeBoardPostList', id || accountname],
     () => {
       if (id) return getMyFreeBoardPostList(id);
 
       return accountname && getMyFreeBoardPostList(accountname);
     },
-    { suspense: false, useErrorBoundary: false },
+    // { suspense: false, useErrorBoundary: false },
   );
+};
+
+export const useGetFreeBoardFeedList = () => {
+  return useQuery(['freeBoardPostList'], getFreeBoardFeedList, {
+    // suspense: false,
+    // useErrorBoundary: false,
+  });
 };
 
 export const useSetFreeBoardPostHeartMutation = (
