@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 const GlobalStyled = createGlobalStyle`
 
@@ -67,6 +67,53 @@ input {
     
   }
 }
+.slick-slider{
+
+  .slick-dots{
+    bottom:15px;
+    ${({ theme }) => {
+      return css`
+        > li {
+          margin: 0 2px;
+
+          ${theme.device.mobile} {
+            margin: 0;
+          }
+          button {
+            &::before {
+              color: #fff;
+              opacity: 1;
+            }
+
+            &:hover {
+              &::before {
+                color: ${theme.colors.colorMain};
+              }
+            }
+          }
+        }
+
+        .slick-active {
+          button {
+            &::before {
+              color: ${theme.colors.colorMain};
+            }
+          }
+        }
+      `;
+    }}
+
+  .slick-slide{
+  
+    .img-box{
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+}
+}
+
 `;
 
 export default GlobalStyled;
