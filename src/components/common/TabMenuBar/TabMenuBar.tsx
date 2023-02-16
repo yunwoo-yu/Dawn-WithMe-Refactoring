@@ -25,10 +25,10 @@ const TabMenu = () => {
       </TabNavLink>
       <TabNavLink to='/freeboard'>
         <img
-          src={pathname === '/feed' ? noticeImgOn : noticeImg}
+          src={pathname === '/freeboard' ? noticeImgOn : noticeImg}
           alt='자유게시판 이동 버튼'
         />
-        <p className={pathname === '/feed' ? 'active' : ''}>자유게시판</p>
+        <p className={pathname === '/freeboard' ? 'active' : ''}>자유게시판</p>
       </TabNavLink>
       <TabNavLink to='/chat'>
         <img
