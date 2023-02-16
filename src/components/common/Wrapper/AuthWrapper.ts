@@ -9,7 +9,9 @@ const AuthWrapper = styled.section`
       margin: 0 auto;
       padding: 30px 34px 0;
       text-align: center;
-
+      &::-webkit-scrollbar {
+        display: none;
+      }
       > h2 {
         color: ${theme.colors.colorBorder};
         font-weight: 500;
