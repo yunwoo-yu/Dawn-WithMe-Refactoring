@@ -1,10 +1,10 @@
-import { useGetMyFreeBoardPostList } from '../../../hooks/freeBoard.hooks';
+import { useGetMyFreeBoardPostListQuery } from '../../../hooks/freeBoard.hooks';
 import FreeBoardItem from '../../FreeBoard/FreeBoardItem/FreeBoardItem';
 
 import ProfileFreeBoardPostListWrapper from './styled';
 
 const ProfileFreeBoardPostList = () => {
-  const { data } = useGetMyFreeBoardPostList();
+  const { data } = useGetMyFreeBoardPostListQuery();
 
   return (
     <ProfileFreeBoardPostListWrapper>
