@@ -1,13 +1,10 @@
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import DefaultLayout, {
   HeaderStyle,
 } from '../../../components/common/Layout/DefaultLayout/DefaultLayout';
 import RetryErrorBoundary from '../../../components/common/RetryErrorBoundary/RetryErrorBoundary';
 import FreeBoardItemSkeleton from '../../../components/FreeBoard/FreeBoardItem/FreeBoardItemSkeleton';
-import ProfileCategoryFeedList from '../../../components/Profile/ProfileCategoryFeedList/ProfileCategoryFeedList';
 import ProfileCategoryFeedListSkeleton from '../../../components/Profile/ProfileCategoryFeedList/ProfileCategoryFeedListSkeleton';
-import ProfileFreeBoardPostList from '../../../components/Profile/ProfileFreeBoardPostList/ProfileFreeBoardPostList';
-import ProfileInfo from '../../../components/Profile/ProfileInfo/ProfileInfo';
 import ProfileInfoSkeleton from '../../../components/Profile/ProfileInfo/ProfileInfoSkeleton';
 import MyProfileWrapper from './styled';
 
@@ -17,6 +14,24 @@ const myProfileHeaderProps: Partial<HeaderStyle> = {
   isTitle: true,
   isMoreButton: true,
 };
+
+const ProfileInfo = lazy(
+  () => import('../../../components/Profile/ProfileInfo/ProfileInfo'),
+);
+
+const ProfileCategoryFeedList = lazy(
+  () =>
+    import(
+      '../../../components/Profile/ProfileCategoryFeedList/ProfileCategoryFeedList'
+    ),
+);
+
+const ProfileFreeBoardPostList = lazy(
+  () =>
+    import(
+      '../../../components/Profile/ProfileFreeBoardPostList/ProfileFreeBoardPostList'
+    ),
+);
 
 const MyProfile = () => {
   return (
