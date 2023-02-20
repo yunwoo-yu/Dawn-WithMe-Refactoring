@@ -9,7 +9,7 @@ import {
 import { PostIsHeartTypes } from '../components/FreeBoard/FreeBoardItem/FreeBoardItem';
 import { FreeBoardListDataTypes } from '../types/freeBoard';
 
-export const useGetMyFreeBoardPostList = () => {
+export const useGetMyFreeBoardPostListQuery = () => {
   const { id } = useParams();
   const accountname = localStorage.getItem('accountname');
 
@@ -24,14 +24,14 @@ export const useGetMyFreeBoardPostList = () => {
   );
 };
 
-export const useGetFreeBoardFeedList = () => {
+export const useGetFreeBoardFeedListQuery = () => {
   return useQuery(['freeBoardPostList'], getFreeBoardFeedList, {
     // suspense: false,
     // useErrorBoundary: false,
   });
 };
 
-export const useGetFreeBoardDetailFeed = () => {
+export const useGetFreeBoardDetailFeedQuery = () => {
   const { id } = useParams();
 
   return useQuery(
