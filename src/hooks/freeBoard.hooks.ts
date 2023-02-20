@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import {
+  getFreeBoardDatailFeed,
   getFreeBoardFeedList,
   getMyFreeBoardPostList,
   setFreeBoardPostHeart,
@@ -28,6 +29,19 @@ export const useGetFreeBoardFeedList = () => {
     // suspense: false,
     // useErrorBoundary: false,
   });
+};
+
+export const useGetFreeBoardDetailFeed = () => {
+  const { id } = useParams();
+
+  return useQuery(
+    ['freeBoardDatail', id],
+    () => id && getFreeBoardDatailFeed(id),
+    {
+      suspense: false,
+      useErrorBoundary: false,
+    },
+  );
 };
 
 export const useSetFreeBoardPostHeartMutation = (

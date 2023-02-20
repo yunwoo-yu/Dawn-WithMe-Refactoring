@@ -12,6 +12,12 @@ export const getFreeBoardFeedList = async () => {
   return response.data;
 };
 
+export const getFreeBoardDatailFeed = async (id: string) => {
+  const response = await accessInstance.get(`/post/${id}`);
+
+  return response.data;
+};
+
 export const setFreeBoardPostHeart = async ({
   postId,
   isHeart,
