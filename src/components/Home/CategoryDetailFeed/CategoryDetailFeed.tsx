@@ -4,7 +4,7 @@ import CategoryFeedItem from '../CategoryFeedItem/CategoryFeedItem';
 const CategoryDetailFeed = () => {
   const { data } = useGetCategoryDetailFeedQuery();
 
-  return <CategoryFeedItem data={data.product} />;
+  return data && <CategoryFeedItem data={data.product} />;
 };
 
 export default CategoryDetailFeed;
