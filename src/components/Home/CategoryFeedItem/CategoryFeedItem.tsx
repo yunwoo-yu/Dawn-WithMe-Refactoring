@@ -6,7 +6,13 @@ import profileImg from '../../../assets/images/profile-logo.png';
 import { FeedData } from '../../../types/category';
 import { selectBoxValueAtom } from '../../../recoil/atom';
 
-const CategoryFeedItem = ({ data }: { data: FeedData }) => {
+const CategoryFeedItem = ({
+  data,
+  as,
+}: {
+  data: FeedData;
+  as?: keyof JSX.IntrinsicElements;
+}) => {
   const { itemImage, createdAt, price, link, id, author, itemName } = data;
   const { accountname, username, image: profileImage } = author;
   const selectValue = useRecoilValue(selectBoxValueAtom);
@@ -18,7 +24,7 @@ const CategoryFeedItem = ({ data }: { data: FeedData }) => {
   const postDate = createdAt.split('-');
 
   return (
-    <CategoryItemWrapper>
+    <CategoryItemWrapper as={as}>
       <div className='profile-box'>
         <Link
           className='profile'
