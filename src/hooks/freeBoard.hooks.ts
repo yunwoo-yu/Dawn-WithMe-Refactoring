@@ -2,12 +2,16 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import {
   getFreeBoardDatailFeed,
+  getFreeBoardDetailFeedCommentList,
   getFreeBoardFeedList,
   getMyFreeBoardPostList,
   setFreeBoardPostHeart,
 } from '../api/freeBoard';
 import { PostIsHeartTypes } from '../components/FreeBoard/FreeBoardItem/FreeBoardItem';
-import { FreeBoardListDataTypes } from '../types/freeBoard';
+import {
+  FreeBoardCommentListDataTypes,
+  FreeBoardListDataTypes,
+} from '../types/freeBoard';
 
 export const useGetMyFreeBoardPostListQuery = () => {
   const { id } = useParams();
@@ -37,6 +41,19 @@ export const useGetFreeBoardDetailFeedQuery = () => {
   return useQuery(
     ['freeBoardDatail', id],
     () => id && getFreeBoardDatailFeed(id),
+    {
+      suspense: false,
+      useErrorBoundary: false,
+    },
+  );
+};
+
+export const useGetDetailFeedCommentQuery = () => {
+  const { id } = useParams();
+
+  return useQuery<unknown, Error, FreeBoardCommentListDataTypes>(
+    ['freeBoardDetailCommentList', id],
+    async () => id && getFreeBoardDetailFeedCommentList(id),
     {
       suspense: false,
       useErrorBoundary: false,
