@@ -18,6 +18,12 @@ export const getFreeBoardDatailFeed = async (id: string) => {
   return response.data;
 };
 
+export const getFreeBoardDetailFeedCommentList = async (id: string) => {
+  const response = await accessInstance.get(`/post/${id}/comments`);
+
+  return response.data;
+};
+
 export const setFreeBoardPostHeart = async ({
   postId,
   isHeart,
