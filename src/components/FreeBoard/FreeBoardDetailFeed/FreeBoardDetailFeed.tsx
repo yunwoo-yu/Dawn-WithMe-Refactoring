@@ -1,17 +1,25 @@
-import { useGetFreeBoardDetailFeedQuery } from '../../../hooks/freeBoard.hooks';
-import FreeBoardCommentList from '../FreeBoardCommentList/FreeBoardCommentList';
+import {
+  useGetDetailFeedCommentQuery,
+  useGetFreeBoardDetailFeedQuery,
+} from '../../../hooks/freeBoard.hooks';
+import FreeBoardCommentItem from '../FreeBoardCommentItem/FreeBoardCommentItem';
 import FreeBoardItem from '../FreeBoardItem/FreeBoardItem';
+import FreeBoardDetailFeedWrapper from './styled';
 
 const FreeBoardDetailFeed = () => {
   const { data } = useGetFreeBoardDetailFeedQuery();
 
-  console.log(data);
+  const { data: commentData } = useGetDetailFeedCommentQuery();
 
   return (
-    <>
-      {data && <FreeBoardItem data={data.post} />}
-      <FreeBoardCommentList />
-    </>
+    <FreeBoardDetailFeedWrapper>
+      {data && <FreeBoardItem as='div' data={data.post} />}
+      <ul>
+        {commentData?.comments.map((item) => (
+          <FreeBoardCommentItem data={item} />
+        ))}
+      </ul>
+    </FreeBoardDetailFeedWrapper>
   );
 };
 

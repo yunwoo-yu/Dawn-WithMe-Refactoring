@@ -15,7 +15,13 @@ export interface PostIsHeartTypes {
   heartCount: number;
 }
 
-const FreeBoardItem = ({ data }: { data: FreeBoardDataTypes }) => {
+const FreeBoardItem = ({
+  data,
+  as,
+}: {
+  data: FreeBoardDataTypes;
+  as?: keyof JSX.IntrinsicElements;
+}) => {
   const {
     createdAt,
     id,
@@ -46,7 +52,7 @@ const FreeBoardItem = ({ data }: { data: FreeBoardDataTypes }) => {
   };
 
   return (
-    <FreeBoardItemWrapper>
+    <FreeBoardItemWrapper as={as}>
       <div className='profile-box'>
         <Link
           className='profile'
