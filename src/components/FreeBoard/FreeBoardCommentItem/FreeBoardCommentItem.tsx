@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FreeBoardCommentDataTypes } from '../../../types/freeBoard';
 import FreeBoardCommentItemWrapper from './styled';
+import moreIcon from '../../../assets/images/s-icon-more-vertical.png';
 
 const FreeBoardCommentItem = ({
   data,
@@ -8,17 +10,21 @@ const FreeBoardCommentItem = ({
   data: FreeBoardCommentDataTypes;
 }) => {
   const { content, createdAt, author } = data;
-  const { username, image } = author;
+  const { username, image, accountname } = author;
   console.log(data);
+
   return (
     <FreeBoardCommentItemWrapper>
       <div className='comment-profile'>
-        <img src={image} alt='' />
+        <Link to={`/profile/${accountname}`}>
+          <img src={image} alt='프로필 이미지' />
+          <p className='comment-username'>{username}</p>
+        </Link>
+        <button type='button'>
+          <img src={moreIcon} alt='댓글 더보기 버튼' />
+        </button>
       </div>
-      <div className='comment-content'>
-        <p className='comment-username'>{username}</p>
-        <p className='comment'>{content}</p>
-      </div>
+      <p className='comment'>{content}</p>
     </FreeBoardCommentItemWrapper>
   );
 };
