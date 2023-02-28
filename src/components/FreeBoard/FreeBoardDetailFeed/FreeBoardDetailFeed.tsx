@@ -16,7 +16,7 @@ const FreeBoardDetailFeed = () => {
       {data && <FreeBoardItem as='div' data={data.post} />}
       <ul>
         {commentData?.comments.map((item) => (
-          <FreeBoardCommentItem data={item} />
+          <FreeBoardCommentItem data={item} key={item.id} />
         ))}
       </ul>
     </FreeBoardDetailFeedWrapper>
