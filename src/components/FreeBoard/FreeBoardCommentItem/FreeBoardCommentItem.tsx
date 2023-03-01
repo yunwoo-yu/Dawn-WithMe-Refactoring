@@ -11,7 +11,6 @@ const FreeBoardCommentItem = ({
 }) => {
   const { content, createdAt, author } = data;
   const { username, image, accountname } = author;
-  console.log(data);
 
   return (
     <FreeBoardCommentItemWrapper>
