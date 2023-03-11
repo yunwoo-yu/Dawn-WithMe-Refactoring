@@ -15,6 +15,7 @@ export interface HeaderStyle {
   isBackButton: boolean;
   isSelectBox: boolean;
   isSearch: boolean;
+  isTabMenu: boolean;
 }
 
 const DefaultLayout = ({
@@ -24,12 +25,12 @@ const DefaultLayout = ({
   children: React.ReactNode;
   styleProps: Partial<HeaderStyle>;
 }) => {
-  const { title } = styleProps;
+  const { title, isTabMenu = true } = styleProps;
   return (
     <>
       <TopNavBar styleProps={styleProps}>{title}</TopNavBar>
       <DefaultMainWrapper>{children}</DefaultMainWrapper>
-      <TabMenu />
+      {isTabMenu && <TabMenu />}
     </>
   );
 };

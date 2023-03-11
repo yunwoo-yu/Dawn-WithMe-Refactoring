@@ -9,6 +9,7 @@ const freeBoardDetailHeaderProps: Partial<HeaderStyle> = {
   isTitle: true,
   isBackButton: true,
   isMoreButton: true,
+  isTabMenu: false,
 };
 
 const FreeBoardDetail = () => {
