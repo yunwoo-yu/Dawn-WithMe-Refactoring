@@ -52,6 +52,7 @@ module.exports = {
         allowAsProps: true,
       },
     ],
+    'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
   },
 
   settings: {
