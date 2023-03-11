@@ -4,6 +4,7 @@ const FreeBoardCommentItemWrapper = styled.li`
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
+  padding: 0 16px;
   .comment-profile {
     display: flex;
     > a {
@@ -14,6 +15,16 @@ const FreeBoardCommentItemWrapper = styled.li`
       .comment-username {
         color: ${(props) => props.theme.colors.colorBorder};
         font-size: ${(props) => props.theme.fontSizes.base};
+
+        > span {
+          color: ${(props) => props.theme.colors.color76};
+          font-size: ${(props) => props.theme.fontSizes.small};
+          vertical-align: middle;
+          margin-left: 6px;
+          &::before {
+            content: '· ';
+          }
+        }
       }
 
       > img {

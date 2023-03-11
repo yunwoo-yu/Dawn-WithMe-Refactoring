@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FreeBoardCommentDataTypes } from '../../../types/freeBoard';
 import FreeBoardCommentItemWrapper from './styled';
 import moreIcon from '../../../assets/images/s-icon-more-vertical.png';
+import getCommentCreateTime from '../../../util/getCommentCreateTime';
 
 const FreeBoardCommentItem = ({
   data,
@@ -17,7 +18,10 @@ const FreeBoardCommentItem = ({
       <div className='comment-profile'>
         <Link to={`/profile/${accountname}`}>
           <img src={image} alt='프로필 이미지' />
-          <p className='comment-username'>{username}</p>
+          <p className='comment-username'>
+            {username}
+            <span>{getCommentCreateTime(createdAt)}</span>
+          </p>
         </Link>
         <button type='button'>
           <img src={moreIcon} alt='댓글 더보기 버튼' />
