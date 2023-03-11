@@ -13,6 +13,10 @@ export interface FreeBoardDataTypes {
   updatedAt: string;
 }
 
+export interface FreeBoardDataHooksTypes {
+  post: FreeBoardDataTypes;
+}
+
 export interface FreeBoardListDataTypes {
   post?: FreeBoardDataTypes[];
   posts?: FreeBoardDataTypes[];
