@@ -5,7 +5,6 @@ import ProfileFreeBoardPostListWrapper from './styled';
 
 const ProfileFreeBoardPostList = () => {
   const { data } = useGetMyFreeBoardPostListQuery();
-
   return (
     <ProfileFreeBoardPostListWrapper>
       {data &&

@@ -15,7 +15,7 @@ const getCommentCreateTime = (date: string): string => {
     if (betweenTime > 0) return `${betweenTime}${times[i].name} 전`;
   }
 
-  return 'zz';
+  return '방금 전';
 };
 
 export default getCommentCreateTime;

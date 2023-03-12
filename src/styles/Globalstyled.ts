@@ -71,6 +71,7 @@ input {
 
   .slick-dots{
     bottom:15px;
+    
     ${({ theme }) => {
       return css`
         > li {
