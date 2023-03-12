@@ -1,4 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { useParams } from 'react-router-dom';
 import { getMyProfileData, getUserProfileData } from '../api/profile';
 
@@ -15,19 +16,33 @@ export interface MyProfileTypes {
   _id: string;
 }
 
-export const useGetMyProfileDataQuery = () => {
-  return useQuery(['myProfileData'], getMyProfileData, {
-    // suspense: false,
-    // useErrorBoundary: false,
-  });
+export const useGetMyProfileDataQuery = (
+  options?: UseQueryOptions<MyProfileTypes, AxiosError>,
+) => {
+  return useQuery<MyProfileTypes, AxiosError>(
+    ['myProfileData'],
+    getMyProfileData,
+    {
+      // suspense: false,
+      // useErrorBoundary: false,
+      ...options,
+    },
+  );
 };
 
-export const useGetUserProfileDataQuery = () => {
+export const useGetUserProfileDataQuery = (
+  options?: UseQueryOptions<MyProfileTypes, AxiosError>,
+) => {
   const { id } = useParams();
 
-  return useQuery(['userProfileData', id], () => id && getUserProfileData(id), {
-    // suspense: false,
-    // useErrorBoundary: false,
-    enabled: !!id,
-  });
+  return useQuery<MyProfileTypes, AxiosError>(
+    ['userProfileData', id],
+    async () => id && getUserProfileData(id),
+    {
+      // suspense: false,
+      // useErrorBoundary: false,
+      enabled: !!id,
+      ...options,
+    },
+  );
 };

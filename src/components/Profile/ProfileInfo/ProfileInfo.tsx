@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Link } from 'react-router-dom';
 import {
-  MyProfileTypes,
   useGetMyProfileDataQuery,
   useGetUserProfileDataQuery,
 } from '../../../hooks/profile.hooks';
@@ -11,14 +11,8 @@ const ProfileInfo = () => {
   const { data: myProfileData } = useGetMyProfileDataQuery();
   const { data: userProfileData } = useGetUserProfileDataQuery();
 
-  const {
-    accountname,
-    username,
-    intro,
-    image,
-    followerCount,
-    followingCount,
-  }: MyProfileTypes = userProfileData || myProfileData;
+  const { accountname, username, intro, image, followerCount, followingCount } =
+    userProfileData! || myProfileData!;
 
   return (
     <ProfileInfoWrapper>
