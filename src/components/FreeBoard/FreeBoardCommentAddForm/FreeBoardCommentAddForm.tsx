@@ -8,8 +8,8 @@ interface Props {
 }
 
 const FreeBoardCommentAddForm = ({ profileImg }: Props) => {
-  const [comment, setComment] = useState<string>('');
   const { id } = useParams();
+  const [comment, setComment] = useState<string>('');
   const addFreeBoardCommentMutation = useAddFreeBoardCommentMutation();
 
   const onSubmitCommentHandler = (e: FormEvent) => {
