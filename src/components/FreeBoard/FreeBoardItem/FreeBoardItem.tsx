@@ -52,7 +52,7 @@ const FreeBoardItem = ({
   };
 
   return (
-    <FreeBoardItemWrapper as={as}>
+    <FreeBoardItemWrapper className='freeboard-detail-wrapper' as={as}>
       <div className='profile-box'>
         <Link
           className='profile'
