@@ -16,6 +16,7 @@ import FreeBoardDetail from './pages/FreeBoardDetail/FreeBoardDetail';
 import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Timer from './pages/Timer/Timer';
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -48,6 +49,7 @@ const App = () => {
           <Route path='/profile/:id' element={<UesrProfile />} />
           <Route path='/freeboard' element={<FreeBoard />} />
           <Route path='/freeboard/detail/:id' element={<FreeBoardDetail />} />
+          <Route path='/timer' element={<Timer />} />
         </Routes>
         <ToastContainer limit={1} />
         <ReactQueryDevtools />

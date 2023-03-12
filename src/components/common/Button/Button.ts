@@ -26,7 +26,7 @@ const setSize = (size: string) => {
   }
 };
 
-const Button = styled.button<{ width: string; size: string }>`
+const Button = styled.button<{ width?: string; size?: string }>`
   width: ${(props) => props.width};
   ${({ theme }) => {
     return css`
@@ -48,7 +48,7 @@ const Button = styled.button<{ width: string; size: string }>`
     `;
   }}
 
-  ${({ size }) => setSize(size)}
+  ${({ size }) => size && setSize(size)}
 `;
 
 export default Button;

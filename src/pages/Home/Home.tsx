@@ -5,6 +5,7 @@ import HomeWrapper from './styled';
 import DefaultLayout, {
   HeaderStyle,
 } from '../../components/common/Layout/DefaultLayout/DefaultLayout';
+import PostToggleButton from '../../components/common/Button/PostToggleButton';
 
 export const homeStyleProps: Partial<HeaderStyle> = {
   isSelectBox: true,
@@ -22,6 +23,7 @@ const Home = () => {
         <RetryErrorBoundary>
           <Suspense fallback={<CategoryFeedItemSkeleton />}>
             <CategoryFeedList />
+            <PostToggleButton />
           </Suspense>
         </RetryErrorBoundary>
       </HomeWrapper>
