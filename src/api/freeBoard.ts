@@ -7,7 +7,7 @@ export const getMyFreeBoardPostList = async (accountname: string) => {
 };
 
 export const getFreeBoardFeedList = async () => {
-  const response = await accessInstance.get('/post/feed');
+  const response = await accessInstance.get('/post/feed/?limit=100');
 
   return response.data;
 };
@@ -34,6 +34,20 @@ export const setFreeBoardPostHeart = async ({
   const response = isHeart
     ? await accessInstance.delete(`/post/${postId}/unheart`)
     : await accessInstance.post(`/post/${postId}/heart`);
+
+  return response.data;
+};
+
+export const addFreeBoardComment = async ({
+  postId,
+  comment,
+}: {
+  postId: string;
+  comment: string;
+}) => {
+  const response = await accessInstance.post(`/post/${postId}/comments`, {
+    comment: { content: comment },
+  });
 
   return response.data;
 };

@@ -1,6 +1,13 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  UseQueryOptions,
+} from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { useParams } from 'react-router-dom';
 import {
+  addFreeBoardComment,
   getFreeBoardDatailFeed,
   getFreeBoardDetailFeedCommentList,
   getFreeBoardFeedList,
@@ -10,6 +17,7 @@ import {
 import { PostIsHeartTypes } from '../components/FreeBoard/FreeBoardItem/FreeBoardItem';
 import {
   FreeBoardCommentListDataTypes,
+  FreeBoardDataHooksTypes,
   FreeBoardListDataTypes,
 } from '../types/freeBoard';
 
@@ -24,21 +32,17 @@ export const useGetMyFreeBoardPostListQuery = () => {
 
       return accountname && getMyFreeBoardPostList(accountname);
     },
-    // { suspense: false, useErrorBoundary: false },
   );
 };
 
 export const useGetFreeBoardFeedListQuery = () => {
-  return useQuery(['freeBoardPostList'], getFreeBoardFeedList, {
-    // suspense: false,
-    // useErrorBoundary: false,
-  });
+  return useQuery(['freeBoardPostList'], getFreeBoardFeedList);
 };
 
 export const useGetFreeBoardDetailFeedQuery = () => {
   const { id } = useParams();
 
-  return useQuery(
+  return useQuery<unknown, AxiosError, FreeBoardDataHooksTypes>(
     ['freeBoardDatail', id],
     () => id && getFreeBoardDatailFeed(id),
     {
@@ -48,15 +52,16 @@ export const useGetFreeBoardDetailFeedQuery = () => {
   );
 };
 
-export const useGetDetailFeedCommentQuery = () => {
+export const useGetDetailFeedCommentQuery = (
+  options?: UseQueryOptions<FreeBoardCommentListDataTypes, AxiosError>,
+) => {
   const { id } = useParams();
 
-  return useQuery<unknown, Error, FreeBoardCommentListDataTypes>(
+  return useQuery<FreeBoardCommentListDataTypes, AxiosError>(
     ['freeBoardDetailCommentList', id],
     async () => id && getFreeBoardDetailFeedCommentList(id),
     {
-      suspense: false,
-      useErrorBoundary: false,
+      ...options,
     },
   );
 };
@@ -66,15 +71,56 @@ export const useSetFreeBoardPostHeartMutation = (
 ) => {
   return useMutation(setFreeBoardPostHeart, {
     onSuccess(data) {
-      console.log(data);
-
       setState({
         hearted: data.post.hearted,
         heartCount: data.post.heartCount,
       });
     },
-    onError(err) {
-      console.log(err);
+    onError(err: AxiosError) {
+      throw Error(err.message || '좋아요 변경에 실패했습니다.');
+    },
+  });
+};
+
+export const useAddFreeBoardCommentMutation = () => {
+  const { id } = useParams();
+  const queryClient = useQueryClient();
+
+  return useMutation(addFreeBoardComment, {
+    async onMutate(newComment) {
+      await queryClient.cancelQueries(['freeBoardDetailCommentList', id]);
+      const previouseCommentData = queryClient.getQueryData([
+        'freeBoardDetailCommentList',
+        id,
+      ]);
+      queryClient.setQueryData(
+        ['freeBoardDetailCommentList', id],
+        (oldData: any) => {
+          return {
+            comments: [
+              ...oldData.comments,
+              {
+                content: newComment.comment,
+                id: `commentsId${oldData.comments.length + 1}`,
+                createdAt: new Date(),
+                author: oldData.comments.length + 1,
+              },
+            ],
+          };
+        },
+      );
+      return {
+        previouseCommentData,
+      };
+    },
+    onError(_error, _data, context) {
+      queryClient.setQueriesData(
+        ['freeBoardDetailCommentList', id],
+        context?.previouseCommentData,
+      );
+    },
+    onSettled() {
+      queryClient.invalidateQueries(['freeBoardDetailCommentList', id]);
     },
   });
 };
