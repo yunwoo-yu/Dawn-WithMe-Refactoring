@@ -9,9 +9,11 @@ const CategoryFeedList = () => {
   const selectValue = useRecoilValue(selectBoxValueAtom);
   const { data: feedData } = useGetCategoryFeedQuery();
 
-  const filteredFeedList = feedData?.filter(
-    (el) => el.itemName === selectValue,
-  );
+  const filteredFeedList = feedData
+    ?.filter((el) => el.itemName === selectValue)
+    .sort((a, b) => {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    });
 
   return (
     <ul>
