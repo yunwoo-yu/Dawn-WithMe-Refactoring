@@ -11,6 +11,7 @@ const HomeDetailWrapper = styled.section`
 
   div {
     margin: 0;
+
     a.feed-content-box {
       margin-left: 0;
 

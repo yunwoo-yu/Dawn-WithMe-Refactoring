@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import AuthWrapper from '../../components/common/Wrapper/AuthWrapper';
 
 const HomeWrapper = styled(AuthWrapper)`

@@ -10,9 +10,6 @@ const FreeBoardDetailFeedWrapper = styled.div`
       margin-left: 7px;
     }
   }
-  > ul.comment-list {
-    margin-top: 20px;
-  }
 `;
 
 export default FreeBoardDetailFeedWrapper;
