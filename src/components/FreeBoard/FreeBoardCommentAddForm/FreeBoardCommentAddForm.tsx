@@ -1,16 +1,14 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAddFreeBoardCommentMutation } from '../../../hooks/freeBoard.hooks';
+import { useGetMyProfileDataQuery } from '../../../hooks/profile.hooks';
 import FreeBoardCommentAddFormWrapper from './styled';
 
-interface Props {
-  profileImg: string | undefined;
-}
-
-const FreeBoardCommentAddForm = ({ profileImg }: Props) => {
+const FreeBoardCommentAddForm = () => {
   const { id } = useParams();
   const [comment, setComment] = useState<string>('');
   const addFreeBoardCommentMutation = useAddFreeBoardCommentMutation();
+  const { data: myProfile } = useGetMyProfileDataQuery();
 
   const onSubmitCommentHandler = (e: FormEvent) => {
     e.preventDefault();
@@ -21,7 +19,7 @@ const FreeBoardCommentAddForm = ({ profileImg }: Props) => {
 
   return (
     <FreeBoardCommentAddFormWrapper onSubmit={onSubmitCommentHandler}>
-      <img src={profileImg} alt='프로필 이미지' />
+      <img src={myProfile?.image} alt='프로필 이미지' />
       <input
         type='text'
         placeholder='댓글 입력하기...'
