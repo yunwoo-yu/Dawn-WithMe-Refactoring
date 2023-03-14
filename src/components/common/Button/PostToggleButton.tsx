@@ -55,7 +55,7 @@ const PostToggleButton = () => {
 
   return (
     <PostToggleButtonWrapper className={isToggle ? 'active' : ''}>
-      <PostLinkButton to='/home/addpost/'>등록</PostLinkButton>
+      <PostLinkButton to='/home/category/create'>등록</PostLinkButton>
       <PostLinkButton to='/timer' className='timer-button'>
         타이머
       </PostLinkButton>
