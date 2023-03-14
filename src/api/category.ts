@@ -1,4 +1,4 @@
-import { FeedData } from '../types/category';
+import { CreateCategoryPostData, FeedData } from '../types/category';
 import { accessInstance } from './axiosBase';
 
 export const getFollowingProduct = async (accountNameList: string[]) => {
@@ -30,6 +30,14 @@ export const getCategoryDetailProduct = async (id: string) => {
 
 export const getCategoryFeedList = async (id: string) => {
   const response = await accessInstance.get(`/product/${id}`);
+
+  return response.data;
+};
+
+export const createCategoryPost = async (postData: {
+  product: CreateCategoryPostData;
+}) => {
+  const response = await accessInstance.post('/product', postData);
 
   return response.data;
 };

@@ -21,3 +21,10 @@ export interface FeedData {
   updatedAt: string;
   author: Author;
 }
+
+export interface CreateCategoryPostData {
+  itemName: string;
+  link: string;
+  price: string | number;
+  itemImage: string;
+}
