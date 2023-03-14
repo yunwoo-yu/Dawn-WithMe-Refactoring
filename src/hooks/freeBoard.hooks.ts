@@ -1,9 +1,4 @@
-import {
-  useMutation,
-  useQuery,
-  useQueryClient,
-  UseQueryOptions,
-} from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient, UseQueryOptions } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useParams } from 'react-router-dom';
 import {
@@ -45,10 +40,6 @@ export const useGetFreeBoardDetailFeedQuery = () => {
   return useQuery<unknown, AxiosError, FreeBoardDataHooksTypes>(
     ['freeBoardDatail', id],
     () => id && getFreeBoardDatailFeed(id),
-    {
-      suspense: false,
-      useErrorBoundary: false,
-    },
   );
 };
 
@@ -89,36 +80,32 @@ export const useAddFreeBoardCommentMutation = () => {
   return useMutation(addFreeBoardComment, {
     async onMutate(newComment) {
       await queryClient.cancelQueries(['freeBoardDetailCommentList', id]);
-      const previouseCommentData = queryClient.getQueryData([
-        'freeBoardDetailCommentList',
-        id,
-      ]);
-      queryClient.setQueryData(
-        ['freeBoardDetailCommentList', id],
-        (oldData: any) => {
-          return {
-            comments: [
-              ...oldData.comments,
-              {
-                content: newComment.comment,
-                id: `commentsId${oldData.comments.length + 1}`,
-                createdAt: new Date(),
-                author: oldData.comments.length + 1,
-              },
-            ],
-          };
-        },
-      );
+
+      const previouseCommentData = queryClient.getQueryData(['freeBoardDetailCommentList', id]);
+
+      queryClient.setQueryData(['freeBoardDetailCommentList', id], (oldData: any) => {
+        return {
+          comments: [
+            ...oldData.comments,
+            {
+              content: newComment.comment,
+              id: `commentsId${oldData.comments.length + 1}`,
+              createdAt: new Date(),
+              author: oldData.comments.length + 1,
+            },
+          ],
+        };
+      });
+
       return {
         previouseCommentData,
       };
     },
+
     onError(_error, _data, context) {
-      queryClient.setQueriesData(
-        ['freeBoardDetailCommentList', id],
-        context?.previouseCommentData,
-      );
+      queryClient.setQueriesData(['freeBoardDetailCommentList', id], context?.previouseCommentData);
     },
+
     onSettled() {
       queryClient.invalidateQueries(['freeBoardDetailCommentList', id]);
     },
