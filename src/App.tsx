@@ -12,11 +12,12 @@ import MyProfile from './pages/Profile/MyProfile/MyProfile';
 import UesrProfile from './pages/Profile/UserProfile/UserProfile';
 import FreeBoard from './pages/FreeBoard/FreeBoard';
 import FreeBoardDetail from './pages/FreeBoardDetail/FreeBoardDetail';
+import Timer from './pages/Timer/Timer';
+import HomeCategoryCreate from './pages/HomeCategoryCreate/HomeCategoryCreate';
 
 import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Timer from './pages/Timer/Timer';
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -40,15 +41,28 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
+          {/* Auth Page */}
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/profilesetting' element={<SignupProfileSetting />} />
-          <Route path='/home' element={<Home />} />
-          <Route path='/home/detail/:id' element={<HomeDetail />} />
+
+          {/* Profile Page */}
           <Route path='/myprofile' element={<MyProfile />} />
           <Route path='/profile/:id' element={<UesrProfile />} />
+
+          {/* Category Page */}
+          <Route path='/home' element={<Home />} />
+          <Route path='/home/detail/:id' element={<HomeDetail />} />
+          <Route
+            path='/home/category/create'
+            element={<HomeCategoryCreate />}
+          />
+
+          {/* FreeBoard Page */}
           <Route path='/freeboard' element={<FreeBoard />} />
           <Route path='/freeboard/detail/:id' element={<FreeBoardDetail />} />
+
+          {/* Timer Page */}
           <Route path='/timer' element={<Timer />} />
         </Routes>
         <ToastContainer limit={1} />
