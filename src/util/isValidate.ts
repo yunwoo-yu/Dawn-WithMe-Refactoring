@@ -7,8 +7,7 @@ const isValidate = <T>(
 ) => {
   const regEmail = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/.test(targetValue);
   const regPassword = targetValue.length > 5 && targetValue !== '';
-  const regUserName =
-    targetValue.length > 1 && targetValue.length < 9 && targetValue !== '';
+  const regUserName = targetValue.length > 1 && targetValue.length < 9 && targetValue !== '';
   const regAccountname = /[a-z0-9A-Z_.]{2,20}$/.test(targetValue);
 
   switch (targetName) {
@@ -73,4 +72,5 @@ const isValidate = <T>(
     // no default
   }
 };
+
 export default isValidate;
