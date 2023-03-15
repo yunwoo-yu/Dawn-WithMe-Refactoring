@@ -17,7 +17,7 @@ const TopNavBar = ({
   children: React.ReactNode;
 }) => {
   const {
-    onClick,
+    onSubmitHandler,
     disabled,
     buttonText,
     isBackButton,
@@ -26,26 +26,20 @@ const TopNavBar = ({
     isTitle,
     isSelectBox,
     isSearch,
+    formId,
   } = styleProps;
   const navigate = useNavigate();
   const [selectValue, setSelectValue] = useRecoilState(selectBoxValueAtom);
 
   return (
-    <TopNavBarWarpper>
+    <TopNavBarWarpper isButton>
       {isBackButton && (
-        <button
-          className='back-button'
-          type='button'
-          onClick={() => navigate(-1)}
-        >
+        <button className='back-button' type='button' onClick={() => navigate(-1)}>
           <img src={backIcon} alt='뒤로가기 버튼' />
         </button>
       )}
       {isSelectBox && (
-        <select
-          value={selectValue}
-          onChange={(event) => setSelectValue(event.target.value)}
-        >
+        <select value={selectValue} onChange={(event) => setSelectValue(event.target.value)}>
           <option value='study'>스터디</option>
           <option value='music'>음악</option>
           <option value='tips'>공부 팁</option>
@@ -59,11 +53,11 @@ const TopNavBar = ({
       )}
       {isButton && (
         <Button
-          type='button'
-          onClick={onClick}
+          type='submit'
+          form={formId}
+          onClick={onSubmitHandler}
           disabled={disabled}
           width='90px'
-          size='large'
         >
           {buttonText}
         </Button>
