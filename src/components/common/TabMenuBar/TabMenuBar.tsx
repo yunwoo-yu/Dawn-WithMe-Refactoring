@@ -10,42 +10,30 @@ import profileImg from '../../../assets/images/icon-user.png';
 import profileImgOn from '../../../assets/images/icon-user-fill.png';
 import TabMenuBarWrapper, { TabNavLink } from './styled';
 
-const TabMenu = () => {
+const TabMenuBar = () => {
   const location = useLocation();
   const { pathname } = location;
 
   return (
     <TabMenuBarWrapper>
       <TabNavLink to='/home'>
-        <img
-          src={pathname === '/home' ? homeImgOn : homeImg}
-          alt='홈 이동 버튼'
-        />
+        <img src={pathname === '/home' ? homeImgOn : homeImg} alt='홈 이동 버튼' />
         <p className={pathname === '/home' ? 'active' : ''}>홈</p>
       </TabNavLink>
       <TabNavLink to='/freeboard'>
-        <img
-          src={pathname === '/freeboard' ? noticeImgOn : noticeImg}
-          alt='자유게시판 이동 버튼'
-        />
+        <img src={pathname === '/freeboard' ? noticeImgOn : noticeImg} alt='자유게시판 이동 버튼' />
         <p className={pathname === '/freeboard' ? 'active' : ''}>자유게시판</p>
       </TabNavLink>
       <TabNavLink to='/chat'>
-        <img
-          src={pathname === '/chat' ? messageImgOn : messageImg}
-          alt='채팅창 이동 버튼'
-        />
+        <img src={pathname === '/chat' ? messageImgOn : messageImg} alt='채팅창 이동 버튼' />
         <p className={pathname === '/chat' ? 'active' : ''}>채팅</p>
       </TabNavLink>
       <TabNavLink to='/myprofile'>
-        <img
-          src={pathname === '/myprofile' ? profileImgOn : profileImg}
-          alt='프로필 이동 버튼'
-        />
+        <img src={pathname === '/myprofile' ? profileImgOn : profileImg} alt='프로필 이동 버튼' />
         <p className={pathname === '/myprofile' ? 'active' : ''}>프로필</p>
       </TabNavLink>
     </TabMenuBarWrapper>
   );
 };
 
-export default TabMenu;
+export default TabMenuBar;
