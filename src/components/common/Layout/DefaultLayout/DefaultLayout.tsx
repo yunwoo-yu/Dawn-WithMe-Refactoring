@@ -6,7 +6,7 @@ import DefaultMainWrapper from '../../Wrapper/DefaultWrapper';
 
 export interface HeaderStyle {
   title: string;
-  onClick: () => void;
+  onSubmitHandler: () => void;
   buttonText: string;
   disabled: boolean;
   isButton: boolean;
@@ -16,6 +16,7 @@ export interface HeaderStyle {
   isSelectBox: boolean;
   isSearch: boolean;
   isTabMenu: boolean;
+  formId: string;
 }
 
 const DefaultLayout = ({
