@@ -53,10 +53,7 @@ const App = () => {
           {/* Category Page */}
           <Route path='/home' element={<Home />} />
           <Route path='/home/detail/:id' element={<HomeDetail />} />
-          <Route
-            path='/home/category/create'
-            element={<HomeCategoryCreate />}
-          />
+          <Route path='/home/category/create' element={<HomeCategoryCreate />} />
 
           {/* FreeBoard Page */}
           <Route path='/freeboard' element={<FreeBoard />} />
@@ -65,7 +62,7 @@ const App = () => {
           {/* Timer Page */}
           <Route path='/timer' element={<Timer />} />
         </Routes>
-        <ToastContainer limit={1} />
+        <ToastContainer limit={1} theme='dark' position='top-center' />
         <ReactQueryDevtools />
       </BrowserRouter>
     </QueryClientProvider>
