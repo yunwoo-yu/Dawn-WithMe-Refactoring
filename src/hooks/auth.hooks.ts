@@ -7,9 +7,7 @@ import { url } from '../api/axiosBase';
 
 import { errorToast, successToast } from '../util/toast';
 
-export const useLoginMutation = (
-  setError: React.Dispatch<React.SetStateAction<string>>,
-) => {
+export const useLoginMutation = (setError: React.Dispatch<React.SetStateAction<string>>) => {
   const navigate = useNavigate();
 
   return useMutation(userLogin, {
@@ -50,9 +48,7 @@ export const useSignupMutation = () => {
   });
 };
 
-export const useImageUploadMutation = (
-  setState: React.Dispatch<React.SetStateAction<string>>,
-) => {
+export const useImageUploadMutation = (setState: React.Dispatch<React.SetStateAction<string>>) => {
   return useMutation(uploadUserImage, {
     onSuccess(resData) {
       console.log(resData);

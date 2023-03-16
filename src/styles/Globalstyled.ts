@@ -12,7 +12,14 @@ const GlobalStyled = createGlobalStyle`
     position: relative;
   }
 
-  button{
+*,html {
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  font-weight: 400;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+button{
     background: inherit;
     border:none;
     box-shadow:none;
@@ -43,13 +50,6 @@ const GlobalStyled = createGlobalStyle`
     word-break: initial;
     word-wrap: initial;
   }
-
-*,html {
-  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-  font-weight: 400;
-  box-sizing: border-box;
-  color: #fff;
-}
 
 input {
     &:focus {

@@ -17,7 +17,7 @@ const useValidDebouncing = (
     if (formData) {
       debounceEmailValidMutation(formData);
     }
-  }, [formData]);
+  }, [formData, debounceEmailValidMutation]);
 };
 
 export default useValidDebouncing;

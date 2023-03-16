@@ -14,6 +14,7 @@ import FreeBoard from './pages/FreeBoard/FreeBoard';
 import FreeBoardDetail from './pages/FreeBoardDetail/FreeBoardDetail';
 import Timer from './pages/Timer/Timer';
 import HomeCategoryCreate from './pages/HomeCategoryCreate/HomeCategoryCreate';
+import Splash from './pages/Splash/Splash';
 
 import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick.css';
@@ -42,6 +43,7 @@ const App = () => {
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           {/* Auth Page */}
+          <Route path='/' element={<Splash />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/profilesetting' element={<SignupProfileSetting />} />
