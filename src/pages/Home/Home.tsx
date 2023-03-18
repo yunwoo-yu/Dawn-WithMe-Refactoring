@@ -23,7 +23,7 @@ const Home = () => {
         <RetryErrorBoundary>
           <Suspense fallback={<CategoryFeedItemSkeleton />}>
             <CategoryFeedList />
-            <PostToggleButton />
+            <PostToggleButton postPath='/home/category/create' />
           </Suspense>
         </RetryErrorBoundary>
       </HomeWrapper>
