@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import SignupForm from '../../components/Signup/SignupForm';
+
 import { useEmailValidMutation } from '../../hooks/valid.hooks';
 import useForm from '../../hooks/common/useForm';
 import useValidDebouncing from '../../hooks/common/useValidDebouncing';
 import SignupWrapper from './styled';
+import RetryErrorBoundary from '../../components/common/RetryErrorBoundary/RetryErrorBoundary';
+
+const SignupForm = lazy(() => import('../../components/Signup/SignupForm'));
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -37,9 +40,13 @@ const Signup = () => {
   return (
     <main>
       <SignupWrapper>
-        <h2>이메일로 회원가입</h2>
-        <SignupForm propsData={propsData} />
-        <Link to='/login'>로그인 하러가기</Link>
+        <RetryErrorBoundary>
+          <Suspense>
+            <h2>이메일로 회원가입</h2>
+            <SignupForm propsData={propsData} />
+            <Link to='/login'>로그인 하러가기</Link>
+          </Suspense>
+        </RetryErrorBoundary>
       </SignupWrapper>
     </main>
   );

@@ -1,10 +1,16 @@
+import { lazy, Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
 import DefaultLayout, {
   HeaderStyle,
 } from '../../components/common/Layout/DefaultLayout/DefaultLayout';
-import CategoryCreatePostForm from '../../components/Home/CategoryCreatePostForm/CategoryCreatePostForm';
+import RetryErrorBoundary from '../../components/common/RetryErrorBoundary/RetryErrorBoundary';
+
 import { categoryCreatePostValueAtom } from '../../recoil/atom';
 import HomeCategoryAddWrapper from './styled';
+
+const CategoryCreatePostForm = lazy(
+  () => import('../../components/Home/CategoryCreatePostForm/CategoryCreatePostForm'),
+);
 
 export const HomeCategoryCreate = () => {
   const postValue = useRecoilValue(categoryCreatePostValueAtom);
@@ -22,7 +28,11 @@ export const HomeCategoryCreate = () => {
   return (
     <DefaultLayout styleProps={HomeCategoryAddStyleProps}>
       <HomeCategoryAddWrapper>
-        <CategoryCreatePostForm isValue={isValue} />
+        <RetryErrorBoundary>
+          <Suspense>
+            <CategoryCreatePostForm isValue={isValue} />
+          </Suspense>
+        </RetryErrorBoundary>
       </HomeCategoryAddWrapper>
     </DefaultLayout>
   );
