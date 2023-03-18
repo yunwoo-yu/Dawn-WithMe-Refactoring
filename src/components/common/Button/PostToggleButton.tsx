@@ -46,7 +46,7 @@ const ToggleButton = styled.button`
   transition: 0.5s;
 `;
 
-const PostToggleButton = () => {
+const PostToggleButton = ({ postPath }: { postPath: string }) => {
   const [isToggle, setIsToggle] = useState<boolean>(false);
 
   const onClickToggleHandler = () => {
@@ -55,7 +55,7 @@ const PostToggleButton = () => {
 
   return (
     <PostToggleButtonWrapper className={isToggle ? 'active' : ''}>
-      <PostLinkButton to='/home/category/create'>등록</PostLinkButton>
+      <PostLinkButton to={postPath}>등록</PostLinkButton>
       <PostLinkButton to='/timer' className='timer-button'>
         타이머
       </PostLinkButton>
