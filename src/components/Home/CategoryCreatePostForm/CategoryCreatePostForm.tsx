@@ -26,7 +26,7 @@ const CategoryCreatePostForm = ({ isValue }: Props) => {
     createCategoryPostMutation,
   } = useCreateCategoryPostMutation();
   const submitValue = {
-    itemImage: imgSrc,
+    itemImage: imgSrc[0],
     ...postValue,
   };
 
@@ -50,7 +50,7 @@ const CategoryCreatePostForm = ({ isValue }: Props) => {
 
   return (
     <CategoryCreatePostFormWrapper onSubmit={onSubmitButtonHandler} id='categoryPostAddForm'>
-      <PostImgWrapper backBg={imgSrc}>
+      <PostImgWrapper backBg={imgSrc[0]}>
         <input
           type='file'
           accept='image/*'

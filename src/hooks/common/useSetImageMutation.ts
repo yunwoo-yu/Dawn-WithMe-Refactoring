@@ -10,7 +10,7 @@ interface Event<T = EventTarget> {
 
 const useSetImageMutation = () => {
   const imageInputRef = useRef<HTMLInputElement>(null);
-  const [imgSrc, setImgSrc] = useState('');
+  const [imgSrc, setImgSrc] = useState<string[]>([]);
 
   const onClickImageFileModalHandler = () => {
     if (imageInputRef.current) {
@@ -20,7 +20,8 @@ const useSetImageMutation = () => {
 
   const imageUploadMutation = useMutation(setFeedImagePost, {
     onSuccess(data) {
-      setImgSrc(`${url}/1678808411473.png`);
+      console.log(data);
+      setImgSrc((prev) => [...prev, `${url}/${data.filename}`]);
     },
     onError(error) {
       toast.error('이미지 업로드에 실패했습니다. 다시 시도해주세요!');
@@ -28,12 +29,16 @@ const useSetImageMutation = () => {
   });
 
   const onChangeInputImage = (event: Event<HTMLInputElement>) => {
-    const formData = new FormData();
-    if (event.target.files) {
-      formData.append('image', event.target.files[0]);
-    }
+    const { files } = event.target;
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        const formData = new FormData();
 
-    imageUploadMutation.mutate(formData);
+        formData.append('image', files[i]);
+
+        imageUploadMutation.mutate(formData);
+      }
+    }
   };
 
   return {
@@ -41,6 +46,7 @@ const useSetImageMutation = () => {
     onClickImageFileModalHandler,
     onChangeInputImage,
     imgSrc,
+    setImgSrc,
   };
 };
 
