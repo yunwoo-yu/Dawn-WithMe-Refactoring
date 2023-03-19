@@ -20,7 +20,6 @@ const useSetImageMutation = () => {
 
   const imageUploadMutation = useMutation(setFeedImagePost, {
     onSuccess(data) {
-      console.log(data);
       setImgSrc((prev) => [...prev, `${url}/${data.filename}`]);
     },
     onError(error) {
@@ -30,6 +29,12 @@ const useSetImageMutation = () => {
 
   const onChangeInputImage = (event: Event<HTMLInputElement>) => {
     const { files } = event.target;
+
+    if ((files && files?.length > 3) || imgSrc.length > 2) {
+      toast.error('3개 이하의 이미지를 업로드 하세요.');
+      return;
+    }
+
     if (files) {
       for (let i = 0; i < files.length; i++) {
         const formData = new FormData();
