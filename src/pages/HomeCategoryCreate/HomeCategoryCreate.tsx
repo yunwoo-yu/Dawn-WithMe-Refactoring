@@ -18,7 +18,7 @@ export const HomeCategoryCreate = () => {
   const HomeCategoryAddStyleProps: Partial<HeaderStyle> = {
     isTitle: true,
     isBackButton: true,
-    title: '게시물 등록',
+    title: '게시글 등록',
     isButton: true,
     buttonText: '등록',
     formId: 'categoryPostAddForm',

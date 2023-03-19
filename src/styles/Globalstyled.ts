@@ -103,17 +103,17 @@ input {
         }
       `;
     }}
+    
+  }
 
-  .slick-slide{
-  
+  .slick-slide {
     .img-box{
-      &:focus{
-        outline: none;
-      }
+      outline:none;
+
     }
   }
 }
-}
+
 
 `;
 
