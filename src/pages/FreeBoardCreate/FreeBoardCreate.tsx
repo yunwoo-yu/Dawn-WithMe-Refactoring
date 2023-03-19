@@ -1,6 +1,8 @@
+import { Suspense } from 'react';
 import DefaultLayout, {
   HeaderStyle,
 } from '../../components/common/Layout/DefaultLayout/DefaultLayout';
+import RetryErrorBoundary from '../../components/common/RetryErrorBoundary/RetryErrorBoundary';
 import FreeBoardCreatePostForm from '../../components/FreeBoard/FreeBoardCreatePostForm/FreeBoardCreatePostForm';
 import FreeBoardCreateWrapper from './styled';
 
@@ -11,13 +13,18 @@ const freeBoardHeaderProps: Partial<HeaderStyle> = {
   isButton: true,
   buttonText: '등록',
   formId: 'categoryPostAddForm',
+  isTabMenu: false,
 };
 
 const FreeBoardCreate = () => {
   return (
     <DefaultLayout styleProps={freeBoardHeaderProps}>
       <FreeBoardCreateWrapper>
-        <FreeBoardCreatePostForm />
+        <RetryErrorBoundary>
+          <Suspense>
+            <FreeBoardCreatePostForm />
+          </Suspense>
+        </RetryErrorBoundary>
       </FreeBoardCreateWrapper>
     </DefaultLayout>
   );
