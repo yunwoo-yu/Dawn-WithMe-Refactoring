@@ -15,12 +15,13 @@ import FreeBoardDetail from './pages/FreeBoardDetail/FreeBoardDetail';
 import Timer from './pages/Timer/Timer';
 import HomeCategoryCreate from './pages/HomeCategoryCreate/HomeCategoryCreate';
 import Splash from './pages/Splash/Splash';
+import NotAuthRoutes from './router/NotAuthRoutes';
+import PrivateRoute from './router/PrivateRoute';
+import FreeBoardCreate from './pages/FreeBoardCreate/FreeBoardCreate';
 
 import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import NotAuthRoutes from './router/NotAuthRoutes';
-import PrivateRoute from './router/PrivateRoute';
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -64,6 +65,7 @@ const App = () => {
             {/* FreeBoard Page */}
             <Route path='/freeboard' index element={<FreeBoard />} />
             <Route path='/freeboard/detail/:id' element={<FreeBoardDetail />} />
+            <Route path='/freeboard/create' element={<FreeBoardCreate />} />
 
             {/* Timer Page */}
             <Route path='/timer' element={<Timer />} />
