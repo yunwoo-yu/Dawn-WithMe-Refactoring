@@ -23,6 +23,7 @@ export const HomeCategoryCreate = () => {
     buttonText: '등록',
     formId: 'categoryPostAddForm',
     disabled: isValue,
+    isTabMenu: false,
   };
 
   return (
