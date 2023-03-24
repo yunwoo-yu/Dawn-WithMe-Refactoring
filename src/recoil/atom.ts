@@ -18,3 +18,11 @@ export const categoryCreatePostValueAtom = atom({
     link: '',
   },
 });
+
+export const freeBoardCreatePostValueAtom = atom({
+  key: 'freeBoardCreateValue',
+  default: {
+    content: '',
+    image: '',
+  },
+});
