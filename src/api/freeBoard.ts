@@ -1,5 +1,10 @@
 import { accessInstance } from './axiosBase';
 
+interface PostCreateTypes {
+  content: string;
+  image: string;
+}
+
 export const getMyFreeBoardPostList = async (accountname: string) => {
   const response = await accessInstance.get(`/post/${accountname}/userpost`);
 
@@ -48,6 +53,12 @@ export const addFreeBoardComment = async ({
   const response = await accessInstance.post(`/post/${postId}/comments`, {
     comment: { content: comment },
   });
+
+  return response.data;
+};
+
+export const createFreeBaordPost = async (post: PostCreateTypes) => {
+  const response = await accessInstance.post('/post', { post });
 
   return response.data;
 };

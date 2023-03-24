@@ -1,8 +1,11 @@
 import { useMutation, useQuery, useQueryClient, UseQueryOptions } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { useParams } from 'react-router-dom';
+import { ChangeEvent, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import {
   addFreeBoardComment,
+  createFreeBaordPost,
   getFreeBoardDatailFeed,
   getFreeBoardDetailFeedCommentList,
   getFreeBoardFeedList,
@@ -10,6 +13,7 @@ import {
   setFreeBoardPostHeart,
 } from '../api/freeBoard';
 import { PostIsHeartTypes } from '../components/FreeBoard/FreeBoardItem/FreeBoardItem';
+import { freeBoardCreatePostValueAtom } from '../recoil/atom';
 import {
   FreeBoardCommentListDataTypes,
   FreeBoardDataHooksTypes,
@@ -31,7 +35,7 @@ export const useGetMyFreeBoardPostListQuery = () => {
 };
 
 export const useGetFreeBoardFeedListQuery = () => {
-  return useQuery(['freeBoardPostList'], getFreeBoardFeedList);
+  return useQuery<FreeBoardListDataTypes>(['freeBoardPostList'], getFreeBoardFeedList);
 };
 
 export const useGetFreeBoardDetailFeedQuery = () => {
@@ -110,4 +114,46 @@ export const useAddFreeBoardCommentMutation = () => {
       queryClient.invalidateQueries(['freeBoardDetailCommentList', id]);
     },
   });
+};
+
+export const useCreateFreeBoardPostMutation = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const [postValue, setPostValue] = useRecoilState(freeBoardCreatePostValueAtom);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const createFreeBoardPostMutation = useMutation(createFreeBaordPost, {
+    onSuccess() {
+      queryClient.invalidateQueries(['freeBoardPostList', 'myFreeBoardPostList']);
+      setPostValue((prev) => ({ ...prev, content: '' }));
+      navigate('/freeboard');
+    },
+  });
+
+  const onChangePostValueHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const { value, name } = e.target;
+
+    setPostValue((prev) => ({ ...prev, [name]: value }));
+
+    if (name === 'content' && !value) {
+      setErrorMessage('');
+    }
+  };
+
+  const onBlurErrorMessageHandler = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+    const { value, name } = e.target;
+
+    if (name === 'content' && !value) {
+      setErrorMessage('필수 정보 입니다.');
+    }
+  };
+
+  return {
+    postValue,
+    errorMessage,
+    setErrorMessage,
+    onChangePostValueHandler,
+    createFreeBoardPostMutation,
+    onBlurErrorMessageHandler,
+  };
 };
