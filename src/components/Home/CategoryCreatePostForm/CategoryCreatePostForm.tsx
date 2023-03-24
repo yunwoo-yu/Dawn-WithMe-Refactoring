@@ -1,5 +1,4 @@
 import { FormEvent } from 'react';
-import { toast } from 'react-toastify';
 import { useCreateCategoryPostMutation } from '../../../hooks/category.hooks';
 import useSetImageMutation from '../../../hooks/common/useSetImageMutation';
 import CategoryCreatePostFormWrapper from './styled';
@@ -8,6 +7,7 @@ import uploadIcon from '../../../assets/images/img-button.png';
 import PostImgWrapper from '../../common/Wrapper/PostImgWrapper';
 import Input from '../../common/Input/Input';
 import Label from '../../common/Label/Label';
+import { errorToast } from '../../../util/toast';
 
 interface Props {
   isValue: boolean;
@@ -42,7 +42,7 @@ const CategoryCreatePostForm = ({ isValue }: Props) => {
         }
       });
 
-      return toast.error('게시글 내용을 입력해주세요.');
+      return errorToast('게시글 내용을 입력해주세요.');
     }
 
     createCategoryPostMutation.mutate({ product: submitValue });
