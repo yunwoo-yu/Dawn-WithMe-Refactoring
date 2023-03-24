@@ -12,7 +12,7 @@ const freeBoardHeaderProps: Partial<HeaderStyle> = {
   title: '게시글 등록',
   isButton: true,
   buttonText: '등록',
-  formId: 'categoryPostAddForm',
+  formId: 'freeBoardPostAddForm',
   isTabMenu: false,
 };
 
