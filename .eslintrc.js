@@ -1,12 +1,7 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['prettier', 'react', '@typescript-eslint', 'react-hooks'],
-  extends: [
-    'airbnb',
-    'airbnb/hooks',
-    'plugin:@typescript-eslint/recommended',
-    'prettier',
-  ],
+  extends: ['airbnb', 'airbnb/hooks', 'plugin:@typescript-eslint/recommended', 'prettier'],
   rules: {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
@@ -54,6 +49,7 @@ module.exports = {
     ],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
   },
+  'eslint no-unsafe-optional-chaining: ': 'off',
 
   settings: {
     'import/resolver': {
