@@ -1,11 +1,12 @@
 import { useMutation, useQuery, useQueryClient, UseQueryOptions } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { ChangeEvent, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { ChangeEvent, SetStateAction, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import {
   addFreeBoardComment,
   createFreeBaordPost,
+  deleteFreeBoardPost,
   getFreeBoardDatailFeed,
   getFreeBoardDetailFeedCommentList,
   getFreeBoardFeedList,
@@ -13,18 +14,20 @@ import {
   setFreeBoardPostHeart,
 } from '../api/freeBoard';
 import { PostIsHeartTypes } from '../components/FreeBoard/FreeBoardItem/FreeBoardItem';
-import { freeBoardCreatePostValueAtom } from '../recoil/atom';
+import { freeBoardCreatePostValueAtom, isShowAlertAtom, isShowModalAtom } from '../recoil/atom';
 import {
   FreeBoardCommentListDataTypes,
   FreeBoardDataHooksTypes,
+  FreeBoardDataTypes,
   FreeBoardListDataTypes,
+  FreeBoardListMyDataTypes,
 } from '../types/freeBoard';
 
 export const useGetMyFreeBoardPostListQuery = () => {
   const { id } = useParams();
   const accountname = localStorage.getItem('accountname');
 
-  return useQuery<unknown, Error, FreeBoardListDataTypes>(
+  return useQuery<unknown, Error, FreeBoardListMyDataTypes>(
     ['myFreeBoardPostList', id || accountname],
     () => {
       if (id) return getMyFreeBoardPostList(id);
@@ -34,8 +37,12 @@ export const useGetMyFreeBoardPostListQuery = () => {
   );
 };
 
-export const useGetFreeBoardFeedListQuery = () => {
-  return useQuery<FreeBoardListDataTypes>(['freeBoardPostList'], getFreeBoardFeedList);
+export const useGetFreeBoardFeedListQuery = (
+  options?: UseQueryOptions<FreeBoardListDataTypes, AxiosError>,
+) => {
+  return useQuery<FreeBoardListDataTypes, AxiosError>(['freeBoardPostList'], getFreeBoardFeedList, {
+    ...options,
+  });
 };
 
 export const useGetFreeBoardDetailFeedQuery = () => {
@@ -79,27 +86,34 @@ export const useSetFreeBoardPostHeartMutation = (
 
 export const useAddFreeBoardCommentMutation = () => {
   const { id } = useParams();
+  const accountname = localStorage.getItem('accountname');
   const queryClient = useQueryClient();
 
   return useMutation(addFreeBoardComment, {
     async onMutate(newComment) {
-      await queryClient.cancelQueries(['freeBoardDetailCommentList', id]);
+      await queryClient.cancelQueries(['freeBoardDetailCommentList', id || accountname]);
 
-      const previouseCommentData = queryClient.getQueryData(['freeBoardDetailCommentList', id]);
+      const previouseCommentData = queryClient.getQueryData([
+        'freeBoardDetailCommentList',
+        id || accountname,
+      ]);
 
-      queryClient.setQueryData(['freeBoardDetailCommentList', id], (oldData: any) => {
-        return {
-          comments: [
-            ...oldData.comments,
-            {
-              content: newComment.comment,
-              id: `commentsId${oldData.comments.length + 1}`,
-              createdAt: new Date(),
-              author: oldData.comments.length + 1,
-            },
-          ],
-        };
-      });
+      queryClient.setQueryData(
+        ['freeBoardDetailCommentList', id || accountname],
+        (oldData: any) => {
+          return {
+            comments: [
+              ...oldData.comments,
+              {
+                content: newComment.comment,
+                id: `commentsId${oldData.comments.length + 1}`,
+                createdAt: new Date(),
+                author: oldData.comments.length + 1,
+              },
+            ],
+          };
+        },
+      );
 
       return {
         previouseCommentData,
@@ -107,11 +121,14 @@ export const useAddFreeBoardCommentMutation = () => {
     },
 
     onError(_error, _data, context) {
-      queryClient.setQueriesData(['freeBoardDetailCommentList', id], context?.previouseCommentData);
+      queryClient.setQueriesData(
+        ['freeBoardDetailCommentList', id || accountname],
+        context?.previouseCommentData,
+      );
     },
 
     onSettled() {
-      queryClient.invalidateQueries(['freeBoardDetailCommentList', id]);
+      queryClient.invalidateQueries(['freeBoardDetailCommentList', id || accountname]);
     },
   });
 };
@@ -122,9 +139,11 @@ export const useCreateFreeBoardPostMutation = () => {
   const [postValue, setPostValue] = useRecoilState(freeBoardCreatePostValueAtom);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const accountname = localStorage.getItem('accountname');
+
   const createFreeBoardPostMutation = useMutation(createFreeBaordPost, {
     onSuccess() {
-      queryClient.invalidateQueries(['freeBoardPostList', 'myFreeBoardPostList']);
+      queryClient.refetchQueries(['myFreeBoardPostList', accountname]);
       setPostValue((prev) => ({ ...prev, content: '' }));
       navigate('/freeboard');
     },
@@ -156,4 +175,50 @@ export const useCreateFreeBoardPostMutation = () => {
     createFreeBoardPostMutation,
     onBlurErrorMessageHandler,
   };
+};
+
+export const useDeleteFreeBoardPostMutation = () => {
+  const [isShowModal, setIsShowModal] = useRecoilState(isShowModalAtom);
+  const [isShowAlert, setIsShowAlert] = useRecoilState(isShowAlertAtom);
+  const location = useLocation();
+  const queryClient = useQueryClient();
+  const { id } = useParams();
+  const accountname = localStorage.getItem('accountname');
+
+  return useMutation(deleteFreeBoardPost, {
+    async onMutate(deleteData) {
+      await queryClient.cancelQueries(['myFreeBoardPostList', id || accountname]);
+
+      const previouseCategoryData = queryClient.getQueryData([
+        'myFreeBoardPostList',
+        id || accountname,
+      ]);
+
+      queryClient.setQueryData(['myFreeBoardPostList', id || accountname], (oldData: any) => {
+        return oldData.post.filter((el: any) => el.id !== deleteData);
+      });
+
+      return {
+        previouseCategoryData,
+      };
+    },
+    onSuccess(successData) {
+      if (successData.data.message === '삭제되었습니다.') {
+        setIsShowModal({ ...isShowModal, isActive: { ...isShowModal.isActive, post: false } });
+        setIsShowAlert({
+          ...isShowAlert,
+          isActive: { header: false, comment: false, post: false },
+        });
+      }
+    },
+    onError(error, category, context: any) {
+      queryClient.setQueryData(
+        ['myFreeBoardPostList', id || accountname],
+        context.previouseCategoryData,
+      );
+    },
+    onSettled() {
+      queryClient.invalidateQueries(['myFreeBoardPostList', id || accountname]);
+    },
+  });
 };
