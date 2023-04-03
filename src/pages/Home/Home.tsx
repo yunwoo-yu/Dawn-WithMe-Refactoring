@@ -1,11 +1,11 @@
 import { lazy, Suspense } from 'react';
+import PostToggleButton from '../../components/common/Button/PostToggleButton';
 import CategoryFeedItemSkeleton from '../../components/Home/CategoryFeedItem/CategoryFeedItemSkeleton';
 import RetryErrorBoundary from '../../components/common/RetryErrorBoundary/RetryErrorBoundary';
 import HomeWrapper from './styled';
 import DefaultLayout, {
   HeaderStyle,
 } from '../../components/common/Layout/DefaultLayout/DefaultLayout';
-import PostToggleButton from '../../components/common/Button/PostToggleButton';
 
 export const homeStyleProps: Partial<HeaderStyle> = {
   isSelectBox: true,

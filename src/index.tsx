@@ -9,22 +9,20 @@ import App from './App';
 import GlobalStyled from './styles/Globalstyled';
 import './index.css';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement,
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <SkeletonTheme
-        baseColor={`${theme.colors.colorNavBg}`}
-        highlightColor={`${theme.colors.color76}`}
-      >
-        <RecoilRoot>
+    <RecoilRoot>
+      <ThemeProvider theme={theme}>
+        <SkeletonTheme
+          baseColor={`${theme.colors.colorNavBg}`}
+          highlightColor={`${theme.colors.color76}`}
+        >
           <Reset />
           <GlobalStyled />
           <App />
-        </RecoilRoot>
-      </SkeletonTheme>
-    </ThemeProvider>
+        </SkeletonTheme>
+      </ThemeProvider>
+    </RecoilRoot>
   </React.StrictMode>,
 );
