@@ -4,23 +4,17 @@ import MoreIcon from '../../../assets/images/icon-more-vertical.png';
 import CategoryItemWrapper from './styled';
 import profileImg from '../../../assets/images/profile-logo.png';
 import { FeedData } from '../../../types/category';
-import { selectBoxValueAtom } from '../../../recoil/atom';
+import { isShowModalAtom, selectBoxValueAtom } from '../../../recoil/atom';
+import useModalAndAlert from '../../../hooks/common/useModalAndAlert';
 
-const CategoryFeedItem = ({
-  data,
-  as,
-}: {
-  data: FeedData;
-  as?: keyof JSX.IntrinsicElements;
-}) => {
+const CategoryFeedItem = ({ data, as }: { data: FeedData; as?: keyof JSX.IntrinsicElements }) => {
   const { itemImage, createdAt, price, link, id, author, itemName } = data;
   const { accountname, username, image: profileImage } = author;
   const selectValue = useRecoilValue(selectBoxValueAtom);
+  const modalValue = useRecoilValue(isShowModalAtom);
   const basicProfileImg =
-    profileImage === 'http://146.56.183.55:5050/Ellipse.png'
-      ? profileImg
-      : profileImage;
-
+    profileImage === 'http://146.56.183.55:5050/Ellipse.png' ? profileImg : profileImage;
+  const { onClickModalOpenHandler } = useModalAndAlert();
   const postDate = createdAt.split('-');
 
   return (
@@ -34,24 +28,33 @@ const CategoryFeedItem = ({
               : `/profile/${accountname}`
           }
         >
-          <img
-            className='profile-image'
-            src={basicProfileImg}
-            alt='프로필 이미지'
-          />
+          <img className='profile-image' src={basicProfileImg} alt='프로필 이미지' />
           <div className='user-box'>
             <p className='user-name'>{username}</p>
             <p className='user-accountname'>@ {accountname}</p>
           </div>
         </Link>
-        {localStorage.getItem('accountname') !== accountname &&
-          itemName === 'study' && (
-            <Link className='participation' to='/chatdetail'>
-              참여하기
-            </Link>
-          )}
+        {localStorage.getItem('accountname') !== accountname && itemName === 'study' && (
+          <Link className='participation' to='/chatdetail'>
+            참여하기
+          </Link>
+        )}
         {localStorage.getItem('accountname') === accountname && (
-          <button type='button' className='more-btn'>
+          <button
+            type='button'
+            className='more-btn'
+            onClick={() =>
+              onClickModalOpenHandler({
+                id: 'category',
+                postId: id,
+                isActive: { ...modalValue.isActive, post: true },
+                modalListText: [
+                  { id: 1, text: '삭제' },
+                  { id: 2, text: '수정' },
+                ],
+              })
+            }
+          >
             <img src={MoreIcon} alt='게시글 더보기 버튼' />
           </button>
         )}
