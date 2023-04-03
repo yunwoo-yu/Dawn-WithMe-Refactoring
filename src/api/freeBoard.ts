@@ -62,3 +62,8 @@ export const createFreeBaordPost = async (post: PostCreateTypes) => {
 
   return response.data;
 };
+
+export const deleteFreeBoardPost = async (postId: string) => {
+  const response = await accessInstance.delete(`/post/${postId}`);
+  return { data: response.data, id: postId };
+};

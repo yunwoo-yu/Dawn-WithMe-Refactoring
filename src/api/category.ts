@@ -2,12 +2,7 @@ import { CreateCategoryPostData, FeedData } from '../types/category';
 import { accessInstance } from './axiosBase';
 
 export const getFollowingProduct = async (accountNameList: string[]) => {
-  const accountName = localStorage.getItem('accountname');
   const result: FeedData[] = [];
-
-  if (accountName) {
-    accountNameList.push(accountName);
-  }
 
   const promises = accountNameList.map(async (username) => {
     const response = await accessInstance.get(`/product/${username}`);
@@ -34,10 +29,14 @@ export const getCategoryFeedList = async (id: string) => {
   return response.data;
 };
 
-export const createCategoryPost = async (postData: {
-  product: CreateCategoryPostData;
-}) => {
+export const createCategoryPost = async (postData: { product: CreateCategoryPostData }) => {
   const response = await accessInstance.post('/product', postData);
+
+  return response.data;
+};
+
+export const deleteCategoryPost = async (productId: string) => {
+  const response = await accessInstance.delete(`/product/${productId}`);
 
   return response.data;
 };
