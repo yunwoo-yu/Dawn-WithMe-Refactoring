@@ -1,13 +1,11 @@
 import { lazy, Suspense } from 'react';
 import PostToggleButton from '../../components/common/Button/PostToggleButton';
-import DefaultLayout, {
-  HeaderStyle,
-} from '../../components/common/Layout/DefaultLayout/DefaultLayout';
 import RetryErrorBoundary from '../../components/common/RetryErrorBoundary/RetryErrorBoundary';
 import FreeBoardItemSkeleton from '../../components/FreeBoard/FreeBoardItem/FreeBoardItemSkeleton';
 import FreeBoardWrapper from './styled';
-
-const FreeBoardList = lazy(() => import('../../components/FreeBoard/FreeBoardList/FreeBoardList'));
+import DefaultLayout, {
+  HeaderStyle,
+} from '../../components/common/Layout/DefaultLayout/DefaultLayout';
 
 const freeBoardHeaderProps: Partial<HeaderStyle> = {
   title: '자유게시판',
@@ -16,6 +14,8 @@ const freeBoardHeaderProps: Partial<HeaderStyle> = {
   isSearch: true,
   formId: 'freeBoardPostAddForm',
 };
+
+const FreeBoardList = lazy(() => import('../../components/FreeBoard/FreeBoardList/FreeBoardList'));
 
 const FreeBoard = () => {
   return (
