@@ -18,8 +18,11 @@ export interface FreeBoardDataHooksTypes {
 }
 
 export interface FreeBoardListDataTypes {
-  post?: FreeBoardDataTypes[];
-  posts?: FreeBoardDataTypes[];
+  posts: FreeBoardDataTypes[];
+}
+
+export interface FreeBoardListMyDataTypes {
+  post: FreeBoardDataTypes[];
 }
 
 export interface FreeBoardCommentDataTypes {
