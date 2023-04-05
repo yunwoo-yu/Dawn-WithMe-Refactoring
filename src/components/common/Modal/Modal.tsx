@@ -43,7 +43,7 @@ const Modal = () => {
     } else if (isShowModal.id === 'category') {
       if (itemText === '수정') {
         setIsShowModal({ ...isShowModal, isActive: { ...isShowModal.isActive, post: false } });
-        navigate(`/category/edit/${isShowModal.postId}`);
+        navigate(`/home/category/edit/${isShowModal.postId}`);
       } else if (itemText === '삭제') {
         setIsShowAlert({
           ...isShowAlert,
