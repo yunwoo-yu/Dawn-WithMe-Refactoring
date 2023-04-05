@@ -1,9 +1,8 @@
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import DefaultLayout, {
   HeaderStyle,
 } from '../../components/common/Layout/DefaultLayout/DefaultLayout';
 import RetryErrorBoundary from '../../components/common/RetryErrorBoundary/RetryErrorBoundary';
-import FreeBoardCreatePostForm from '../../components/FreeBoard/FreeBoardCreatePostForm/FreeBoardCreatePostForm';
 import FreeBoardCreateWrapper from './styled';
 
 const freeBoardHeaderProps: Partial<HeaderStyle> = {
@@ -15,6 +14,10 @@ const freeBoardHeaderProps: Partial<HeaderStyle> = {
   formId: 'freeBoardPostAddForm',
   isTabMenu: false,
 };
+
+const FreeBoardCreatePostForm = lazy(
+  () => import('../../components/FreeBoard/FreeBoardCreatePostForm/FreeBoardCreatePostForm'),
+);
 
 const FreeBoardCreate = () => {
   return (
