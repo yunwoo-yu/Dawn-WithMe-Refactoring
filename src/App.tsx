@@ -22,6 +22,7 @@ import FreeBoardCreate from './pages/FreeBoardCreate/FreeBoardCreate';
 import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import HomeCategoryEdit from './pages/HomeCategoryEdit/HomeCategoryEdit';
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -61,6 +62,7 @@ const App = () => {
             <Route path='/home' element={<Home />} />
             <Route path='/home/detail/:id' element={<HomeDetail />} />
             <Route path='/home/category/create' element={<HomeCategoryCreate />} />
+            <Route path='/home/category/edit/:id' element={<HomeCategoryEdit />} />
 
             {/* FreeBoard Page */}
             <Route path='/freeboard' index element={<FreeBoard />} />
