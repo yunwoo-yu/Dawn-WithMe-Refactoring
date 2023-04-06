@@ -7,6 +7,7 @@ import {
   addFreeBoardComment,
   createFreeBaordPost,
   deleteFreeBoardPost,
+  editFreeBoardPost,
   getFreeBoardDatailFeed,
   getFreeBoardDetailFeedCommentList,
   getFreeBoardFeedList,
@@ -20,7 +21,12 @@ import {
   FreeBoardDataHooksTypes,
   FreeBoardListDataTypes,
   FreeBoardListMyDataTypes,
+  FreeBoardDataTypes,
 } from '../types/freeBoard';
+
+interface FeedData {
+  post: FreeBoardDataTypes;
+}
 
 export const useGetMyFreeBoardPostListQuery = () => {
   const { id } = useParams();
@@ -144,7 +150,7 @@ export const useCreateFreeBoardPostMutation = () => {
     onSuccess() {
       queryClient.refetchQueries(['myFreeBoardPostList', accountname]);
       setPostValue((prev) => ({ ...prev, content: '' }));
-      navigate('/freeboard');
+      navigate('/freeboard', { replace: true });
     },
   });
 
@@ -167,7 +173,6 @@ export const useCreateFreeBoardPostMutation = () => {
   };
 
   return {
-    postValue,
     errorMessage,
     setErrorMessage,
     onChangePostValueHandler,
@@ -179,7 +184,6 @@ export const useCreateFreeBoardPostMutation = () => {
 export const useDeleteFreeBoardPostMutation = () => {
   const [isShowModal, setIsShowModal] = useRecoilState(isShowModalAtom);
   const [isShowAlert, setIsShowAlert] = useRecoilState(isShowAlertAtom);
-  const location = useLocation();
   const queryClient = useQueryClient();
   const { id } = useParams();
   const accountname = localStorage.getItem('accountname');
@@ -218,6 +222,24 @@ export const useDeleteFreeBoardPostMutation = () => {
     },
     onSettled() {
       queryClient.invalidateQueries(['myFreeBoardPostList', id || accountname]);
+    },
+  });
+};
+
+export const useEditFreeBoardPostMutation = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const accountname = localStorage.getItem('accountname');
+  const { id } = useParams();
+
+  return useMutation(editFreeBoardPost, {
+    onSuccess(successData) {
+      queryClient.invalidateQueries(['myFreeBoardPostList', accountname]);
+      queryClient.invalidateQueries(['freeBoardDatail', id]);
+      navigate('/freeboard', { replace: true });
+    },
+    onError(err) {
+      console.log(err);
     },
   });
 };

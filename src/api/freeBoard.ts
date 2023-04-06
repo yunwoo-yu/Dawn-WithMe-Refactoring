@@ -5,6 +5,11 @@ interface PostCreateTypes {
   image: string;
 }
 
+interface PostEditTypes {
+  postId: string;
+  post: PostCreateTypes;
+}
+
 export const getMyFreeBoardPostList = async (accountname: string) => {
   const response = await accessInstance.get(`/post/${accountname}/userpost`);
 
@@ -66,4 +71,10 @@ export const createFreeBaordPost = async (post: PostCreateTypes) => {
 export const deleteFreeBoardPost = async (postId: string) => {
   const response = await accessInstance.delete(`/post/${postId}`);
   return { data: response.data, id: postId };
+};
+
+export const editFreeBoardPost = async ({ postId, post }: PostEditTypes) => {
+  const response = await accessInstance.put(`/post/${postId}`, { post });
+
+  return response.data;
 };

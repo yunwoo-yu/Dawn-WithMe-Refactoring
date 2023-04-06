@@ -94,7 +94,7 @@ export const useCreateCategoryPostMutation = () => {
       queryClient.setQueryData(['categoryPost', followingAccountNames], (oldData: any) => {
         return [{ ...successData.product }, ...oldData];
       });
-      navigate('/home');
+      navigate('/home', { replace: true });
     },
     onError(err) {
       console.log(err);
@@ -213,7 +213,7 @@ export const useEditCategoryPostMutation = () => {
 
         return filteredOldData;
       });
-      navigate('/home');
+      navigate('/home', { replace: true });
     },
     onError(err) {
       console.log(err);
