@@ -1,6 +1,11 @@
 import { CreateCategoryPostData, FeedData } from '../types/category';
 import { accessInstance } from './axiosBase';
 
+interface PostEditData {
+  product: CreateCategoryPostData;
+  productId: string;
+}
+
 export const getFollowingProduct = async (accountNameList: string[]) => {
   const result: FeedData[] = [];
 
@@ -37,6 +42,12 @@ export const createCategoryPost = async (postData: { product: CreateCategoryPost
 
 export const deleteCategoryPost = async (productId: string) => {
   const response = await accessInstance.delete(`/product/${productId}`);
+
+  return response.data;
+};
+
+export const editCategoryPost = async ({ productId, product }: PostEditData) => {
+  const response = await accessInstance.put(`/product/${productId}`, { product });
 
   return response.data;
 };

@@ -1,5 +1,11 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  UseQueryOptions,
+  UseQueryResult,
+} from '@tanstack/react-query';
+import { Axios, AxiosError } from 'axios';
 import React, { ChangeEvent, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -7,6 +13,7 @@ import { useRecoilState } from 'recoil';
 import {
   createCategoryPost,
   deleteCategoryPost,
+  editCategoryPost,
   getCategoryDetailProduct,
   getCategoryFeedList,
   getFollowingProduct,
@@ -17,6 +24,10 @@ import useGetFollowingListQuery from './follow.hooks';
 
 interface FollowingUser {
   accountname: string;
+}
+
+interface DetailFeedData {
+  product: FeedData;
 }
 
 // 팔로우 되어있는 유저의 어카운트네임을 뽑아 해당 유저의 카테고리 게시물을 모아 배열로 반환해주는 커스텀훅
@@ -36,10 +47,16 @@ export const useGetCategoryFeedQuery = () => {
   );
 };
 
-export const useGetCategoryDetailFeedQuery = () => {
+export const useGetCategoryDetailFeedQuery = (
+  options?: UseQueryOptions<DetailFeedData, AxiosError>,
+) => {
   const { id } = useParams();
 
-  return useQuery(['categoryDetail', id], () => id && getCategoryDetailProduct(id));
+  return useQuery<DetailFeedData, AxiosError>(
+    ['categoryDetail', id],
+    async () => id && getCategoryDetailProduct(id),
+    { ...options },
+  );
 };
 
 export const useGetCategoryFeedListQuery = () => {
@@ -58,9 +75,9 @@ export const useCreateCategoryPostMutation = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const accountName = localStorage.getItem('accountname');
-  const regStudyPeople = /^[2-8]{1}$/g;
   const { data } = useGetFollowingListQuery();
   const followingAccountNames: string[] = data?.map((user: FollowingUser) => user.accountname);
+  const regStudyPeople = /^[2-8]{1}$/g;
 
   if (accountName) followingAccountNames.push(accountName);
 
@@ -117,7 +134,6 @@ export const useCreateCategoryPostMutation = () => {
   };
 
   return {
-    postValue,
     errorMessage,
     setErrorMessage,
     onChangePostValueHandler,
@@ -171,6 +187,36 @@ export const useDeleteCategoryPostMutation = () => {
     },
     onSettled() {
       queryClient.invalidateQueries(['categoryPost', followingAccountNames]);
+    },
+  });
+};
+
+export const useEditCategoryPostMutation = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const accountName = localStorage.getItem('accountname');
+  const { data } = useGetFollowingListQuery();
+  const followingAccountNames: string[] = data?.map((user: FollowingUser) => user.accountname);
+
+  if (accountName) followingAccountNames.push(accountName);
+
+  return useMutation(editCategoryPost, {
+    onSuccess(successData: DetailFeedData) {
+      const { product } = successData;
+      queryClient.setQueryData(['categoryPost', followingAccountNames], (oldData: any) => {
+        const filteredOldData = oldData.filter((el: FeedData) => el.id !== product.id);
+
+        filteredOldData.push(product);
+        filteredOldData.sort((a: FeedData, b: FeedData) => {
+          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        });
+
+        return filteredOldData;
+      });
+      navigate('/home');
+    },
+    onError(err) {
+      console.log(err);
     },
   });
 };
