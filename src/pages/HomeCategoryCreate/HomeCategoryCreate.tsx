@@ -31,7 +31,7 @@ export const HomeCategoryCreate = () => {
       <HomeCategoryAddWrapper>
         <RetryErrorBoundary>
           <Suspense>
-            <CategoryCreatePostForm isValue={isValue} />
+            <CategoryCreatePostForm isValue={isValue} pageType='create' />
           </Suspense>
         </RetryErrorBoundary>
       </HomeCategoryAddWrapper>

@@ -1,23 +1,29 @@
-import { FormEvent } from 'react';
-import { useCreateCategoryPostMutation } from '../../../hooks/category.hooks';
+import { FormEvent, useEffect } from 'react';
+import {
+  useCreateCategoryPostMutation,
+  useEditCategoryPostMutation,
+  useGetCategoryDetailFeedQuery,
+} from '../../../hooks/category.hooks';
 import useSetImageMutation from '../../../hooks/common/useSetImageMutation';
 import CategoryCreatePostFormWrapper from './styled';
-
 import uploadIcon from '../../../assets/images/img-button.png';
 import PostImgWrapper from '../../common/Wrapper/PostImgWrapper';
 import Input from '../../common/Input/Input';
 import Label from '../../common/Label/Label';
-import { errorToast } from '../../../util/toast';
+import { useRecoilState } from 'recoil';
+import { categoryCreatePostValueAtom } from '../../../recoil/atom';
+import { useParams } from 'react-router-dom';
 
 interface Props {
   isValue: boolean;
+  pageType: 'create' | 'edit';
 }
 
-const CategoryCreatePostForm = ({ isValue }: Props) => {
-  const { onClickImageFileModalHandler, imageInputRef, onChangeInputImage, imgSrc } =
+const CategoryCreatePostForm = ({ isValue, pageType }: Props) => {
+  const [postValue, setPostValue] = useRecoilState(categoryCreatePostValueAtom);
+  const { onClickImageFileModalHandler, imageInputRef, onChangeInputImage, imgSrc, setImgSrc } =
     useSetImageMutation();
   const {
-    postValue,
     errorMessage,
     setErrorMessage,
     onChangePostValueHandler,
@@ -25,32 +31,64 @@ const CategoryCreatePostForm = ({ isValue }: Props) => {
     onBlurErrorMessageHandler,
     createCategoryPostMutation,
   } = useCreateCategoryPostMutation();
+  const editCategoryPostMutation = useEditCategoryPostMutation();
+  const { id } = useParams();
+
+  const { data: editData } = useGetCategoryDetailFeedQuery({
+    enabled: pageType === 'edit',
+  });
+
+  useEffect(() => {
+    if (editData) {
+      const { itemImage, itemName, link, price } = editData.product;
+
+      setPostValue({ itemName, link, price });
+      setImgSrc([itemImage]);
+    }
+
+    if (pageType === 'create') {
+      setPostValue({ itemName: '', link: '', price: 2 });
+      setImgSrc([]);
+    }
+  }, []);
+
   const submitValue = {
-    itemImage: imgSrc[0],
+    itemImage: imgSrc[imgSrc.length - 1],
     ...postValue,
   };
 
   const onSubmitButtonHandler = (e: FormEvent) => {
     e.preventDefault();
 
-    if (isValue) {
-      Object.entries(postValue).forEach((el) => {
+    if (isValue || !imgSrc.length) {
+      Object.entries(submitValue).forEach((el) => {
         if (!el[1]) {
+          if (el[0] === 'itemImage') {
+            setErrorMessage((prev) => ({ ...prev, [el[0]]: '이미지를 선택해 주세요.' }));
+            return;
+          }
           setErrorMessage((prev) => ({ ...prev, [el[0]]: '필수 정보 입니다.' }));
         } else {
           setErrorMessage((prev) => ({ ...prev, [el[0]]: '' }));
         }
       });
 
-      return errorToast('게시글 내용을 입력해주세요.');
+      return;
     }
 
-    createCategoryPostMutation.mutate({ product: submitValue });
+    if (pageType === 'create') {
+      createCategoryPostMutation.mutate({ product: submitValue });
+    } else {
+      editCategoryPostMutation.mutate({ product: submitValue, productId: id as string });
+    }
   };
 
   return (
-    <CategoryCreatePostFormWrapper onSubmit={onSubmitButtonHandler} id='categoryPostAddForm'>
-      <PostImgWrapper backBg={imgSrc[0]}>
+    <CategoryCreatePostFormWrapper
+      onSubmit={onSubmitButtonHandler}
+      id={pageType === 'create' ? 'categoryPostAddForm' : 'categoryPostEditForm'}
+    >
+      <PostImgWrapper backBg={imgSrc.at(-1)}>
         <input
           type='file'
           accept='image/*'
@@ -62,6 +100,9 @@ const CategoryCreatePostForm = ({ isValue }: Props) => {
           <img src={uploadIcon} alt='이미지 업로드 버튼' />
         </button>
       </PostImgWrapper>
+      {errorMessage.itemImage && !submitValue.itemImage && (
+        <p className='error-message image-error'>{`* ${errorMessage.itemImage}`}</p>
+      )}
       <select
         name='itemName'
         id='itemName'

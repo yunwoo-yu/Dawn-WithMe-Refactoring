@@ -23,6 +23,11 @@ const CategoryCreatePostFormWrapper = styled.form`
     margin-left: 8px;
     font-size: ${({ theme }) => theme.fontSizes.smallMid};
     color: ${({ theme }) => theme.colors.colorWarning};
+
+    &.image-error {
+      margin-bottom: 0;
+      margin-top: 16px;
+    }
   }
 `;
 
