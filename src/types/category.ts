@@ -26,5 +26,5 @@ export interface CreateCategoryPostData {
   itemName: string;
   link: string;
   price: string | number;
-  itemImage: string;
+  itemImage: string | string[];
 }
