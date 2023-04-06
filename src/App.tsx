@@ -7,7 +7,7 @@ import Signup from './pages/Signup/Signup';
 import SignupProfileSetting from './pages/SignupProfileSetting/SignupProfileSetting';
 import Home from './pages/Home/Home';
 import useScreenResize from './hooks/common/useScreenRezise';
-import HomeDetail from './pages/HomeDetail/HomeDetail';
+import HomeCategoryDetail from './pages/HomeCategoryDetail/HomeCategoryDetail';
 import MyProfile from './pages/Profile/MyProfile/MyProfile';
 import UesrProfile from './pages/Profile/UserProfile/UserProfile';
 import FreeBoard from './pages/FreeBoard/FreeBoard';
@@ -60,7 +60,7 @@ const App = () => {
 
             {/* Category Page */}
             <Route path='/home' element={<Home />} />
-            <Route path='/home/detail/:id' element={<HomeDetail />} />
+            <Route path='/home/detail/:id' element={<HomeCategoryDetail />} />
             <Route path='/home/category/create' element={<HomeCategoryCreate />} />
             <Route path='/home/category/edit/:id' element={<HomeCategoryEdit />} />
 
