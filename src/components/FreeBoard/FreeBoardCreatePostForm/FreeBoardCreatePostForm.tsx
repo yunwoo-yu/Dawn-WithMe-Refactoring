@@ -1,4 +1,4 @@
-import { FormEvent } from 'react';
+import { FormEvent, useEffect } from 'react';
 import ReactTextareaAutosize from 'react-textarea-autosize';
 import useSetImageMutation from '../../../hooks/common/useSetImageMutation';
 import { useGetMyProfileDataQuery } from '../../../hooks/profile.hooks';
@@ -6,23 +6,48 @@ import FreeBoardCreatePostFormWrapper from './styled';
 
 import uploadIcon from '../../../assets/images/upload-file.png';
 import deleteIcon from '../../../assets/images/icon-delete.png';
-import { useCreateFreeBoardPostMutation } from '../../../hooks/freeBoard.hooks';
+import {
+  useCreateFreeBoardPostMutation,
+  useEditFreeBoardPostMutation,
+  useGetFreeBoardDetailFeedQuery,
+} from '../../../hooks/freeBoard.hooks';
 import { errorToast } from '../../../util/toast';
+import { freeBoardCreatePostValueAtom } from '../../../recoil/atom';
+import { useRecoilState } from 'recoil';
+import { useParams } from 'react-router-dom';
 
-const FreeBoardCreatePostForm = () => {
+interface Props {
+  pageType: 'create' | 'edit';
+}
+
+const FreeBoardCreatePostForm = ({ pageType }: Props) => {
+  const { id } = useParams();
+  const [postValue, setPostValue] = useRecoilState(freeBoardCreatePostValueAtom);
   const { data } = useGetMyProfileDataQuery();
+  const { data: editData } = useGetFreeBoardDetailFeedQuery();
+  const editFreeBoardPostMutation = useEditFreeBoardPostMutation();
   const { onClickImageFileModalHandler, imageInputRef, onChangeInputImage, imgSrc, setImgSrc } =
     useSetImageMutation();
-  const {
-    postValue,
-    createFreeBoardPostMutation,
-    onChangePostValueHandler,
-    onBlurErrorMessageHandler,
-  } = useCreateFreeBoardPostMutation();
+  const { createFreeBoardPostMutation, onChangePostValueHandler, onBlurErrorMessageHandler } =
+    useCreateFreeBoardPostMutation();
   const submitValue = {
     ...postValue,
     image: imgSrc.join(','),
   };
+
+  useEffect(() => {
+    if (editData) {
+      const { content, image } = editData.post;
+
+      setPostValue({ content, image });
+      setImgSrc(image.split(','));
+    }
+
+    if (pageType === 'create') {
+      setPostValue({ content: '', image: '' });
+      setImgSrc([]);
+    }
+  }, []);
 
   const onClickImgDeleteHandler = (imgString: string) => {
     setImgSrc(imgSrc.filter((el) => el !== imgString));
@@ -34,13 +59,19 @@ const FreeBoardCreatePostForm = () => {
     if (!postValue.content) {
       return errorToast('게시글 내용을 입력해주세요.');
     }
-
-    createFreeBoardPostMutation.mutate(submitValue);
+    if (pageType === 'create') {
+      createFreeBoardPostMutation.mutate(submitValue);
+    } else {
+      editFreeBoardPostMutation.mutate({ post: submitValue, postId: id as string });
+    }
   };
 
   return (
     <>
-      <FreeBoardCreatePostFormWrapper id='freeBoardPostAddForm' onSubmit={onSubmitButtonHandler}>
+      <FreeBoardCreatePostFormWrapper
+        id={pageType === 'create' ? 'freeBoardPostAddForm' : 'freeBoardPostEditForm'}
+        onSubmit={onSubmitButtonHandler}
+      >
         <div className='text-box'>
           <img src={data?.image} alt='프로필 이미지' />
           <ReactTextareaAutosize

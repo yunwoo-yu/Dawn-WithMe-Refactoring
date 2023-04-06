@@ -5,31 +5,31 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import SignupProfileSetting from './pages/SignupProfileSetting/SignupProfileSetting';
+import Splash from './pages/Splash/Splash';
+import Timer from './pages/Timer/Timer';
 import Home from './pages/Home/Home';
 import useScreenResize from './hooks/common/useScreenRezise';
+import HomeCategoryCreate from './pages/HomeCategoryCreate/HomeCategoryCreate';
 import HomeCategoryDetail from './pages/HomeCategoryDetail/HomeCategoryDetail';
+import HomeCategoryEdit from './pages/HomeCategoryEdit/HomeCategoryEdit';
 import MyProfile from './pages/Profile/MyProfile/MyProfile';
 import UesrProfile from './pages/Profile/UserProfile/UserProfile';
 import FreeBoard from './pages/FreeBoard/FreeBoard';
 import FreeBoardDetail from './pages/FreeBoardDetail/FreeBoardDetail';
-import Timer from './pages/Timer/Timer';
-import HomeCategoryCreate from './pages/HomeCategoryCreate/HomeCategoryCreate';
-import Splash from './pages/Splash/Splash';
+import FreeBoardCreate from './pages/FreeBoardCreate/FreeBoardCreate';
+import FreeBoardEdit from './pages/FreeBoardEdit/FreeBoardEdit';
 import NotAuthRoutes from './router/NotAuthRoutes';
 import PrivateRoute from './router/PrivateRoute';
-import FreeBoardCreate from './pages/FreeBoardCreate/FreeBoardCreate';
 
 import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import HomeCategoryEdit from './pages/HomeCategoryEdit/HomeCategoryEdit';
 
 const App = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
         retry: 1,
-        refetchOnMount: false,
         refetchOnReconnect: false,
         refetchOnWindowFocus: false,
         keepPreviousData: true,
@@ -68,6 +68,7 @@ const App = () => {
             <Route path='/freeboard' index element={<FreeBoard />} />
             <Route path='/freeboard/detail/:id' element={<FreeBoardDetail />} />
             <Route path='/freeboard/create' element={<FreeBoardCreate />} />
+            <Route path='/freeboard/edit/:id' element={<FreeBoardEdit />} />
 
             {/* Timer Page */}
             <Route path='/timer' element={<Timer />} />
