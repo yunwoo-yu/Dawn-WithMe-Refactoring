@@ -1,5 +1,11 @@
 import { atom } from 'recoil';
 
+interface CategoryValue {
+  itemName: string;
+  price: number;
+  link: string;
+}
+
 export const errorMessageAtom = atom({
   key: 'errorMessage',
   default: {},
@@ -10,7 +16,7 @@ export const selectBoxValueAtom = atom({
   default: 'study',
 });
 
-export const categoryCreatePostValueAtom = atom({
+export const categoryCreatePostValueAtom = atom<CategoryValue>({
   key: 'categoryCreateValue',
   default: {
     itemName: '',
