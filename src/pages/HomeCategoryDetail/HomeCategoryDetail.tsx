@@ -16,7 +16,7 @@ const CategoryDetailFeed = lazy(
   () => import('../../components/Home/CategoryDetailFeed/CategoryDetailFeed'),
 );
 
-const HomeDetail = () => {
+const HomeCategoryDetail = () => {
   return (
     <DefaultLayout styleProps={homeDetailFeedStyleProps}>
       <HomeDetailWrapper>
@@ -30,4 +30,4 @@ const HomeDetail = () => {
   );
 };
 
-export default HomeDetail;
+export default HomeCategoryDetail;
