@@ -5,9 +5,7 @@ import FreeBoardCommentItem from '../FreeBoardCommentItem/FreeBoardCommentItem';
 import FreeBoardCommentListWrapper from './styled';
 
 const FreeBoardCommentList = () => {
-  const [sortedCommentData, setSortedCommentData] = useState<
-    FreeBoardCommentDataTypes[]
-  >([]);
+  const [sortedCommentData, setSortedCommentData] = useState<FreeBoardCommentDataTypes[]>([]);
   const { data: commentData } = useGetDetailFeedCommentQuery();
 
   useEffect(() => {

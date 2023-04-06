@@ -18,7 +18,6 @@ import { freeBoardCreatePostValueAtom, isShowAlertAtom, isShowModalAtom } from '
 import {
   FreeBoardCommentListDataTypes,
   FreeBoardDataHooksTypes,
-  FreeBoardDataTypes,
   FreeBoardListDataTypes,
   FreeBoardListMyDataTypes,
 } from '../types/freeBoard';
