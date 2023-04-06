@@ -3,15 +3,15 @@ import DefaultLayout, {
   HeaderStyle,
 } from '../../components/common/Layout/DefaultLayout/DefaultLayout';
 import RetryErrorBoundary from '../../components/common/RetryErrorBoundary/RetryErrorBoundary';
-import FreeBoardCreateWrapper from './styled';
+import FreeBoardEditWrapper from './styled';
 
 const freeBoardHeaderProps: Partial<HeaderStyle> = {
   isTitle: true,
   isBackButton: true,
-  title: '게시글 등록',
+  title: '게시글 수정',
   isButton: true,
-  buttonText: '등록',
-  formId: 'freeBoardPostAddForm',
+  buttonText: '수정',
+  formId: 'freeBoardPostEditForm',
   isTabMenu: false,
 };
 
@@ -19,18 +19,18 @@ const FreeBoardCreatePostForm = lazy(
   () => import('../../components/FreeBoard/FreeBoardCreatePostForm/FreeBoardCreatePostForm'),
 );
 
-const FreeBoardCreate = () => {
+const FreeBoardEdit = () => {
   return (
     <DefaultLayout styleProps={freeBoardHeaderProps}>
-      <FreeBoardCreateWrapper>
+      <FreeBoardEditWrapper>
         <RetryErrorBoundary>
           <Suspense>
-            <FreeBoardCreatePostForm pageType='create' />
+            <FreeBoardCreatePostForm pageType='edit' />
           </Suspense>
         </RetryErrorBoundary>
-      </FreeBoardCreateWrapper>
+      </FreeBoardEditWrapper>
     </DefaultLayout>
   );
 };
 
-export default FreeBoardCreate;
+export default FreeBoardEdit;
