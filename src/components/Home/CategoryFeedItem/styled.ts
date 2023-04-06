@@ -97,6 +97,7 @@ const CategoryItemWrapper = styled.li`
       }
       .feed-date-box {
         margin-left: 54px;
+
         .feed-date {
           display: inline-block;
           color: ${theme.colors.colorBorder};
@@ -114,6 +115,16 @@ const CategoryItemWrapper = styled.li`
           span {
             color: ${theme.colors.colorMain};
           }
+        }
+      }
+
+      &.detail {
+        .feed-content-box {
+          margin-left: 0;
+        }
+
+        .feed-date-box {
+          margin-left: 0;
         }
       }
     `;

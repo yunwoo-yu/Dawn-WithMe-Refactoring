@@ -7,8 +7,14 @@ import { FeedData } from '../../../types/category';
 import { isShowModalAtom, selectBoxValueAtom } from '../../../recoil/atom';
 import useModalAndAlert from '../../../hooks/common/useModalAndAlert';
 
-const CategoryFeedItem = ({ data, as }: { data: FeedData; as?: keyof JSX.IntrinsicElements }) => {
-  const { itemImage, createdAt, price, link, id, author, itemName } = data;
+const CategoryFeedItem = ({
+  data,
+  as,
+}: {
+  data: FeedData | undefined;
+  as?: keyof JSX.IntrinsicElements;
+}) => {
+  const { itemImage, createdAt, price, link, id, author, itemName } = data as FeedData;
   const { accountname, username, image: profileImage } = author;
   const selectValue = useRecoilValue(selectBoxValueAtom);
   const modalValue = useRecoilValue(isShowModalAtom);
@@ -18,7 +24,7 @@ const CategoryFeedItem = ({ data, as }: { data: FeedData; as?: keyof JSX.Intrins
   const postDate = createdAt.split('-');
 
   return (
-    <CategoryItemWrapper as={as}>
+    <CategoryItemWrapper as={as} className={as ? 'detail' : ''}>
       <div className='profile-box'>
         <Link
           className='profile'
