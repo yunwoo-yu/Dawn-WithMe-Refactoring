@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import AuthWrapper from '../../../components/common/Wrapper/AuthWrapper';
+import AuthWrapper from '../../components/common/Wrapper/AuthWrapper';
 
-const MyProfileWrapper = styled(AuthWrapper)`
+const UserProfileWrapper = styled(AuthWrapper)`
   padding: 0;
   overflow-y: scroll;
   text-align: left;
@@ -11,4 +11,4 @@ const MyProfileWrapper = styled(AuthWrapper)`
   }
 `;
 
-export default MyProfileWrapper;
+export default UserProfileWrapper;

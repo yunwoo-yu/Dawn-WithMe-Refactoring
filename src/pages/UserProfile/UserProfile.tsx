@@ -1,11 +1,11 @@
 import { lazy, Suspense } from 'react';
 import DefaultLayout, {
   HeaderStyle,
-} from '../../../components/common/Layout/DefaultLayout/DefaultLayout';
-import RetryErrorBoundary from '../../../components/common/RetryErrorBoundary/RetryErrorBoundary';
-import FreeBoardItemSkeleton from '../../../components/FreeBoard/FreeBoardItem/FreeBoardItemSkeleton';
-import ProfileCategoryFeedListSkeleton from '../../../components/Profile/ProfileCategoryFeedList/ProfileCategoryFeedListSkeleton';
-import ProfileInfoSkeleton from '../../../components/Profile/ProfileInfo/ProfileInfoSkeleton';
+} from '../../components/common/Layout/DefaultLayout/DefaultLayout';
+import RetryErrorBoundary from '../../components/common/RetryErrorBoundary/RetryErrorBoundary';
+import FreeBoardItemSkeleton from '../../components/FreeBoard/FreeBoardItem/FreeBoardItemSkeleton';
+import ProfileCategoryFeedListSkeleton from '../../components/Profile/ProfileCategoryFeedList/ProfileCategoryFeedListSkeleton';
+import ProfileInfoSkeleton from '../../components/Profile/ProfileInfo/ProfileInfoSkeleton';
 import UserProfileWrapper from './styled';
 
 const userProfileHeaderProps: Partial<HeaderStyle> = {
@@ -15,22 +15,14 @@ const userProfileHeaderProps: Partial<HeaderStyle> = {
   isMoreButton: true,
 };
 
-const ProfileInfo = lazy(
-  () => import('../../../components/Profile/ProfileInfo/ProfileInfo'),
-);
+const ProfileInfo = lazy(() => import('../../components/Profile/ProfileInfo/ProfileInfo'));
 
 const ProfileCategoryFeedList = lazy(
-  () =>
-    import(
-      '../../../components/Profile/ProfileCategoryFeedList/ProfileCategoryFeedList'
-    ),
+  () => import('../../components/Profile/ProfileCategoryFeedList/ProfileCategoryFeedList'),
 );
 
 const ProfileFreeBoardPostList = lazy(
-  () =>
-    import(
-      '../../../components/Profile/ProfileFreeBoardPostList/ProfileFreeBoardPostList'
-    ),
+  () => import('../../components/Profile/ProfileFreeBoardPostList/ProfileFreeBoardPostList'),
 );
 
 const UserProfile = () => {

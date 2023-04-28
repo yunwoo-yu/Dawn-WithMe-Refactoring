@@ -12,12 +12,13 @@ import useScreenResize from './hooks/common/useScreenRezise';
 import HomeCategoryCreate from './pages/HomeCategoryCreate/HomeCategoryCreate';
 import HomeCategoryDetail from './pages/HomeCategoryDetail/HomeCategoryDetail';
 import HomeCategoryEdit from './pages/HomeCategoryEdit/HomeCategoryEdit';
-import MyProfile from './pages/Profile/MyProfile/MyProfile';
-import UesrProfile from './pages/Profile/UserProfile/UserProfile';
+import MyProfile from './pages/MyProfile/MyProfile';
+import UesrProfile from './pages/UserProfile/UserProfile';
 import FreeBoard from './pages/FreeBoard/FreeBoard';
 import FreeBoardDetail from './pages/FreeBoardDetail/FreeBoardDetail';
 import FreeBoardCreate from './pages/FreeBoardCreate/FreeBoardCreate';
 import FreeBoardEdit from './pages/FreeBoardEdit/FreeBoardEdit';
+import ProfileEdit from './pages/ProfileEdit/ProfileEdit';
 import NotAuthRoutes from './router/NotAuthRoutes';
 import PrivateRoute from './router/PrivateRoute';
 
@@ -57,6 +58,7 @@ const App = () => {
             {/* Profile Page */}
             <Route path='/myprofile' element={<MyProfile />} />
             <Route path='/profile/:id' element={<UesrProfile />} />
+            <Route path='/myprofile/edit' element={<ProfileEdit />} />
 
             {/* Category Page */}
             <Route path='/home' element={<Home />} />
