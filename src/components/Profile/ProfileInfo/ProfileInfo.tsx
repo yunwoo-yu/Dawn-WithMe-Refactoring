@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Link } from 'react-router-dom';
-import {
-  useGetMyProfileDataQuery,
-  useGetUserProfileDataQuery,
-} from '../../../hooks/profile.hooks';
+import { useGetMyProfileDataQuery, useGetUserProfileDataQuery } from '../../../hooks/profile.hooks';
 
 import ProfileInfoWrapper from './styled';
 
@@ -31,7 +28,7 @@ const ProfileInfo = () => {
         <p className='username'>{username}</p>
         <p className='account-name'>@ {accountname}</p>
         <p className='intro'>{intro}</p>
-        <Link to='/myprofile/changeinfo'>프로필 수정</Link>
+        <Link to='/myprofile/edit'>프로필 수정</Link>
       </div>
     </ProfileInfoWrapper>
   );
