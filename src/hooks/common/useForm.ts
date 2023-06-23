@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { errorMessageAtom } from '../../recoil/atom';
 import isValidate from '../../util/isValidate';
@@ -12,7 +12,7 @@ const useForm = <T extends object>(initialState: T) => {
   }, []);
 
   const onChangeInputHandler = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
+    (event: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.target;
 
       setFormData({ ...formData, [name]: value });

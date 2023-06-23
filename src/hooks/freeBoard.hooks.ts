@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient, UseQueryOptions } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { ChangeEvent, SetStateAction, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { ChangeEvent, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import {
   addFreeBoardComment,
@@ -21,12 +21,7 @@ import {
   FreeBoardDataHooksTypes,
   FreeBoardListDataTypes,
   FreeBoardListMyDataTypes,
-  FreeBoardDataTypes,
 } from '../types/freeBoard';
-
-interface FeedData {
-  post: FreeBoardDataTypes;
-}
 
 export const useGetMyFreeBoardPostListQuery = () => {
   const { id } = useParams();
@@ -56,6 +51,9 @@ export const useGetFreeBoardDetailFeedQuery = () => {
   return useQuery<unknown, AxiosError, FreeBoardDataHooksTypes>(
     ['freeBoardDatail', id],
     () => id && getFreeBoardDatailFeed(id),
+    {
+      enabled: !!id,
+    },
   );
 };
 
