@@ -18,7 +18,7 @@ const useForm = <T extends object>(initialState: T) => {
       setFormData({ ...formData, [name]: value });
       isValidate(name, value, setError);
     },
-    [formData],
+    [formData, setError],
   );
 
   return { formData, error, onChangeInputHandler };

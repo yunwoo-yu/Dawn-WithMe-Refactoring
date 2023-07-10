@@ -139,7 +139,7 @@ export const useAddFreeBoardCommentMutation = () => {
 export const useCreateFreeBoardPostMutation = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [postValue, setPostValue] = useRecoilState(freeBoardCreatePostValueAtom);
+  const [, setPostValue] = useRecoilState(freeBoardCreatePostValueAtom);
   const [errorMessage, setErrorMessage] = useState('');
 
   const accountname = localStorage.getItem('accountname');

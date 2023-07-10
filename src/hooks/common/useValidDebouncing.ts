@@ -1,23 +1,20 @@
 import { UseMutationResult } from '@tanstack/react-query';
 import { debounce } from 'lodash';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
 const useValidDebouncing = (
   mutationFn: UseMutationResult<any, any, string, unknown>,
   formData: string,
 ) => {
-  const debounceEmailValidMutation = useCallback(
-    debounce((data) => {
-      mutationFn.mutate(data);
-    }, 500),
-    [],
-  );
+  const debounceMutation = debounce((data) => {
+    mutationFn.mutate(data);
+  }, 500);
 
   useEffect(() => {
     if (formData) {
-      debounceEmailValidMutation(formData);
+      debounceMutation(formData);
     }
-  }, [formData, debounceEmailValidMutation]);
+  }, [formData, debounceMutation]);
 };
 
 export default useValidDebouncing;

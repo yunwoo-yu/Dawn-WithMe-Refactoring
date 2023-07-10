@@ -23,9 +23,7 @@ const FreeBoardCommentAddForm = () => {
       <input
         type='text'
         placeholder='댓글 입력하기...'
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setComment(e.target.value)
-        }
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setComment(e.target.value)}
       />
       <button type='submit' className={comment ? 'active' : ''}>
         게시

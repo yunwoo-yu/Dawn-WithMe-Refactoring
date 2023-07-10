@@ -4,16 +4,13 @@ import { useCallback, useEffect, useState } from 'react';
 const useScreenResize = () => {
   const [heightSize, setHeightSize] = useState(window.innerHeight * 0.01);
 
-  const setScreenSize = () => {
+  const setScreenSize = useCallback(() => {
     document.documentElement.style.setProperty('--vh', `${heightSize}px`);
-  };
+  }, [heightSize]);
 
-  const setScreenResize = useCallback(
-    debounce(() => {
-      setHeightSize(window.innerHeight * 0.01);
-    }, 500),
-    [heightSize],
-  );
+  const setScreenResize = debounce(() => {
+    setHeightSize(window.innerHeight * 0.01);
+  }, 500);
 
   useEffect(() => {
     setScreenSize();
@@ -22,7 +19,7 @@ const useScreenResize = () => {
     return () => {
       window.removeEventListener('resize', setScreenResize);
     };
-  }, [heightSize]);
+  }, [setScreenSize, setScreenResize]);
 };
 
 export default useScreenResize;

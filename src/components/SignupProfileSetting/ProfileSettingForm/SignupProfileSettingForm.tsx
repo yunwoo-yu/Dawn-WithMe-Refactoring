@@ -5,27 +5,13 @@ import Input from '../../common/Input/Input';
 import Label from '../../common/Label/Label';
 import ProfileSettingFormWrapper from './styled';
 
-const SignupProfileSettingForm = ({
-  propsData,
-}: {
-  propsData: SignupProps;
-}) => {
-  const { formData, error, onChangeInputHandler, onSubmitButtonHandler } =
-    propsData;
+const SignupProfileSettingForm = ({ propsData }: { propsData: SignupProps }) => {
+  const { formData, error, onChangeInputHandler, onSubmitButtonHandler } = propsData;
   const { username, accountname, intro } = formData;
-  const {
-    username: errorUserName,
-    accountname: errorAccountName,
-    isActive,
-  } = error;
+  const { username: errorUserName, accountname: errorAccountName, isActive } = error;
 
   const checkValidButton =
-    !username ||
-    !accountname ||
-    !intro ||
-    !!errorUserName ||
-    !!errorAccountName ||
-    isActive;
+    !username || !accountname || !intro || !!errorUserName || !!errorAccountName || isActive;
 
   return (
     <ProfileSettingFormWrapper onSubmit={onSubmitButtonHandler}>
@@ -68,12 +54,7 @@ const SignupProfileSettingForm = ({
           required
         />
       </div>
-      <Button
-        width='100%'
-        size='large'
-        type='submit'
-        disabled={checkValidButton}
-      >
+      <Button width='100%' size='large' type='submit' disabled={checkValidButton}>
         다음
       </Button>
     </ProfileSettingFormWrapper>
