@@ -1,46 +1,28 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 🚀팀프로젝트 리팩토링
 
-## Available Scripts
+부트캠프에서 진행했던 팀 프로젝트를 리팩토링 하고 있습니다 :) 타입스크립트를 적용하여 컴파일 단계에 에러를 잡아내고 성능개선과 커스텀훅을 통한 비즈니스 로직 분리에 초첨을 두었습니다.
 
-In the project directory, you can run:
+[원본 레포보러가기](https://github.com/TEAM-INFINITE/Dawn-WithMe) 👈
 
-### `npm start`
+```
+// 테스트용 아이디 로그인은 이메일로 하시면 됩니다.
+id : dawn@test.com
+password : 123123
+배포 : https://vercel.com/yunwoo-yu/dawn-with-me-refactoring
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### ❗️읽어주세요
+- 게시물이나 프로필이미지가 제대로 나오지 않을 수 있습니다! 중간에 api 도메인이 변경되어 기존에 저장된 이미지가 없어졌습니다. 테스트아이디에 대한 이미지는 변경된 도메인으로 다시 수정하였지만 다른 테스트 아이디로 팀원 분들이 올린 게시글이나 프로필은 제대로 나오지 않을 수 있습니다. 🥲
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+### Stack 변경사항
+- Typesciprt
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 개선사항
+- 재사용 고려하지 않은 아토믹 패턴 제거 후 패턴 변경
+- api호출 개선 중복 이메일, 네임 확인 로직에 debounce 추가
+- 타입스크립트 추가하여 생산성 증가
+- 코드 스플리팅으로 초기 렌더링 속도 개선 (React.lazy)
+- 비즈니스 로직, 데이터로직 분리 (역할 분리, 재사용성 증가)
+- UX를 위한 스켈레톤 UI 적용, Layout Shift 제거
