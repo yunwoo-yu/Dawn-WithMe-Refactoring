@@ -4,17 +4,17 @@ import useSetImageMutation from '../../../hooks/common/useSetImageMutation';
 import { useGetMyProfileDataQuery } from '../../../hooks/profile.hooks';
 import FreeBoardCreatePostFormWrapper from './styled';
 
-import uploadIcon from '../../../assets/images/upload-file.png';
+import { useParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import deleteIcon from '../../../assets/images/icon-delete.png';
+import uploadIcon from '../../../assets/images/upload-file.png';
 import {
   useCreateFreeBoardPostMutation,
   useEditFreeBoardPostMutation,
   useGetFreeBoardDetailFeedQuery,
 } from '../../../hooks/freeBoard.hooks';
-import { errorToast } from '../../../util/toast';
 import { freeBoardCreatePostValueAtom } from '../../../recoil/atom';
-import { useRecoilState } from 'recoil';
-import { useParams } from 'react-router-dom';
+import { errorToast } from '../../../util/toast';
 
 interface Props {
   pageType: 'create' | 'edit';

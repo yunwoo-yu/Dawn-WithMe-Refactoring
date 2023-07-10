@@ -1,18 +1,18 @@
 import { FormEvent, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import uploadIcon from '../../../assets/images/img-button.png';
 import {
   useCreateCategoryPostMutation,
   useEditCategoryPostMutation,
   useGetCategoryDetailFeedQuery,
 } from '../../../hooks/category.hooks';
 import useSetImageMutation from '../../../hooks/common/useSetImageMutation';
-import CategoryCreatePostFormWrapper from './styled';
-import uploadIcon from '../../../assets/images/img-button.png';
-import PostImgWrapper from '../../common/Wrapper/PostImgWrapper';
+import { categoryCreatePostValueAtom } from '../../../recoil/atom';
 import Input from '../../common/Input/Input';
 import Label from '../../common/Label/Label';
-import { useRecoilState } from 'recoil';
-import { categoryCreatePostValueAtom } from '../../../recoil/atom';
-import { useParams } from 'react-router-dom';
+import PostImgWrapper from '../../common/Wrapper/PostImgWrapper';
+import CategoryCreatePostFormWrapper from './styled';
 
 interface Props {
   isValue: boolean;
