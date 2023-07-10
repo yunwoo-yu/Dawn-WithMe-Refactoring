@@ -1,9 +1,9 @@
 import { lazy, Suspense } from 'react';
 import DefaultLayout, {
   HeaderStyle,
-} from '../../components/common/Layout/DefaultLayout/DefaultLayout';
-import RetryErrorBoundary from '../../components/common/RetryErrorBoundary/RetryErrorBoundary';
-import FreeBoardDetailFeedSkeleton from '../../components/FreeBoard/FreeBoardDetailFeed/FreeBoardDetailFeedSkeleton';
+} from '../../../components/common/Layout/DefaultLayout/DefaultLayout';
+import RetryErrorBoundary from '../../../components/common/RetryErrorBoundary/RetryErrorBoundary';
+import FreeBoardDetailFeedSkeleton from '../../../components/FreeBoard/FreeBoardDetailFeed/FreeBoardDetailFeedSkeleton';
 import FreeBoardDetailWrapper from './styled';
 
 const freeBoardDetailHeaderProps: Partial<HeaderStyle> = {
@@ -15,13 +15,13 @@ const freeBoardDetailHeaderProps: Partial<HeaderStyle> = {
 };
 
 const FreeBoardDetailFeed = lazy(
-  () => import('../../components/FreeBoard/FreeBoardDetailFeed/FreeBoardDetailFeed'),
+  () => import('../../../components/FreeBoard/FreeBoardDetailFeed/FreeBoardDetailFeed'),
 );
 const FreeBoardCommentList = lazy(
-  () => import('../../components/FreeBoard/FreeBoardCommentList/FreeBoardCommentList'),
+  () => import('../../../components/FreeBoard/FreeBoardCommentList/FreeBoardCommentList'),
 );
 const FreeBoardCommentAddForm = lazy(
-  () => import('../../components/FreeBoard/FreeBoardCommentAddForm/FreeBoardCommentAddForm'),
+  () => import('../../../components/FreeBoard/FreeBoardCommentAddForm/FreeBoardCommentAddForm'),
 );
 
 const FreeBoardDetail = () => {

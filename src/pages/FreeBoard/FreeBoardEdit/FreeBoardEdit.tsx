@@ -1,8 +1,8 @@
 import { lazy, Suspense } from 'react';
 import DefaultLayout, {
   HeaderStyle,
-} from '../../components/common/Layout/DefaultLayout/DefaultLayout';
-import RetryErrorBoundary from '../../components/common/RetryErrorBoundary/RetryErrorBoundary';
+} from '../../../components/common/Layout/DefaultLayout/DefaultLayout';
+import RetryErrorBoundary from '../../../components/common/RetryErrorBoundary/RetryErrorBoundary';
 import FreeBoardEditWrapper from './styled';
 
 const freeBoardHeaderProps: Partial<HeaderStyle> = {
@@ -16,7 +16,7 @@ const freeBoardHeaderProps: Partial<HeaderStyle> = {
 };
 
 const FreeBoardCreatePostForm = lazy(
-  () => import('../../components/FreeBoard/FreeBoardCreatePostForm/FreeBoardCreatePostForm'),
+  () => import('../../../components/FreeBoard/FreeBoardCreatePostForm/FreeBoardCreatePostForm'),
 );
 
 const FreeBoardEdit = () => {

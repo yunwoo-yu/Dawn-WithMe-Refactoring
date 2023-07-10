@@ -2,14 +2,15 @@ import { lazy, Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
 import DefaultLayout, {
   HeaderStyle,
-} from '../../components/common/Layout/DefaultLayout/DefaultLayout';
-import RetryErrorBoundary from '../../components/common/RetryErrorBoundary/RetryErrorBoundary';
+} from '../../../components/common/Layout/DefaultLayout/DefaultLayout';
+import RetryErrorBoundary from '../../../components/common/RetryErrorBoundary/RetryErrorBoundary';
 
-import { categoryCreatePostValueAtom } from '../../recoil/atom';
+import { categoryCreatePostValueAtom } from '../../../recoil/atom';
+
 import HomeCategoryEditWrapper from './styled';
 
 const CategoryCreatePostForm = lazy(
-  () => import('../../components/Home/CategoryCreatePostForm/CategoryCreatePostForm'),
+  () => import('../../../components/Home/CategoryCreatePostForm/CategoryCreatePostForm'),
 );
 
 const HomeCategoryEdit = () => {

@@ -1,10 +1,11 @@
 import { lazy, Suspense } from 'react';
 import DefaultLayout, {
   HeaderStyle,
-} from '../../components/common/Layout/DefaultLayout/DefaultLayout';
+} from '../../../components/common/Layout/DefaultLayout/DefaultLayout';
+import RetryErrorBoundary from '../../../components/common/RetryErrorBoundary/RetryErrorBoundary';
+import CategoryDetailFeedSkeleton from '../../../components/Home/CategoryDetailFeed/CategoryDetailFeedSkeleton';
+
 import HomeDetailWrapper from './styled';
-import CategoryDetailFeedSkeleton from '../../components/Home/CategoryDetailFeed/CategoryDetailFeedSkeleton';
-import RetryErrorBoundary from '../../components/common/RetryErrorBoundary/RetryErrorBoundary';
 
 const homeDetailFeedStyleProps: Partial<HeaderStyle> = {
   title: '카테고리 게시물',
@@ -13,7 +14,7 @@ const homeDetailFeedStyleProps: Partial<HeaderStyle> = {
 };
 
 const CategoryDetailFeed = lazy(
-  () => import('../../components/Home/CategoryDetailFeed/CategoryDetailFeed'),
+  () => import('../../../components/Home/CategoryDetailFeed/CategoryDetailFeed'),
 );
 
 const HomeCategoryDetail = () => {

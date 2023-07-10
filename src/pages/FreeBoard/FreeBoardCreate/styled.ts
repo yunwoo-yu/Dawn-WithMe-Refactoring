@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import AuthWrapper from '../../components/common/Wrapper/AuthWrapper';
+import AuthWrapper from '../../../components/common/Wrapper/AuthWrapper';
 
 const FreeBoardCreateWrapper = styled(AuthWrapper)`
   padding: 20px 0;
