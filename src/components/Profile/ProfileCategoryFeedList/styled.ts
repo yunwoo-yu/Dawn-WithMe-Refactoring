@@ -10,7 +10,7 @@ const ProfileCategoryFeedListWrapper = styled.div`
       select {
         position: relative;
         width: 100px;
-        padding: 8px 0;
+        padding: 8px;
         background-color: ${theme.colors.colorBg};
         font-size: ${theme.fontSizes.xl};
         color: ${theme.colors.colorWhite};
