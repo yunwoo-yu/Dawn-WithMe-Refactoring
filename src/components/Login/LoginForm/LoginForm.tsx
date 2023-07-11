@@ -1,12 +1,17 @@
-import { LoginProps } from '../../../types/auth';
+import { ChangeEvent } from 'react';
+import { LoginFormTypes } from '../../../types/auth';
 import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
 import Label from '../../common/Label/Label';
 import LoginFormWrapper from './styled';
 
-const LoginForm = ({ propsData }: { propsData: LoginProps }) => {
-  const { formData, onChangeInputHandler, onSubmitButtonHandler, error } =
-    propsData;
+export interface LoginProps {
+  formData: LoginFormTypes;
+  onChangeInputHandler(event: ChangeEvent<HTMLInputElement>): void;
+  onSubmitButtonHandler(event: React.FormEvent<HTMLFormElement>): void;
+}
+
+const LoginForm = ({ formData, onChangeInputHandler, onSubmitButtonHandler }: LoginProps) => {
   const { email, password } = formData;
 
   return (
@@ -36,13 +41,7 @@ const LoginForm = ({ propsData }: { propsData: LoginProps }) => {
           onChange={onChangeInputHandler}
         />
       </div>
-      {error && <p>{error}</p>}
-      <Button
-        width='100%'
-        size='large'
-        type='submit'
-        disabled={!email || !password}
-      >
+      <Button width='100%' size='large' type='submit' disabled={!email || !password}>
         로그인
       </Button>
     </LoginFormWrapper>

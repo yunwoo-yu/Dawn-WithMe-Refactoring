@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 
 export interface LoginSignupData {
   email?: string;
@@ -10,16 +10,23 @@ export interface LoginSignupData {
   isActive?: boolean;
 }
 
-export interface LoginProps {
-  formData: LoginSignupData;
-  onChangeInputHandler(event: ChangeEvent<HTMLInputElement>): void;
-  onSubmitButtonHandler(event: React.FormEvent<HTMLFormElement>): void;
-  error: string;
+export interface LoginFormTypes {
+  email: string;
+  password: string;
 }
 
-export interface SignupProps {
-  formData: LoginSignupData;
+export interface SignupFormTypes extends LoginFormTypes {
+  isActive: boolean;
+}
+
+export interface SignupProfileSettingFormTypes extends SignupFormTypes {
+  username: string;
+  image: string;
+  accountname: string;
+  intro: string;
+}
+
+export interface AuthPropsBasic {
   onChangeInputHandler(event: ChangeEvent<HTMLInputElement>): void;
-  onSubmitButtonHandler(event: React.FormEvent<HTMLFormElement>): void;
-  error: LoginSignupData;
+  onSubmitButtonHandler(event: FormEvent<HTMLFormElement>): void;
 }

@@ -20,7 +20,7 @@ const SignupProfileSetting = () => {
   const location = useLocation();
   const { email, password } = location.state.data;
   const [imgSrc, setImgSrc] = useState('');
-  const { formData, error, onChangeInputHandler } = useForm({
+  const { formData, onChangeInputHandler } = useForm({
     email,
     password,
     username: '',
@@ -29,8 +29,18 @@ const SignupProfileSetting = () => {
     intro: '',
     isActive: true,
   });
+  const [error, setError] = useState({
+    email,
+    password,
+    username: '',
+    accountname: '',
+    image: '',
+    intro: '',
+    isActive: true,
+  });
+
   const imageUploadMutation = useImageUploadMutation(setImgSrc);
-  const accountNameMutation = useAccountNameValidMutation();
+  const accountNameMutation = useAccountNameValidMutation(setError);
   const signupMutation = useSignupMutation();
 
   const onChangeImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,13 +61,6 @@ const SignupProfileSetting = () => {
 
   useValidDebouncing(accountNameMutation, formData.accountname);
 
-  const propsData = {
-    formData,
-    error,
-    onChangeInputHandler,
-    onSubmitButtonHandler,
-  };
-
   return (
     <main>
       <ProfileSettingWrapper>
@@ -77,7 +80,12 @@ const SignupProfileSetting = () => {
                 <img src={profileUploadIcon} alt='프로필 이미지 업로드버튼' />
               </button>
             </ImgBackground>
-            <SignupProfileSettingForm propsData={propsData} />
+            <SignupProfileSettingForm
+              formData={formData}
+              error={error}
+              onChangeInputHandler={onChangeInputHandler}
+              onSubmitButtonHandler={onSubmitButtonHandler}
+            />
           </Suspense>
         </RetryErrorBoundary>
       </ProfileSettingWrapper>

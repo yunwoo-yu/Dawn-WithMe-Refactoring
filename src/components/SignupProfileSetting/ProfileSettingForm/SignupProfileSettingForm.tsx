@@ -1,12 +1,22 @@
 import React from 'react';
-import { SignupProps } from '../../../types/auth';
+import { AuthPropsBasic, SignupProfileSettingFormTypes } from '../../../types/auth';
+
 import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
 import Label from '../../common/Label/Label';
 import ProfileSettingFormWrapper from './styled';
 
-const SignupProfileSettingForm = ({ propsData }: { propsData: SignupProps }) => {
-  const { formData, error, onChangeInputHandler, onSubmitButtonHandler } = propsData;
+export interface SignupProps extends AuthPropsBasic {
+  formData: SignupProfileSettingFormTypes;
+  error: SignupProfileSettingFormTypes;
+}
+
+const SignupProfileSettingForm = ({
+  formData,
+  error,
+  onChangeInputHandler,
+  onSubmitButtonHandler,
+}: SignupProps) => {
   const { username, accountname, intro } = formData;
   const { username: errorUserName, accountname: errorAccountName, isActive } = error;
 

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useEmailValidMutation } from '../../hooks/valid.hooks';
@@ -11,13 +11,18 @@ const SignupForm = lazy(() => import('../../components/Signup/SignupForm'));
 
 const Signup = () => {
   const navigate = useNavigate();
-  const { formData, error, onChangeInputHandler } = useForm({
+  const { formData, onChangeInputHandler } = useForm({
+    email: '',
+    password: '',
+    isActive: true,
+  });
+  const [error, setError] = useState({
     email: '',
     password: '',
     isActive: true,
   });
 
-  const emailValidMutation = useEmailValidMutation();
+  const emailValidMutation = useEmailValidMutation(setError);
 
   const onSubmitButtonHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -30,20 +35,18 @@ const Signup = () => {
 
   useValidDebouncing(emailValidMutation, formData.email);
 
-  const propsData = {
-    formData,
-    error,
-    onChangeInputHandler,
-    onSubmitButtonHandler,
-  };
-
   return (
     <main>
       <SignupWrapper>
         <RetryErrorBoundary>
           <Suspense>
             <h2>이메일로 회원가입</h2>
-            <SignupForm propsData={propsData} />
+            <SignupForm
+              formData={formData}
+              error={error}
+              onChangeInputHandler={onChangeInputHandler}
+              onSubmitButtonHandler={onSubmitButtonHandler}
+            />
             <Link to='/login'>로그인 하러가기</Link>
           </Suspense>
         </RetryErrorBoundary>

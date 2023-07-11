@@ -1,12 +1,20 @@
-import { SignupProps } from '../../types/auth';
+import { AuthPropsBasic, SignupFormTypes } from '../../types/auth';
 import Button from '../common/Button/Button';
 import Input from '../common/Input/Input';
 import Label from '../common/Label/Label';
 import SignupFormWrapper from './styled';
 
-const SignupForm = ({ propsData }: { propsData: SignupProps }) => {
-  const { formData, error, onChangeInputHandler, onSubmitButtonHandler } =
-    propsData;
+export interface SignupProps extends AuthPropsBasic {
+  formData: SignupFormTypes;
+  error: SignupFormTypes;
+}
+
+const SignupForm = ({
+  formData,
+  error,
+  onChangeInputHandler,
+  onSubmitButtonHandler,
+}: SignupProps) => {
   const { email, password } = formData;
   const { email: errorEmail, password: errorPassword, isActive } = error;
 
@@ -44,9 +52,7 @@ const SignupForm = ({ propsData }: { propsData: SignupProps }) => {
         width='100%'
         size='large'
         type='submit'
-        disabled={
-          !email || !password || !!errorEmail || !!errorPassword || isActive
-        }
+        disabled={!email || !password || !!errorEmail || !!errorPassword || isActive}
       >
         다음
       </Button>

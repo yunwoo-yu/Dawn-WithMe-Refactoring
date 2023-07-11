@@ -61,6 +61,7 @@ export const useGetCategoryFeedListQuery = () => {
     if (id) {
       return getCategoryFeedList(id);
     }
+
     return accountname && getCategoryFeedList(accountname);
   });
 };

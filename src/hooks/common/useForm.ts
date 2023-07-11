@@ -1,27 +1,15 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { errorMessageAtom } from '../../recoil/atom';
-import isValidate from '../../util/isValidate';
+import { ChangeEvent, useState } from 'react';
 
 const useForm = <T extends object>(initialState: T) => {
   const [formData, setFormData] = useState<T>({ ...initialState });
-  const [error, setError] = useRecoilState(errorMessageAtom);
 
-  useEffect(() => {
-    setError({ ...initialState });
-  }, []);
+  const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
 
-  const onChangeInputHandler = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-      setFormData({ ...formData, [name]: value });
-      isValidate(name, value, setError);
-    },
-    [formData, setError],
-  );
-
-  return { formData, error, onChangeInputHandler };
+  return { formData, onChangeInputHandler };
 };
 
 export default useForm;

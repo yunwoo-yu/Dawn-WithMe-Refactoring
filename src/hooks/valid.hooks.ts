@@ -1,11 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
-import { useSetRecoilState } from 'recoil';
+import { Dispatch, SetStateAction } from 'react';
 import { signupAccountNameValid, signupEmailValid } from '../api/auth';
-import { errorMessageAtom } from '../recoil/atom';
+import { SignupFormTypes, SignupProfileSettingFormTypes } from '../types/auth';
 
-export const useEmailValidMutation = () => {
-  const setError = useSetRecoilState(errorMessageAtom);
-
+export const useEmailValidMutation = (setError: Dispatch<SetStateAction<SignupFormTypes>>) => {
   return useMutation(signupEmailValid, {
     onSuccess(resData) {
       if (resData.message === '잘못된 접근입니다.') {
@@ -44,9 +42,9 @@ export const useEmailValidMutation = () => {
   });
 };
 
-export const useAccountNameValidMutation = () => {
-  const setError = useSetRecoilState(errorMessageAtom);
-
+export const useAccountNameValidMutation = (
+  setError: Dispatch<SetStateAction<SignupProfileSettingFormTypes>>,
+) => {
   return useMutation(signupAccountNameValid, {
     onSuccess(resData, variables) {
       const regAccountname = /[a-zA-Z0-9_.]{1,16}$/.test(variables);
@@ -64,8 +62,7 @@ export const useAccountNameValidMutation = () => {
           setError((prev) => {
             return {
               ...prev,
-              accountname:
-                '영문, 숫자, 밑줄, 마침표만 사용할 수 있습니다. (1~16)',
+              accountname: '영문, 숫자, 밑줄, 마침표만 사용할 수 있습니다. (1~16)',
               isActive: true,
             };
           });

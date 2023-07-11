@@ -7,15 +7,15 @@ import { url } from '../api/axiosBase';
 
 import { errorToast, successToast } from '../util/toast';
 
-export const useLoginMutation = (setError: React.Dispatch<React.SetStateAction<string>>) => {
+export const useLoginMutation = () => {
   const navigate = useNavigate();
 
   return useMutation(userLogin, {
     onSuccess(resData) {
       if (resData.status === 422) {
-        setError(`${resData.message}`);
+        errorToast(`${resData.message}`);
       } else if (resData.message === '잘못된 접근입니다.') {
-        setError(`${resData.message}`);
+        errorToast(`${resData.message}`);
       } else if (resData.status === 404) {
         errorToast(`서버에 문제가 있습니다. 잠시 후 시도해주세요 :(`);
       } else {
