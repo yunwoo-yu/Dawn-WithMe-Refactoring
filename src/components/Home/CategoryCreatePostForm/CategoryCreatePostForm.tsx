@@ -50,7 +50,7 @@ const CategoryCreatePostForm = ({ isValue, pageType }: Props) => {
       setPostValue({ itemName: '', link: '', price: 2 });
       setImgSrc([]);
     }
-  }, []);
+  }, [editData, pageType, setImgSrc, setPostValue]);
 
   const submitValue = {
     itemImage: imgSrc[imgSrc.length - 1],

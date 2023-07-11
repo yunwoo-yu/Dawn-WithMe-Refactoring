@@ -47,7 +47,7 @@ const FreeBoardCreatePostForm = ({ pageType }: Props) => {
       setPostValue({ content: '', image: '' });
       setImgSrc([]);
     }
-  }, []);
+  }, [editData, pageType, setPostValue, setImgSrc]);
 
   const onClickImgDeleteHandler = (imgString: string) => {
     setImgSrc(imgSrc.filter((el) => el !== imgString));
