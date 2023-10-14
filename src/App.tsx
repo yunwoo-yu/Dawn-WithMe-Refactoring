@@ -1,30 +1,32 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import useScreenResize from './hooks/common/useScreenRezise';
+import Chat from './pages/Chat/Chat';
+import ChatDetail from './pages/Chat/ChatDetail/ChatDetail';
+import FreeBoard from './pages/FreeBoard/FreeBoard';
+import FreeBoardCreate from './pages/FreeBoard/FreeBoardCreate/FreeBoardCreate';
+import FreeBoardDetail from './pages/FreeBoard/FreeBoardDetail/FreeBoardDetail';
+import FreeBoardEdit from './pages/FreeBoard/FreeBoardEdit/FreeBoardEdit';
+import Home from './pages/Home/Home';
+import HomeCategoryCreate from './pages/Home/HomeCategoryCreate/HomeCategoryCreate';
+import HomeCategoryDetail from './pages/Home/HomeCategoryDetail/HomeCategoryDetail';
+import HomeCategoryEdit from './pages/Home/HomeCategoryEdit/HomeCategoryEdit';
 import Login from './pages/Login/Login';
+import MyProfile from './pages/MyProfile/MyProfile';
+import ProfileEdit from './pages/ProfileEdit/ProfileEdit';
 import Signup from './pages/Signup/Signup';
 import SignupProfileSetting from './pages/SignupProfileSetting/SignupProfileSetting';
 import Splash from './pages/Splash/Splash';
 import Timer from './pages/Timer/Timer';
-import Home from './pages/Home/Home';
-import useScreenResize from './hooks/common/useScreenRezise';
-import HomeCategoryCreate from './pages/Home/HomeCategoryCreate/HomeCategoryCreate';
-import HomeCategoryDetail from './pages/Home/HomeCategoryDetail/HomeCategoryDetail';
-import HomeCategoryEdit from './pages/Home/HomeCategoryEdit/HomeCategoryEdit';
-import MyProfile from './pages/MyProfile/MyProfile';
 import UesrProfile from './pages/UserProfile/UserProfile';
-import FreeBoard from './pages/FreeBoard/FreeBoard';
-import FreeBoardDetail from './pages/FreeBoard/FreeBoardDetail/FreeBoardDetail';
-import FreeBoardCreate from './pages/FreeBoard/FreeBoardCreate/FreeBoardCreate';
-import FreeBoardEdit from './pages/FreeBoard/FreeBoardEdit/FreeBoardEdit';
-import ProfileEdit from './pages/ProfileEdit/ProfileEdit';
 import NotAuthRoutes from './router/NotAuthRoutes';
 import PrivateRoute from './router/PrivateRoute';
 
 import 'react-toastify/dist/ReactToastify.css';
-import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -72,7 +74,9 @@ const App = () => {
             <Route path='/freeboard/create' element={<FreeBoardCreate />} />
             <Route path='/freeboard/edit/:id' element={<FreeBoardEdit />} />
 
-            {/* Timer Page */}
+            {/* Other Page */}
+            <Route path='/chat' element={<Chat />} />
+            <Route path='/chatdetail' element={<ChatDetail />} />
             <Route path='/timer' element={<Timer />} />
           </Route>
         </Routes>
