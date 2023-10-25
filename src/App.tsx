@@ -15,7 +15,6 @@ import HomeCategoryDetail from './pages/Home/HomeCategoryDetail/HomeCategoryDeta
 import HomeCategoryEdit from './pages/Home/HomeCategoryEdit/HomeCategoryEdit';
 import Login from './pages/Login/Login';
 import MyProfile from './pages/MyProfile/MyProfile';
-import ProfileEdit from './pages/ProfileEdit/ProfileEdit';
 import Signup from './pages/Signup/Signup';
 import SignupProfileSetting from './pages/SignupProfileSetting/SignupProfileSetting';
 import Splash from './pages/Splash/Splash';
@@ -27,6 +26,9 @@ import PrivateRoute from './router/PrivateRoute';
 import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
+import { Suspense, lazy } from 'react';
+
+const ProfileEdit = lazy(() => import('./pages/ProfileEdit/ProfileEdit'));
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -60,7 +62,14 @@ const App = () => {
             {/* Profile Page */}
             <Route path='/myprofile' element={<MyProfile />} />
             <Route path='/profile/:id' element={<UesrProfile />} />
-            <Route path='/myprofile/edit' element={<ProfileEdit />} />
+            <Route
+              path='/myprofile/edit'
+              element={
+                <Suspense fallback={null}>
+                  <ProfileEdit />
+                </Suspense>
+              }
+            />
 
             {/* Category Page */}
             <Route path='/home' element={<Home />} />
@@ -80,6 +89,7 @@ const App = () => {
             <Route path='/timer' element={<Timer />} />
           </Route>
         </Routes>
+
         <ToastContainer limit={1} theme='dark' position='top-center' />
         <ReactQueryDevtools />
       </BrowserRouter>
